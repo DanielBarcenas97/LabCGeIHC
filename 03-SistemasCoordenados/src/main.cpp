@@ -17,6 +17,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
+#include "Headers/Shader.h"//se agrego esta linea
+
+Shader * shader = new Shader();
+
 int screenWidth;
 int screenHeight;
 
@@ -37,16 +42,17 @@ void init(int width, int height, std::string strTitle, bool bFullScreen);
 void destroy();
 bool processInput(bool continueApplication = true);
 
-GLuint VAO, VBO;
+GLuint VAO, VBO, EBO;
+GLuint VAO2, VBO2, EBO2;
 
-typedef struct _Vertex{
+typedef struct _Vertex {
 	glm::vec3 m_Pos;
 	glm::vec3 m_Color;
 } Vertex;
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-	
+
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -93,20 +99,25 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	glViewport(0, 0, screenWidth, screenHeight);
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glEnable(GL_DEPTH_TEST);
+	//ruta del shder de vertices, ruta del shader de fragmento
+	shader->initialize("../Shaders/transformaciones.vs", "../Shaders/transformaciones.fs");
 
 	// Se definen los vertices de la geometria a dibujar
-	Vertex vertices [] =
+	Vertex vertices[] =
 	{
-			{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
-			{ glm::vec3( 0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-			{ glm::vec3( 0.5f,  0.5f,  0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
-			{ glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
-			{ glm::vec3( 0.5f, -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
-			{ glm::vec3( 0.5f,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
-			{ glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
-			{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }
+		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+	{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
+	{ glm::vec3(0.5f,  0.5f,  0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+	{ glm::vec3(0.5f,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }
 	};
-
+	Vertex vertices2[] = {
+		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+	};
 	// Se definen los indices de las conexiones con los vertices.
 	GLuint indices[] = {  // Note que se inicia en 0!
 		0, 1, 2,
@@ -135,6 +146,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Se crea el ID del VAO
 	// Se crea el VBO (buffer de datos) asociado al VAO
 	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+
 	/*
 	El VAO es un objeto que nos permite almacenar la estructura de nuestros datos,
 	Esto es de gran utilidad debido a que solo se configura la estructura una vez
@@ -149,7 +162,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Copiamos los datos de los vertices a memoria del procesador grafico
 	//           TIPO DE BUFFER     TAMANIO          DATOS    MODO (No cambian los datos)
 	glBufferData(GL_ARRAY_BUFFER, bufferSize, vertices, GL_STATIC_DRAW);
-
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	// Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
 	// indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)0);
@@ -173,7 +187,7 @@ void destroy() {
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 
-	glBindBuffer(GL_ARRAY_BUFFER,VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glDeleteBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -219,7 +233,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
 	}
 }
 
-bool processInput(bool continueApplication){
+bool processInput(bool continueApplication) {
 	if (exitApp || glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
@@ -232,15 +246,27 @@ void applicationLoop() {
 	bool psi = true;
 	while (psi) {
 		psi = processInput(true);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Buffer de color y buffer de profundidad
 
-		// Esta linea esta comentada debido a que de momento no se usan los shaders
-		// glUseProgram(shaderProgramID);
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)screenWidth / (float)screenHeight, 0.2f, 100.0f);//se declara la matriz en perspectiva
 
-		// Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
+																															 // Esta linea esta comentada debido a que de momento no se usan los shaders
+																															 // glUseProgram(shaderProgramID);
+		shader->turnOn();//se agrego esta linea para activar el shader, por medio de la clase
+
+		glm::mat4 view = glm::mat4(1.0f);//se crea la matriz de vista
+		view = glm::translate(view, glm::vec3(0.0, 0.0, -3.0));//se debe realializar una traslacion para observar la geometria
+		shader->setMatrix4("projection", 1, false, glm::value_ptr(projection));//se enlaza las matrices creadas con el vertex shader
+		shader->setMatrix4("view", 1, false, glm::value_ptr(view));//se enlaza las matrices creadas con el vertex shader
+
+		glm::mat4 model = glm::mat4(1.0f);//se crea la matriz del modelo
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));//se enlaza las matrices creadas con el vertex shader
+
+																	 // Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
 		glBindVertexArray(VAO);
 		// Primitiva de ensamble
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
