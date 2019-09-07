@@ -21,7 +21,10 @@
   <ItemGroup>
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\Cylinder.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="src\FirstPersonCamera.cpp" />
+=======
+>>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
@@ -30,9 +33,13 @@
   <ItemGroup>
     <ClInclude Include="src\Headers\AbstractModel.h" />
     <ClInclude Include="src\Headers\Box.h" />
+<<<<<<< HEAD
     <ClInclude Include="src\Headers\Camera.h" />
     <ClInclude Include="src\Headers\Cylinder.h" />
     <ClInclude Include="src\Headers\FirstPersonCamera.h" />
+=======
+    <ClInclude Include="src\Headers\Cylinder.h" />
+>>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
     <ClInclude Include="src\Headers\Shader.h" />
     <ClInclude Include="src\Headers\Sphere.h" />
     <ClInclude Include="src\Headers\TimeManager.h" />

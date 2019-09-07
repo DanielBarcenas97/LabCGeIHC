@@ -176,10 +176,14 @@ bool processInput(bool continueApplication){
 	if (exitApp || glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
+<<<<<<< HEAD
 
 	TimeManager::Instance().CalculateFrameRate(false);
 	deltaTime = TimeManager::Instance().DeltaTime;
 
+=======
+	deltaTime = 1 / TimeManager::Instance().CalculateFrameRate(false);
+>>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
 	glfwPollEvents();
 	return continueApplication;
 }

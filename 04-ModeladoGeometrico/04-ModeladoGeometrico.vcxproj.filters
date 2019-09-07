@@ -33,9 +33,12 @@
     <ClCompile Include="src\TimeManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="src\FirstPersonCamera.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+=======
+>>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Headers\AbstractModel.h">
@@ -56,12 +59,15 @@
     <ClInclude Include="src\Headers\TimeManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="src\Headers\Camera.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Headers\FirstPersonCamera.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+=======
+>>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shaders\colorShader.fs">
