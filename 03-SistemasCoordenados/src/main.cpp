@@ -17,18 +17,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-<<<<<<< HEAD
-=======
 
 #include "Headers/Shader.h"//se agrego esta linea
 
-Shader * shader = new Shader();
+Shader* shader = new Shader();
 
->>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
 int screenWidth;
 int screenHeight;
 
-GLFWwindow * window;
+GLFWwindow* window;
 
 bool exitApp = false;
 int lastMousePosX;
@@ -45,8 +42,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen);
 void destroy();
 bool processInput(bool continueApplication = true);
 
-GLuint VAO, VBO, EBO;//se agrego el EBO
-GLuint VAO2, VBO2, EBO2;//se duplico la linea anterior
+GLuint VAO, VBO, EBO;
+GLuint VAO2, VBO2, EBO2;
 
 typedef struct _Vertex {
 	glm::vec3 m_Pos;
@@ -100,40 +97,38 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		exit(-1);
 	}
 
-	glViewport(0, 0, screenWidth, screenHeight);//linea original, se recomienda usar
-												//glViewport(screenWidth/2, 0, screenWidth/2, screenHeight);//alterando la funcion anterior
-												//glViewport(screenWidth / 2, screenHeight / 2, screenWidth / 2, screenHeight);//alterando la funcion anterior
+	glViewport(0, 0, screenHeight, screenHeight);
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	glEnable(GL_DEPTH_TEST);//se activa la prueba de profundidad
-
-							//ruta del shder de vertices, ruta del shader de fragmento
+	glEnable(GL_DEPTH_TEST);
+	//ruta del shder de vertices, ruta del shader de fragmento
 	shader->initialize("../Shaders/transformaciones.vs", "../Shaders/transformaciones.fs");
 
 	// Se definen los vertices de la geometria a dibujar
 	Vertex vertices[] =
 	{
+			{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+			{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
+			{ glm::vec3(0.5f,  0.5f,  0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
+			{ glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
+			{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+			{ glm::vec3(0.5f,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
+			{ glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
+			{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }
+	};
+	Vertex vertices2[] = {
+		//cara frontal
 		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
-	{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-	{ glm::vec3(0.5f,  0.5f,  0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
-	{ glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
-	{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
-	{ glm::vec3(0.5f,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
-	{ glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3(0.0f, 0.0f, 1.0f) },
-	{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }
+		{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+		{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+		{ glm::vec3(-0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+		//cara derecha
+			{ glm::vec3(0.5f, -0.5f,   0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
+			{ glm::vec3(0.5f, -0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
+			{ glm::vec3(0.5f,  0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
+			{ glm::vec3(0.5f,  0.5f,   0.5f), glm::vec3(0.0f, 1.0f, 0.0f) }
 	};
 
-	Vertex vertices2[] = {//se arregla otro conjunto de vertices
-		{ glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V0  {
-	{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V1   {
-	{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V2    {cara frontal
-	{ glm::vec3(-0.5f, 0.5f,  0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },//V4   {
-																   //cara derecha
-	{ glm::vec3(0.5f, -0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-	{ glm::vec3(0.5f, -0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-	{ glm::vec3(0.5f, 0.5f,  -0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-	{ glm::vec3(0.5f, 0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f) },
-	};
-
+	
 	// Se definen los indices de las conexiones con los vertices.
 	GLuint indices[] = {  // Note que se inicia en 0!
 		0, 1, 2,
@@ -150,7 +145,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		4, 6, 7
 	};
 
-	GLint indices2[] = {//se crea otro arreglo de indices
+	GLuint indices2[] = {
 		0,1,2,
 		0,2,3,
 		4,5,6,
@@ -169,12 +164,13 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Se crea el ID del VAO
 	// Se crea el VBO (buffer de datos) asociado al VAO
 	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);//se agrego esta linea, para el EBO
-						  /*
-						  El VAO es un objeto que nos permite almacenar la estructura de nuestros datos,
-						  Esto es de gran utilidad debido a que solo se configura la estructura una vez
-						  y se puede utilizar en el loop de renderizado
-						  */
+	glGenBuffers(1, &EBO);
+
+	/*
+	El VAO es un objeto que nos permite almacenar la estructura de nuestros datos,
+	Esto es de gran utilidad debido a que solo se configura la estructura una vez
+	y se puede utilizar en el loop de renderizado
+	*/
 	glGenVertexArrays(1, &VAO);
 	// Cambiamos el estado para indicar que usaremos el id del VAO
 	glBindVertexArray(VAO);
@@ -184,11 +180,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Copiamos los datos de los vertices a memoria del procesador grafico
 	//           TIPO DE BUFFER     TAMANIO          DATOS    MODO (No cambian los datos)
 	glBufferData(GL_ARRAY_BUFFER, bufferSize, vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);//se agrego esta linea para el EBO
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);//se agrego esta linea para el EBO
-
-																					// Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
-																					// indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	// Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
+	// indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)rgbOffset);
 	// Se habilita el atributo del vertice con indice 0 (posicion)
@@ -199,40 +194,37 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	bufferSize = sizeof(vertices2);//se actualiza con el color el tamaño del buffer
-	vertexSize = sizeof(vertices2[0]);//se actualiza el tamaño de los vertices
-	rgbOffset = sizeof(vertices2[0].m_Pos);//se actualiza la salida del color
-
-										   //se agrega estas linear que correponden al otro cubo
-										   //---------------------------------------------------------------------------------------------------------------------------------------------
+	bufferSize = sizeof(vertices2);
+	vertexSize = sizeof(vertices2[0]);
+	rgbOffset = sizeof(vertices2[0].m_Pos);
 	std::cout << "Vertices Estrella:" << std::endl;
 	std::cout << "bufferSize:" << bufferSize << std::endl;
 	std::cout << "vertexSize:" << vertexSize << std::endl;
 	std::cout << "rgbOffset:" << rgbOffset << std::endl;
 
-	// Se crea el ID del VAO2
-	// Se crea el VBO (buffer de datos) asociado al VAO2
+	// Se crea el ID del VAO
+	// Se crea el VBO (buffer de datos) asociado al VAO
 	glGenBuffers(1, &VBO2);
-	glGenBuffers(1, &EBO2);//se agrego esta linea, para el EBO2
-						   /*
-						   El VAO2 es un objeto que nos permite almacenar la estructura de nuestros datos,
-						   Esto es de gran utilidad debido a que solo se configura la estructura una vez
-						   y se puede utilizar en el loop de renderizado
-						   */
+	glGenBuffers(1, &EBO2);
+
+	/*
+	El VAO es un objeto que nos permite almacenar la estructura de nuestros datos,
+	Esto es de gran utilidad debido a que solo se configura la estructura una vez
+	y se puede utilizar en el loop de renderizado
+	*/
 	glGenVertexArrays(1, &VAO2);
-	// Cambiamos el estado para indicar que usaremos el id del VAO2
+	// Cambiamos el estado para indicar que usaremos el id del VAO
 	glBindVertexArray(VAO2);
 
-	// Cambiamos el estado para indicar que usaremos el id del VBO2 como Arreglo de vertices (GL_ARRAY_BUFFER)
+	// Cambiamos el estado para indicar que usaremos el id del VBO como Arreglo de vertices (GL_ARRAY_BUFFER)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
 	// Copiamos los datos de los vertices a memoria del procesador grafico
 	//           TIPO DE BUFFER     TAMANIO          DATOS    MODO (No cambian los datos)
 	glBufferData(GL_ARRAY_BUFFER, bufferSize, vertices2, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO2);//se agrego esta linea para el EBO
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices2), indices2, GL_STATIC_DRAW);//se agrego esta linea para el EBO
-
-																					  // Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
-																					  // indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices2), indices2, GL_STATIC_DRAW);
+	// Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
+	// indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)rgbOffset);
 	// Se habilita el atributo del vertice con indice 0 (posicion)
@@ -242,7 +234,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Ya que se configuro, se regresa al estado original
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-	//--------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 void destroy() {
@@ -266,9 +257,10 @@ void destroy() {
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
 	screenWidth = widthRes;
 	screenHeight = heightRes;
-	glViewport(0, 0, widthRes, heightRes);//funcion original, se recomienda usar este
-										  //glViewport(screenWidth / 2, 0, screenWidth / 2, screenHeight);//alterando la funcion anterior
-										  //glViewport(screenWidth / 2, screenHeight/2 , screenWidth / 2, screenHeight);//alterando la funcion anterior
+	//glViewport(0, 0, widthRes, heightRes);
+	//glViewport(screenWidth / 2, screenWidth / 2, screenHeight / 2, screenHeight / 2);
+	glViewport(0,0, screenWidth, screenHeight);
+
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {
@@ -316,15 +308,11 @@ void applicationLoop() {
 	bool psi = true;
 	while (psi) {
 		psi = processInput(true);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//SE AGREGO LA BANDERA: GL_DEPTH_BUFFER_BIT
-
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)screenWidth / (float)screenHeight, 0.2f, 100.0f);//se declara la matriz en perspectiva, se recomienda usar esta funcion
-																															 //modificando el valor del primer parametro de la funcion perpective: original->45, intentos->20 y 60
-																															 //glm::mat4 projection = glm::frustum(-0.005, 0.005, -0.005, 0.005, 0.01, 100.0);//se comenta la linea de arriba para poder practicar con la funcion frustum
-																															 //glm::mat4 projection = glm::ortho(-5.0, 5.0, -5.0, 5.0, 0.01, 10.0);//se comenta la linea de arriba para entender la proyeccion ortogonal
-
-																															 // Esta linea esta comentada debido a que de momento no se usan los shaders
-																															 // glUseProgram(shaderProgramID);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Buffer de color y buffer de profundidad
+		//si se cambia los radianes sirve para hacer zoom
+		glm::mat4 projection = glm::perspective(glm::radians(30.0f), (float)screenWidth / (float)screenHeight, 0.02f, 100.0f);//se declara la matriz en perspectiva
+		//glm::mat4 projection = glm::frustum(-0.005, 0.005, -0.005, 0.005, 0.01, 100.0);		// Esta linea esta comentada debido a que de momento no se usan los shaders
+		//glm::mat4 projection = glm::ortho(-5.0, 5.0, -5.0, 5.0, 0.01, 10.0);
 		shader->turnOn();//se agrego esta linea para activar el shader, por medio de la clase
 
 		glm::mat4 view = glm::mat4(1.0f);//se crea la matriz de vista
@@ -333,26 +321,29 @@ void applicationLoop() {
 		shader->setMatrix4("view", 1, false, glm::value_ptr(view));//se enlaza las matrices creadas con el vertex shader
 
 		glm::mat4 model = glm::mat4(1.0f);//se crea la matriz del modelo
-										  //model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0, 1.0, 0.0));//haciendo una rotacion al cubo sobre el eje y, para observar la cara derecha del cubo
-		model = glm::translate(model, glm::vec3(-1.0, 1.0, -4.0));//se elimina la linea de arriba para poder dibujar la letra C, primer cubo
+		//model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0, 1.0, 0.0));
+		model = glm::translate(model, glm::vec3(-1.0, 1.0, -4.0));//se debe realializar una traslacion para observar la geometria
+
 		shader->setMatrix4("model", 1, false, glm::value_ptr(model));//se enlaza las matrices creadas con el vertex shader
 
-																	 // Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
-		glBindVertexArray(VAO2);//se modifica el valor de VAO, por VAO2
-								// Primitiva de ensamble
-								//glDrawArrays(GL_TRIANGLES, 0, 6); //se comenta esta linea y se sustituye por el siguiente
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);// ESTRUCTURA: tipo de primitiva, #de vertices, tipó de datos, desde donde empieza
-															 //segundo cubo
-		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, 1.0, -4.0));
-		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		// Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
+		glBindVertexArray(VAO2);
+		// Primitiva de ensamble
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//tercer cubo
-		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, 0.0, -4.0));
-		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+		
+		//segundo cubo
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, 1.0, -4.0));//se debe realializar una traslacion para observar la geometria
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));//se enlaza las matrices creadas con el vertex shader
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//cuarto cubo
-		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, -1.0, -4.0));
-		shader->setMatrix4("model", 1, false, glm::value_ptr(model));
+
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, 0.0, -4.0));//se debe realializar una traslacion para observar la geometria
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));//se enlaza las matrices creadas con el vertex shader
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+
+		model = glm::translate(glm::mat4(1.0), glm::vec3(-2.0, -1.0, -4.0));//se debe realializar una traslacion para observar la geometria
+		shader->setMatrix4("model", 1, false, glm::value_ptr(model));//se enlaza las matrices creadas con el vertex shader
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
@@ -360,7 +351,7 @@ void applicationLoop() {
 	}
 }
 
-int main(int argc, char ** argv) {
+int main(int argc, char** argv) {
 	init(800, 700, "Window GLFW", false);
 	applicationLoop();
 	destroy();

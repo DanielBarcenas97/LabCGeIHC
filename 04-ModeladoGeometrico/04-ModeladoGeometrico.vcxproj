@@ -21,10 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\Cylinder.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="src\FirstPersonCamera.cpp" />
-=======
->>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
@@ -33,13 +30,9 @@
   <ItemGroup>
     <ClInclude Include="src\Headers\AbstractModel.h" />
     <ClInclude Include="src\Headers\Box.h" />
-<<<<<<< HEAD
     <ClInclude Include="src\Headers\Camera.h" />
     <ClInclude Include="src\Headers\Cylinder.h" />
     <ClInclude Include="src\Headers\FirstPersonCamera.h" />
-=======
-    <ClInclude Include="src\Headers\Cylinder.h" />
->>>>>>> 83ef73ee33f0280762bf054035975e747aa21dee
     <ClInclude Include="src\Headers\Shader.h" />
     <ClInclude Include="src\Headers\Sphere.h" />
     <ClInclude Include="src\Headers\TimeManager.h" />
@@ -52,32 +45,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{59cb9b00-d532-4db6-b06a-4d0ab90a5f08}</ProjectGuid>
     <RootNamespace>_04_ModeladoGeometrico</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>

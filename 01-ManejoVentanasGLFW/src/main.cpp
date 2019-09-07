@@ -21,6 +21,7 @@ int lastMousePosX;
 int lastMousePosY;
 
 double deltaTime;
+int colorStatus = 0;
 
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
@@ -79,7 +80,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	}
 
 	glViewport(0, 0, screenWidth, screenHeight);
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 }
 
 void destroy() {
@@ -99,6 +100,21 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		case GLFW_KEY_R:
+			colorStatus = 0;
+			break;
+		case GLFW_KEY_G:
+			colorStatus = 1;
+			break;
+		case GLFW_KEY_B:
+			colorStatus = 2;
+			break;
+		case GLFW_KEY_O:
+			colorStatus = 3;
+			break;
+		case GLFW_KEY_P:
+			colorStatus = 4;
+			break;
 		}
 	}
 }
@@ -113,9 +129,11 @@ void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
 		switch (button) {
 		case GLFW_MOUSE_BUTTON_RIGHT:
 			std::cout << "lastMousePos.y:" << lastMousePosY << std::endl;
+			colorStatus = 5;
 			break;
 		case GLFW_MOUSE_BUTTON_LEFT:
 			std::cout << "lastMousePos.x:" << lastMousePosX << std::endl;
+			colorStatus = 6;
 			break;
 		case GLFW_MOUSE_BUTTON_MIDDLE:
 			std::cout << "lastMousePos.x:" << lastMousePosX << std::endl;
@@ -140,11 +158,25 @@ void applicationLoop() {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(window);
+		if(colorStatus == 0)
+			glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		else if(colorStatus == 1)
+			glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
+		else if(colorStatus == 2)
+			glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
+		else if (colorStatus == 3)
+			glClearColor(1.0f, 0.5f, 0.0f, 0.0f);
+		else if (colorStatus == 4)
+			glClearColor(0.5f, 0.0f, 0.5f, 0.0f);
+		else if (colorStatus == 5)
+			glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
+		else if (colorStatus == 6)
+			glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
 	}
 }
 
 int main(int argc, char ** argv) {
-	init(800, 700, "Window GLFW", false);
+	init(1600, 900, "Práctica 1", true);
 	applicationLoop();
 	destroy();
 	return 1;
