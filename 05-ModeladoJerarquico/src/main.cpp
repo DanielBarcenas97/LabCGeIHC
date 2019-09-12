@@ -51,6 +51,9 @@ float rot1 = 0.0, rot2 = 0.0;///1
 float rot3 = 0.0, rot4 = 0.0;///2
 bool sentido = true;
 
+float rot0 = 0;
+float dz = 0;
+
 double deltaTime;///1
 
 // Se definen todos las funciones.
@@ -230,7 +233,6 @@ bool processInput(bool continueApplication) {
 
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)///3
 		sentido = false;///1
-
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && sentido)
 		rot1 += 0.1;///1
 	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && !sentido)
@@ -242,12 +244,26 @@ bool processInput(bool continueApplication) {
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && sentido)
 		rot4 += 0.1;///2
 
+
+	//Se mueva completo:
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)///3
+		rot0 = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)///3
+		rot0 = -0.01;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)///3
+		dz = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)///3
+		dz = -0.01;
+
+
 	glfwPollEvents();
 	return continueApplication;
 }
 
 void applicationLoop() {
 	bool psi = true;
+
+	glm::mat4 model = glm::mat4(1.0f);
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -258,7 +274,8 @@ void applicationLoop() {
 		shader.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
 
-		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0, 0, dz));
+		model = glm::rotate(model,rot0 ,glm::vec3(0, 1, 0));
 
 		//box1.enableWireMode();
 		box1.render(glm::scale(model, glm::vec3(1.0, 1.0, 0.1)));
@@ -378,6 +395,9 @@ void applicationLoop() {
 
 
 		shader.turnOff();
+
+		dz = 0;
+		rot0 = 0;
 
 		glfwSwapBuffers(window);
 	}
