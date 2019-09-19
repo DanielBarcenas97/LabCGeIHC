@@ -37,11 +37,18 @@ std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
 Sphere sphere1(20, 20);
 Sphere sphere2(20, 20);
+Sphere sphere3(20, 20);
 Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 Box box1;
 Box box2;
 Box box3;
+
+Cylinder torsoR2D2(20, 20, 0.5, 0.5);//se declara el torso de nuevo modelo
+Sphere cabezaR2D2(20, 20);//se declara la cabeza del modelo
+Sphere articulacionR2D2(20, 20);//se declara la articulacion del modelo
+Cylinder brazoR2D2(20, 20, 0.5, 0.5);//se declara el brazo del modelo
+Box pieR2D2;//se declara los pies de soporte del modelo
 
 bool exitApp = false;
 int lastMousePosX, offsetX = 0;
@@ -50,6 +57,10 @@ int lastMousePosY, offsetY = 0;
 float rot1 = 0.0, rot2 = 0.0;///1
 float rot3 = 0.0, rot4 = 0.0;///2
 bool sentido = true;
+
+float desplazamiento = 0.0f;
+float rotacionTotal = 0.0f;
+float brazoDerecho = 0.0f, brazoIzquierdo = 0.0f;
 
 float rot0 = 0;
 float dz = 0;
@@ -133,6 +144,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	//setter para poner el color de la geometria
 	sphere2.setColor(glm::vec4(255, 255, 255, 1.0));
 
+
+	sphere3.init();
+	sphere3.setShader(&shader);
+	sphere3.setColor(glm::vec4(255, 0.0, 0.0, 0.0));
+
+
 	cylinder1.init();
 	cylinder1.setShader(&shader);
 	cylinder1.setColor(glm::vec4(255, 255, 0.0, 1.0));
@@ -153,6 +170,31 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	box3.setShader(&shader);
 	box3.setColor(glm::vec4(0.0, 0.0, 0.0, 1.0));
 
+
+	//////////////////////////////////
+	//se inicializan los objetos para el modelo de R2D2
+
+	torsoR2D2.init();
+	torsoR2D2.setShader(&shader);
+	torsoR2D2.setColor(glm::vec4(255, 255, 255, 255));
+
+	cabezaR2D2.init();
+	cabezaR2D2.setShader(&shader);
+	cabezaR2D2.setColor(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+
+	articulacionR2D2.init();
+	articulacionR2D2.setShader(&shader);
+	articulacionR2D2.setColor(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	brazoR2D2.init();
+	brazoR2D2.setShader(&shader);
+	brazoR2D2.setColor(glm::vec4(255,255,255, 255));
+
+	pieR2D2.init();
+	pieR2D2.setShader(&shader);
+	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
+	////////////////////////////////////
+
 	camera->setPosition(glm::vec3(2.0, 0.0, 4.0));
 }
 
@@ -166,6 +208,16 @@ void destroy() {
 	sphere1.destroy();
 	cylinder1.destroy();
 	box1.destroy();
+
+
+	//se declaran la funcion destroy() para cuando se termine de ejecutar el programa
+
+	torsoR2D2.destroy();
+	sphere3.destroy();
+	cabezaR2D2.destroy();
+	articulacionR2D2.destroy();
+	brazoR2D2.destroy();
+	pieR2D2.destroy();
 
 	shader.destroy();
 }
@@ -264,6 +316,7 @@ void applicationLoop() {
 	bool psi = true;
 
 	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 modelR2D2 = glm::mat4(1.0f);//referencia para el nuevo modelo
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -275,11 +328,15 @@ void applicationLoop() {
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
 
 		model = glm::translate(model, glm::vec3(0, 0, dz));
-		model = glm::rotate(model,rot0 ,glm::vec3(0, 1, 0));
+		model = glm::rotate(model, rot0, glm::vec3(0, 1, 0));
+
+		modelR2D2 = glm::translate(modelR2D2, glm::vec3(0.0f, 0.0f, desplazamiento));
+		modelR2D2 = glm::rotate(modelR2D2, rotacionTotal, glm::vec3(0.0f, 1.0f, 0.0f));
+
 
 		//box1.enableWireMode();
 		box1.render(glm::scale(model, glm::vec3(1.0, 1.0, 0.1)));
-		
+
 		//Articulacion
 		glm::mat4 j1 = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
@@ -394,10 +451,84 @@ void applicationLoop() {
 		box3.render(glm::scale(b, glm::vec3(0.50, 0.15, 0.1)));
 
 
+		/////////////////////////////////////////////////////////////////////////////////////////
+		//apartir de aqui se modelara a R2D2
+
+		glm::mat4 torso = glm::translate(modelR2D2, glm::vec3(5.0f, 0.0f, 0.0f));
+		torso = glm::rotate(torso, glm::radians(-20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//torsoR2D2.enableWireMode();
+		torsoR2D2.render(glm::scale(torso, glm::vec3(1.0f, 1.0f, 1.0f)));
+
+		glm::mat4 cabeza = glm::translate(torso, glm::vec3(0.0f, 0.5f, 0.0f));
+		//cabezaR2D2.enableWireMode();
+		cabezaR2D2.render(glm::scale(cabeza, glm::vec3(1.0f, 1.0f, 1.0f)));
+
+		//
+		///ojo
+		glm::mat4 oj1 = glm::translate(cabeza, glm::vec3(0.0f, 0.2f, 0.4f));
+		//sphere1.enableWireMode();
+		sphere3.render(glm::scale(oj1, glm::vec3(0.15, 0.15, 0.15)));
+
+		glm::mat4 articulacioDerecha = glm::translate(torso, glm::vec3(0.55f, 0.35f, 0.0f));
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(articulacioDerecha, glm::vec3(0.15f, 0.15f, 0.15f)));
+		articulacioDerecha = glm::rotate(articulacioDerecha, brazoDerecho, glm::vec3(1.0, 0.0, 0.0));
+
+		glm::mat4 brazoDer = glm::translate(articulacioDerecha, glm::vec3(0.05f, -0.4f, -0.13f));
+		brazoDer = glm::rotate(brazoDer, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//brazoR2D2.enableWireMode();
+		brazoR2D2.render(glm::scale(brazoDer, glm::vec3(0.1f, 1.0f, 0.1f)));
+
+		glm::mat4 munecaDerecha = glm::translate(brazoDer, glm::vec3(0.0f, -0.5f, 0.0f));;
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(munecaDerecha, glm::vec3(0.15f, 0.15f, 0.15f)));
+
+		glm::mat4 pataDerecha = glm::translate(munecaDerecha, glm::vec3(0.0f, -0.1f, 0.0f));
+		//pieR2D2.enableWireMode();
+		pieR2D2.render(glm::scale(pataDerecha, glm::vec3(0.2f, 0.2f, 0.2f)));
+
+		glm::mat4 articulacioIzquierda = glm::translate(torso, glm::vec3(-0.55f, 0.35f, 0.0f));
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(articulacioIzquierda, glm::vec3(0.15f, 0.15f, 0.15f)));
+		articulacioIzquierda = glm::rotate(articulacioIzquierda, brazoIzquierdo, glm::vec3(1.0, 0.0, 0.0));
+
+		glm::mat4 brazoIzq = glm::translate(articulacioIzquierda, glm::vec3(-0.05f, -0.4f, -0.13f));
+		brazoIzq = glm::rotate(brazoIzq, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//brazoR2D2.enableWireMode();
+		brazoR2D2.render(glm::scale(brazoIzq, glm::vec3(0.1f, 1.0f, 0.1f)));
+
+		glm::mat4 munecaIzquierda = glm::translate(brazoIzq, glm::vec3(0.0f, -0.5f, 0.0f));;
+		articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(munecaIzquierda, glm::vec3(0.15f, 0.15f, 0.15f)));
+
+		glm::mat4 pataIzquierda = glm::translate(munecaIzquierda, glm::vec3(0.0f, -0.1f, 0.0f));
+		//pieR2D2.enableWireMode();
+		pieR2D2.render(glm::scale(pataIzquierda, glm::vec3(0.2f, 0.2f, 0.2f)));
+
+		glm::mat4 coxis = glm::translate(torso, glm::vec3(0.0f, -0.15f, 0.0f));
+		//cabezaR2D2.enableWireMode();
+		cabezaR2D2.render(glm::scale(coxis, glm::vec3(1.0f, 1.0f, 1.0f)));
+
+		glm::mat4 artiulacionCentral = glm::translate(coxis, glm::vec3(0.0f, -0.55f, 0.0f));
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(artiulacionCentral, glm::vec3(0.15f, 0.15f, 0.15f)));
+
+		glm::mat4 pataCentral = glm::translate(artiulacionCentral, glm::vec3(0.0f, -0.1f, 0.0f));
+		pataCentral = glm::rotate(pataCentral, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//pieR2D2.enableWireMode();
+		pieR2D2.render(glm::scale(pataCentral, glm::vec3(0.2f, 0.2f, 0.2f)));
+
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+
 		shader.turnOff();
 
 		dz = 0;
 		rot0 = 0;
+
+		desplazamiento = 0.0f;
+		rotacionTotal = 0.0F;
 
 		glfwSwapBuffers(window);
 	}
@@ -409,4 +540,3 @@ int main(int argc, char** argv) {
 	destroy();
 	return 1;
 }
-
