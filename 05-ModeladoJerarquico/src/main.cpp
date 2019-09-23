@@ -56,7 +56,14 @@ int lastMousePosY, offsetY = 0;
 
 float rot1 = 0.0, rot2 = 0.0;///1
 float rot3 = 0.0, rot4 = 0.0;///2
+
+float rota1 = 0.0, rota2 = 0.0;///1
+float rota3 = 0.0, rota4 = 0.0;///2
+
 bool sentido = true;
+
+float d11 = 0, d12 = 0, d13 = 0, d14 = 0;   //Movimiento de los dedos
+float r21 = 0, r22 = 0, r23 = 0, r24 = 0;
 
 float desplazamiento = 0.0f;
 float rotacionTotal = 0.0f;
@@ -65,6 +72,11 @@ float brazoDerecho = 0.0f, brazoIzquierdo = 0.0f;
 float rot0 = 0;
 float dz = 0;
 
+float rota0 = 0;
+float dza = 0;
+
+float rotr20 = 0;
+float dzd2 = 0;
 double deltaTime;///1
 
 // Se definen todos las funciones.
@@ -83,10 +95,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
 	}
-
 	screenWidth = width;
 	screenHeight = height;
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -97,7 +107,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	else
 		window = glfwCreateWindow(width, height, strTitle.c_str(), nullptr,
 			nullptr);
-
 	if (window == nullptr) {
 		std::cerr
 			<< "Error to create GLFW window, you can try download the last version of your video card that support OpenGL 3.3+"
@@ -105,16 +114,13 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		destroy();
 		exit(-1);
 	}
-
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(0);
-
 	glfwSetWindowSizeCallback(window, reshapeCallback);
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetCursorPosCallback(window, mouseCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-
 	// Init glew
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
@@ -122,42 +128,32 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cerr << "Failed to initialize glew" << std::endl;
 		exit(-1);
 	}
-
 	glViewport(0, 0, screenWidth, screenHeight);
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-
 	shader.initialize("../Shaders/colorShader.vs", "../Shaders/colorShader.fs");
-
 	//Inicializacion de VAO,VBO,EBO
 	sphere1.init();
 	//Es un metodo0 setter que coloca el apuntador al sheder
 	sphere1.setShader(&shader);
 	//setter para poner el color de la geometria
 	sphere1.setColor(glm::vec4(0.0, 0.0, 0.0, 1.0));
-
 	sphere2.init();
 	//Es un metodo0 setter que coloca el apuntador al sheder
 	sphere2.setShader(&shader);
 	//setter para poner el color de la geometria
 	sphere2.setColor(glm::vec4(255, 255, 255, 1.0));
-
-
 	sphere3.init();
 	sphere3.setShader(&shader);
 	sphere3.setColor(glm::vec4(255, 0.0, 0.0, 0.0));
 
-
 	cylinder1.init();
 	cylinder1.setShader(&shader);
 	cylinder1.setColor(glm::vec4(255, 255, 0.0, 1.0));
-
 	cylinder2.init();
 	cylinder2.setShader(&shader);
 	cylinder2.setColor(glm::vec4(0.803, 0.521, 0.247, 1.0));
-
 	box1.init();
 	box1.setShader(&shader);
 	box1.setColor(glm::vec4(255, 255, 0.0, 1.0));
@@ -203,13 +199,10 @@ void destroy() {
 	glfwTerminate();
 	// --------- IMPORTANTE ----------
 	// Eliminar los shader y buffers creados.
-
 	// Destrucción de los VAO, EBO, VBO
 	sphere1.destroy();
 	cylinder1.destroy();
 	box1.destroy();
-
-
 	//se declaran la funcion destroy() para cuando se termine de ejecutar el programa
 
 	torsoR2D2.destroy();
@@ -218,7 +211,6 @@ void destroy() {
 	articulacionR2D2.destroy();
 	brazoR2D2.destroy();
 	pieR2D2.destroy();
-
 	shader.destroy();
 }
 
@@ -295,8 +287,24 @@ bool processInput(bool continueApplication) {
 		rot3 += 0.1;///2
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && sentido)
 		rot4 += 0.1;///2
+	if (glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)///3
+		sentido = true;///1
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS && sentido)
+		rota1 += 0.1;///1
+	else if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS && !sentido)
+		rota1 -= 0.1;///3
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS && sentido)
+		rota2 += 0.1;///1
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS && sentido)
+		rota3 += 0.1;///2
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS && sentido)
+		rota4 += 0.1;///2
 
-
+	//Movimiento de los dedos:
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS && sentido)
+		d11 += 0.01;///2
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS && sentido)
+		d12 -= 0.01;///2
 	//Se mueva completo:
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)///3
 		rot0 = 0.01;
@@ -306,34 +314,34 @@ bool processInput(bool continueApplication) {
 		dz = 0.01;
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)///3
 		dz = -0.01;
-
-
+	//R2D2
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)///3
+		rota0 = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)///3
+		rota0 = -0.01;
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)///3
+		dza = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)///3
+		dza = -0.01;
 	glfwPollEvents();
 	return continueApplication;
 }
 
 void applicationLoop() {
 	bool psi = true;
-
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 modelR2D2 = glm::mat4(1.0f);//referencia para el nuevo modelo
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)screenWidth / (float)screenHeight, 0.01f, 100.0f);
 		glm::mat4 view = camera->getViewMatrix();
-
 		shader.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
-
 		model = glm::translate(model, glm::vec3(0, 0, dz));
 		model = glm::rotate(model, rot0, glm::vec3(0, 1, 0));
-
-		modelR2D2 = glm::translate(modelR2D2, glm::vec3(0.0f, 0.0f, desplazamiento));
-		modelR2D2 = glm::rotate(modelR2D2, rotacionTotal, glm::vec3(0.0f, 1.0f, 0.0f));
-
-
+		modelR2D2 = glm::translate(modelR2D2, glm::vec3(0.0f, 0.0f, dza));
+		modelR2D2 = glm::rotate(modelR2D2, rota0, glm::vec3(0.0f, 1.0f, 0.0f));
 		//box1.enableWireMode();
 		box1.render(glm::scale(model, glm::vec3(1.0, 1.0, 0.1)));
 
@@ -361,13 +369,40 @@ void applicationLoop() {
 		//Hueso2
 		glm::mat4 l2 = glm::translate(j2, glm::vec3(0.215, 0.1223, 0.0f));
 		l2 = glm::rotate(l2, glm::radians(120.0f), glm::vec3(0, 0, 1.0));
-		cylinder1.enableWireMode();
+		//cylinder1.enableWireMode();
 		cylinder1.render(glm::scale(l2, glm::vec3(0.1, 0.5, 0.1)));
 
 		//Articulacion3
-		glm::mat4 j3 = glm::translate(j2, glm::vec3(0.215, 0.1223, 0.0f));
+		glm::mat4 j3 = glm::translate(j2, glm::vec3(0.45, 0.2523, 0.0f));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(j3, glm::vec3(0.1, 0.1, 0.1)));
+		j3 = glm::rotate(j3, d11, glm::vec3(1, 0, 0));///1
+		//j3 = glm::rotate(j3, d11, glm::vec3(0, 1, 0));///1
+
+		//dedo 1
+		glm::mat4 d1 = glm::translate(j3, glm::vec3(0.1, 0.1, 0.0f));
+		d1 = glm::rotate(d1, glm::radians(120.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d1, glm::vec3(0.04, 0.2, 0.1)));
+		
+
+		//dedo 2
+		glm::mat4 d2 = glm::translate(j3, glm::vec3(0.12, 0.05, 0.0f));
+		d2 = glm::rotate(d2, glm::radians(100.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d2, glm::vec3(0.04, 0.2, 0.1)));
+
+		//dedo 3
+		glm::mat4 d3 = glm::translate(j3, glm::vec3(0.14, 0.00, 0.0f));
+		d3 = glm::rotate(d3, glm::radians(80.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d3, glm::vec3(0.04, 0.2, 0.1)));
+
+		//dedo 4
+		glm::mat4 d4 = glm::translate(j3, glm::vec3(0.16, -0.05, 0.0f));
+		d4 = glm::rotate(d4, glm::radians(60.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d4, glm::vec3(0.04, 0.2, 0.1)));
 
 		//Pupila 
 		glm::mat4 pupila1 = glm::translate(model, glm::vec3(0.25, 0.25, 0.065f));
@@ -390,7 +425,9 @@ void applicationLoop() {
 		glm::mat4 a1 = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(a1, glm::vec3(0.1, 0.1, 0.1)));
-
+		a1 = glm::rotate(a1, rot3, glm::vec3(0, 0, 1));///1
+		a1 = glm::rotate(a1, rot3, glm::vec3(0, 1, 0));///1
+	
 		//hueso Izq
 		glm::mat4 h1 = glm::translate(a1, glm::vec3(-0.25f, 0.0f, 0.0f));
 		h1 = glm::rotate(h1, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
@@ -401,6 +438,8 @@ void applicationLoop() {
 		glm::mat4 a2 = glm::translate(a1, glm::vec3(-0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
 		sphere1.render(glm::scale(a2, glm::vec3(0.1, 0.1, 0.1)));
+		a2 = glm::rotate(a2, rot4, glm::vec3(1, 0, 0));///1
+		a2 = glm::rotate(a2, rot4, glm::vec3(0, 1, 0));///1
 
 		//hueso2 Izq 
 		glm::mat4 h2 = glm::translate(a2, glm::vec3(-0.215, -0.1223, 0.0f));
@@ -455,7 +494,7 @@ void applicationLoop() {
 		//apartir de aqui se modelara a R2D2
 
 		glm::mat4 torso = glm::translate(modelR2D2, glm::vec3(5.0f, 0.0f, 0.0f));
-		torso = glm::rotate(torso, glm::radians(-20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		torso = glm::rotate(torso, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		//torsoR2D2.enableWireMode();
 		torsoR2D2.render(glm::scale(torso, glm::vec3(1.0f, 1.0f, 1.0f)));
 
@@ -472,12 +511,13 @@ void applicationLoop() {
 		glm::mat4 articulacioDerecha = glm::translate(torso, glm::vec3(0.55f, 0.35f, 0.0f));
 		//articulacionR2D2.enableWireMode();
 		articulacionR2D2.render(glm::scale(articulacioDerecha, glm::vec3(0.15f, 0.15f, 0.15f)));
-		articulacioDerecha = glm::rotate(articulacioDerecha, brazoDerecho, glm::vec3(1.0, 0.0, 0.0));
+		articulacioDerecha = glm::rotate(articulacioDerecha, rota1, glm::vec3(0, 0, 1));///1
+		articulacioDerecha = glm::rotate(articulacioDerecha, rota1, glm::vec3(0, 1, 0));///1
 
 		glm::mat4 brazoDer = glm::translate(articulacioDerecha, glm::vec3(0.05f, -0.4f, -0.13f));
 		brazoDer = glm::rotate(brazoDer, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		//brazoR2D2.enableWireMode();
-		brazoR2D2.render(glm::scale(brazoDer, glm::vec3(0.1f, 1.0f, 0.1f)));
+		brazoR2D2.render(glm::scale(brazoDer, glm::vec3(0.15f, 1.0f, 0.1f)));
 
 		glm::mat4 munecaDerecha = glm::translate(brazoDer, glm::vec3(0.0f, -0.5f, 0.0f));;
 		//articulacionR2D2.enableWireMode();
@@ -490,12 +530,12 @@ void applicationLoop() {
 		glm::mat4 articulacioIzquierda = glm::translate(torso, glm::vec3(-0.55f, 0.35f, 0.0f));
 		//articulacionR2D2.enableWireMode();
 		articulacionR2D2.render(glm::scale(articulacioIzquierda, glm::vec3(0.15f, 0.15f, 0.15f)));
-		articulacioIzquierda = glm::rotate(articulacioIzquierda, brazoIzquierdo, glm::vec3(1.0, 0.0, 0.0));
+		articulacioIzquierda = glm::rotate(articulacioIzquierda, rota2, glm::vec3(1, 0, 0));///1
 
 		glm::mat4 brazoIzq = glm::translate(articulacioIzquierda, glm::vec3(-0.05f, -0.4f, -0.13f));
 		brazoIzq = glm::rotate(brazoIzq, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		//brazoR2D2.enableWireMode();
-		brazoR2D2.render(glm::scale(brazoIzq, glm::vec3(0.1f, 1.0f, 0.1f)));
+		brazoR2D2.render(glm::scale(brazoIzq, glm::vec3(0.15f, 1.0f, 0.1f)));
 
 		glm::mat4 munecaIzquierda = glm::translate(brazoIzq, glm::vec3(0.0f, -0.5f, 0.0f));;
 		articulacionR2D2.enableWireMode();
@@ -514,22 +554,16 @@ void applicationLoop() {
 		articulacionR2D2.render(glm::scale(artiulacionCentral, glm::vec3(0.15f, 0.15f, 0.15f)));
 
 		glm::mat4 pataCentral = glm::translate(artiulacionCentral, glm::vec3(0.0f, -0.1f, 0.0f));
-		pataCentral = glm::rotate(pataCentral, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		pataCentral = glm::rotate(pataCentral, glm::radians(5.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		//pieR2D2.enableWireMode();
 		pieR2D2.render(glm::scale(pataCentral, glm::vec3(0.2f, 0.2f, 0.2f)));
-
-
-
 		/////////////////////////////////////////////////////////////////////////////////////////
-
 		shader.turnOff();
 
 		dz = 0;
+		dza = 0;
 		rot0 = 0;
-
-		desplazamiento = 0.0f;
-		rotacionTotal = 0.0F;
-
+		rota0 = 0;
 		glfwSwapBuffers(window);
 	}
 }
