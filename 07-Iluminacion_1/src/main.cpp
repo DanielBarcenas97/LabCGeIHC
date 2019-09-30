@@ -40,7 +40,7 @@ Shader shader;
 //Descomentar El shader de texturizado
 Shader shaderTexture;
 // Descomentar El shader para iluminacion
-//Shader shaderColorLighting;
+Shader shaderColorLighting;
 
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
@@ -52,8 +52,9 @@ Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 Box box1;
 Box box2;
+Box box3;
 
-GLuint textureID1, textureID2, textureID3;
+GLuint textureID1, textureID2, textureID3, textureID4;
 
 bool exitApp = false;
 int lastMousePosX, offsetX = 0;
@@ -132,8 +133,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	shader.initialize("../Shaders/colorShader.vs", "../Shaders/colorShader.fs");
 	shaderTexture.initialize("../Shaders/texturizado_res.vs", "../Shaders/texturizado_res.fs");
 	// Descomentar
-	/*shaderColorLighting.initialize("../Shaders/iluminacion_color_res.vs",
-			"../Shaders/iluminacion_color_res.fs");*/
+	shaderColorLighting.initialize("../Shaders/iluminacion_color_res.vs","../Shaders/iluminacion_color_res.fs");
 
 	// Inicializar los buffers VAO, VBO, EBO
 	sphere1.init();
@@ -158,7 +158,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	sphereLamp.setColor(glm::vec4(1.0, 1.0, 1.0, 1.0));*/
 
 	cylinder1.init();
-	cylinder1.setShader(&shader);
+	cylinder1.setShader(&shaderColorLighting);
 	cylinder1.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
 
 	cylinder2.init();
@@ -171,6 +171,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	box2.init();
 	box2.setShader(&shaderTexture);
+
+	box3.init();
+	box3.setShader(&shaderTexture);
 
 	sphere3.init();
 	sphere3.setShader(&shaderTexture);
@@ -274,7 +277,42 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cout << "Failed to load texture" << std::endl;
 	// Libera la memoria de la textura
 	texture3.freeImage(bitmap);
+	///////////////////////
 
+	// Definiendo la textura a utilizar
+	Texture texture4("../Textures/texturaLadrillos.jpg");
+	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
+	// Voltear la imagen
+	bitmap = texture4.loadImage(true);
+	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
+	data = texture4.convertToData(bitmap, imageWidth, imageHeight);
+	// Creando la textura con id 1
+	glGenTextures(1, &textureID4);
+	// Enlazar esa textura a una tipo de textura de 2D.
+	glBindTexture(GL_TEXTURE_2D, textureID4);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// Verifica si se pudo abrir la textura
+	if (data) {
+		// Transferis los datos de la imagen a memoria
+		// Tipo de textura, Mipmaps, Formato interno de openGL, ancho, alto, Mipmaps,
+		// Formato interno de la libreria de la imagen, el tipo de dato y al apuntador
+		// a los datos
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		// Generan los niveles del mipmap (OpenGL es el ecargado de realizarlos)
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	// Libera la memoria de la textura
+	texture4.freeImage(bitmap);
+
+	//////////////////////
 }
 
 void destroy() {
@@ -409,8 +447,9 @@ void applicationLoop() {
 		shaderTexture.setMatrix4("view", 1, false, glm::value_ptr(view));
 
 		// Descomentar
-		/*shaderColorLighting.setMatrix4("projection", 1, false, glm::value_ptr(projection));
+		shaderColorLighting.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shaderColorLighting.setMatrix4("view", 1, false, glm::value_ptr(view));
+		/*
 		shaderColorLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
 		shaderColorLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderColorLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.4, 0.4, 0.4)));
@@ -508,6 +547,15 @@ void applicationLoop() {
 						+ cylinder2.getSlices() * 3, cylinder2.getSlices() * 3,
 				modelCylinder);
 		glBindTexture(GL_TEXTURE_2D, 0);
+
+
+		///////////Matriz
+		glm::mat4 cubeTextureModel = glm::mat4(1.0);
+		cubeTextureModel = glm::translate(cubeTextureModel, glm::vec3(3.0, 2.0, 3.0));
+		glBindTexture(GL_TEXTURE_2D, textureID4);
+		box3.render(cubeTextureModel);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
