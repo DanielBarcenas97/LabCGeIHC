@@ -34,13 +34,14 @@
 int screenWidth;
 int screenHeight;
 
-GLFWwindow * window;
+GLFWwindow* window;
 
 Shader shader;
 //Descomentar El shader de texturizado
 Shader shaderTexture;
 // Descomentar El shader para iluminacion
-Shader shaderColorLighting;
+Shader shaderColorLighting;//SE DESCOMENTA ESTA LINEA PARA ILUMINACION
+Shader shaderTextureLighting;//se crea el shader de iluminacion de texturas
 
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
@@ -52,9 +53,9 @@ Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 Box box1;
 Box box2;
-Box box3;
+Box box3;//se agrega esta caja
 
-GLuint textureID1, textureID2, textureID3, textureID4;
+GLuint textureID1, textureID2, textureID3, textureID4;//se agrego esta textura, practica 7
 
 bool exitApp = false;
 int lastMousePosX, offsetX = 0;
@@ -70,7 +71,7 @@ double deltaTime;
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action,
-		int mode);
+	int mode);
 void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod);
 void init(int width, int height, std::string strTitle, bool bFullScreen);
@@ -94,15 +95,15 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	if (bFullScreen)
 		window = glfwCreateWindow(width, height, strTitle.c_str(),
-				glfwGetPrimaryMonitor(), nullptr);
+			glfwGetPrimaryMonitor(), nullptr);
 	else
 		window = glfwCreateWindow(width, height, strTitle.c_str(), nullptr,
-				nullptr);
+			nullptr);
 
 	if (window == nullptr) {
 		std::cerr
-				<< "Error to create GLFW window, you can try download the last version of your video card that support OpenGL 3.3+"
-				<< std::endl;
+			<< "Error to create GLFW window, you can try download the last version of your video card that support OpenGL 3.3+"
+			<< std::endl;
 		destroy();
 		exit(-1);
 	}
@@ -133,7 +134,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	shader.initialize("../Shaders/colorShader.vs", "../Shaders/colorShader.fs");
 	shaderTexture.initialize("../Shaders/texturizado_res.vs", "../Shaders/texturizado_res.fs");
 	// Descomentar
-	shaderColorLighting.initialize("../Shaders/iluminacion_color_res.vs","../Shaders/iluminacion_color_res.fs");
+	shaderColorLighting.initialize("../Shaders/iluminacion_color.vs",
+		"../Shaders/iluminacion_color.fs");//SE DESCOMENTE ESTA LINEA
+
+//se enlace los codigos de los shader de iluminacion de texturas
+	shaderTextureLighting.initialize("../Shaders/iluminacion_texture_res.vs", "../Shaders/iluminacion_texture_res.fs");
 
 	// Inicializar los buffers VAO, VBO, EBO
 	sphere1.init();
@@ -149,16 +154,16 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	//Setter para poner el color de la geometria
 	sphere2.setColor(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
-	// Descomentar
-	/*// Inicializar los buffers VAO, VBO, EBO
+	// Descomentar/// se descomentaron
+	// Inicializar los buffers VAO, VBO, EBO
 	sphereLamp.init();
 	// Método setter que colocar el apuntador al shader
 	sphereLamp.setShader(&shader);
 	//Setter para poner el color de la geometria
-	sphereLamp.setColor(glm::vec4(1.0, 1.0, 1.0, 1.0));*/
+	sphereLamp.setColor(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
 	cylinder1.init();
-	cylinder1.setShader(&shaderColorLighting);
+	cylinder1.setShader(&shaderColorLighting);//se cambia el shader--antes shader
 	cylinder1.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
 
 	cylinder2.init();
@@ -166,14 +171,14 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	box1.init();
 	// Settea el shader a utilizar
-	box1.setShader(&shaderTexture);
-	box1.setColor(glm::vec4(1.0, 1.0, 0.0, 1.0));
+	box1.setShader(&shaderTextureLighting);//se le asigno el shader de iluminacion a texturas
+	//box1.setColor(glm::vec4(1.0, 1.0, 0.0, 1.0));
 
 	box2.init();
 	box2.setShader(&shaderTexture);
 
-	box3.init();
-	box3.setShader(&shaderTexture);
+	box3.init();                   //se agregaron estas lineas, practica 7
+	box3.setShader(&shaderTexture);//
 
 	sphere3.init();
 	sphere3.setShader(&shaderTexture);
@@ -186,10 +191,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Definiendo la textura a utilizar
 	Texture texture1("../Textures/sponge.jpg");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
-	FIBITMAP *bitmap = texture1.loadImage();
+	FIBITMAP* bitmap = texture1.loadImage();
 	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
-	unsigned char *data = texture1.convertToData(bitmap, imageWidth,
-			imageHeight);
+	unsigned char* data = texture1.convertToData(bitmap, imageWidth,
+		imageHeight);
 	// Creando la textura con id 1
 	glGenTextures(1, &textureID1);
 	// Enlazar esa textura a una tipo de textura de 2D.
@@ -207,10 +212,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		// Formato interno de la libreria de la imagen, el tipo de dato y al apuntador
 		// a los datos
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
-		GL_BGRA, GL_UNSIGNED_BYTE, data);
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
 		// Generan los niveles del mipmap (OpenGL es el ecargado de realizarlos)
 		glGenerateMipmap(GL_TEXTURE_2D);
-	} else
+	}
+	else
 		std::cout << "Failed to load texture" << std::endl;
 	// Libera la memoria de la textura
 	texture1.freeImage(bitmap);
@@ -238,10 +244,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		// Formato interno de la libreria de la imagen, el tipo de dato y al apuntador
 		// a los datos
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
-		GL_BGRA, GL_UNSIGNED_BYTE, data);
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
 		// Generan los niveles del mipmap (OpenGL es el ecargado de realizarlos)
 		glGenerateMipmap(GL_TEXTURE_2D);
-	} else
+	}
+	else
 		std::cout << "Failed to load texture" << std::endl;
 	// Libera la memoria de la textura
 	texture2.freeImage(bitmap);
@@ -270,16 +277,16 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		// Formato interno de la libreria de la imagen, el tipo de dato y al apuntador
 		// a los datos
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
-		GL_BGRA, GL_UNSIGNED_BYTE, data);
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
 		// Generan los niveles del mipmap (OpenGL es el ecargado de realizarlos)
 		glGenerateMipmap(GL_TEXTURE_2D);
-	} else
+	}
+	else
 		std::cout << "Failed to load texture" << std::endl;
 	// Libera la memoria de la textura
 	texture3.freeImage(bitmap);
-	///////////////////////
 
-	// Definiendo la textura a utilizar
+	// Definiendo la textura a utilizar--texturas ladrillos--se agrego esta lineas
 	Texture texture4("../Textures/texturaLadrillos.jpg");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
@@ -291,7 +298,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Enlazar esa textura a una tipo de textura de 2D.
 	glBindTexture(GL_TEXTURE_2D, textureID4);
 	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // set texture wrapping to GL_REPEAT (default wrapping method)//antes GL_REPEAT//ANTES GL_MIRRORED_REPEAT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	// set texture filtering parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -312,7 +319,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture4.freeImage(bitmap);
 
-	//////////////////////
 }
 
 void destroy() {
@@ -336,7 +342,7 @@ void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action,
-		int mode) {
+	int mode) {
 	if (action == GLFW_PRESS) {
 		switch (key) {
 		case GLFW_KEY_ESCAPE:
@@ -399,10 +405,10 @@ bool processInput(bool continueApplication) {
 	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && !sentido)
 		rot1 -= 0.001;
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS
-			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 		rot2 += 0.001;
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS
-			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
 		rot2 -= 0.001;
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && sentido)
 		rot3 += 0.001;
@@ -436,33 +442,42 @@ void applicationLoop() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-				(float) screenWidth / (float) screenHeight, 0.01f, 100.0f);
+			(float)screenWidth / (float)screenHeight, 0.01f, 100.0f);
 		glm::mat4 view = camera->getViewMatrix();
 
 		shader.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
 		// Settea la matriz de vista y projection al nuevo shader
 		shaderTexture.setMatrix4("projection", 1, false,
-				glm::value_ptr(projection));
+			glm::value_ptr(projection));
 		shaderTexture.setMatrix4("view", 1, false, glm::value_ptr(view));
 
 		// Descomentar
-		shaderColorLighting.setMatrix4("projection", 1, false, glm::value_ptr(projection));
+		shaderColorLighting.setMatrix4("projection", 1, false, glm::value_ptr(projection));//se descomenta estas lineas, por ahora
 		shaderColorLighting.setMatrix4("view", 1, false, glm::value_ptr(view));
-		/*
-		shaderColorLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
-		shaderColorLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
-		shaderColorLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.4, 0.4, 0.4)));
-		shaderColorLighting.setVectorFloat3("light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
+		shaderColorLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));//se decomenta esta linea
+		shaderColorLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));// se descomenta esta linea//antes 0.9,0.9,0.9
+		shaderColorLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));//se descomenta esta linea//antes 0.4,0.4,0.4
+		shaderColorLighting.setVectorFloat3("light.specular", glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));//se descomenta esta linea//antes 0.9,0.9,0.9
 
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f));
 		lightModelmatrix = glm::translate(lightModelmatrix, glm::vec3(0.0f, 0.0f, -ratio));
 		shaderColorLighting.setVectorFloat3("light.position",
-				glm::value_ptr(
-						glm::vec4(
-								lightModelmatrix
-										* glm::vec4(0.0, 0.0, 0.0, 1.0))));
-		sphereLamp.render(lightModelmatrix);*/
+			glm::value_ptr(
+				glm::vec4(
+					lightModelmatrix
+					* glm::vec4(0.0, 0.0, 0.0, 1.0))));
+
+		//le configuramos la componetes de iluminacion al shader de textura
+		shaderTextureLighting.setMatrix4("projection", 1, false, glm::value_ptr(projection));
+		shaderTextureLighting.setMatrix4("view", 1, false, glm::value_ptr(view));
+		shaderTextureLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
+		shaderTextureLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+		shaderTextureLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+		shaderTextureLighting.setVectorFloat3("light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
+		shaderTextureLighting.setVectorFloat3("light.position", glm::value_ptr(glm::vec4(lightModelmatrix * glm::vec4(0.0, 0.0, 0.0, 1.0))));
+
+		sphereLamp.render(lightModelmatrix);
 
 		model = glm::translate(model, glm::vec3(0, 0, dz));
 		model = glm::rotate(model, rot0, glm::vec3(0, 1, 0));
@@ -528,41 +543,41 @@ void applicationLoop() {
 
 		glm::mat4 modelCylinder = glm::mat4(1.0);
 		modelCylinder = glm::translate(modelCylinder,
-				glm::vec3(-3.0, 0.0, 0.0));
+			glm::vec3(-3.0, 0.0, 0.0));
 		// Envolvente desde el indice 0, el tamanio es 20 * 20 * 6
 		// Se usa la textura 1 ( Bon sponja)
 		glBindTexture(GL_TEXTURE_2D, textureID1);
 		cylinder2.render(0, cylinder2.getSlices() * cylinder2.getStacks() * 6,
-				modelCylinder);
+			modelCylinder);
 		// Tapa Superior desde el indice : 20 * 20 * 6, el tamanio de indices es 20 * 3
 		// Se usa la textura 2 ( Agua )
 		glBindTexture(GL_TEXTURE_2D, textureID2);
 		cylinder2.render(cylinder2.getSlices() * cylinder2.getStacks() * 6,
-				cylinder2.getSlices() * 3, modelCylinder);
+			cylinder2.getSlices() * 3, modelCylinder);
 		// Tapa inferior desde el indice : 20 * 20 * 6 + 20 * 3, el tamanio de indices es 20 * 3
 		// Se usa la textura 3 ( Goku )
 		glBindTexture(GL_TEXTURE_2D, textureID3);
 		cylinder2.render(
-				cylinder2.getSlices() * cylinder2.getStacks() * 6
-						+ cylinder2.getSlices() * 3, cylinder2.getSlices() * 3,
-				modelCylinder);
+			cylinder2.getSlices() * cylinder2.getStacks() * 6
+			+ cylinder2.getSlices() * 3, cylinder2.getSlices() * 3,
+			modelCylinder);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-
-		///////////Matriz
-		glm::mat4 cubeTextureModel = glm::mat4(1.0);
-		cubeTextureModel = glm::translate(cubeTextureModel, glm::vec3(3.0, 2.0, 3.0));
+		glm::mat4 cubeTextureMode = glm::mat4(1.0f); //se agrega una referencia
+		cubeTextureMode = glm::translate(cubeTextureMode, glm::vec3(3.0, 2.0, 3.0));
 		glBindTexture(GL_TEXTURE_2D, textureID4);
-		box3.render(cubeTextureModel);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		
+		shaderTexture.setVectorFloat2("scaleUV", glm::value_ptr(glm::vec2(2.0, 2.0)));//se agrego esta linea
+		box3.render(cubeTextureMode);
+		glBindTexture(GL_TEXTURE_2D, 0);//---------------------------------------------
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
 		else
-			angle += 0.0001;
+			angle += 0.0009;
 
 		shader.turnOff();
+		shaderColorLighting.turnOff();
+		shaderTextureLighting.turnOff();
 
 		dz = 0;
 		rot0 = 0;
@@ -572,7 +587,7 @@ void applicationLoop() {
 	}
 }
 
-int main(int argc, char ** argv) {
+int main(int argc, char** argv) {
 	init(800, 700, "Window GLFW", false);
 	applicationLoop();
 	destroy();
