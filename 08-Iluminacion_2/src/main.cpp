@@ -45,12 +45,16 @@ Shader shaderTexture;
 Shader shaderColorLighting;
 //Shader con iluminacion y textura
 Shader shaderTextureLighting;
-// Descomentar
-//Shader con materiales
-//Shader shaderMaterialLighting;
+//Descomentar
+//Shader con materiales;
+Shader shaderMaterialLighting;
 // Descomentar
 //Shader con skybox
-//Shader shaderSkybox;
+Shader shaderSkybox;
+
+//shader multiples luces
+
+Shader shaderMulLigthing;
 
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
@@ -59,14 +63,15 @@ Sphere sphere2(20, 20);
 Sphere sphere3(20, 20);
 Sphere sphereLamp(20, 20);
 // Descomentar
-// Sphere skyboxSphere(20, 20);
+Sphere skyboxSphere(20, 20);
 Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 // Descomentar
-// Cylinder cylinderMaterials(20, 20, 0.5, 0.5);
+Cylinder cylinderMaterials(20, 20, 0.5, 0.5);
 Box box1;
 Box box2;
 Box box3;
+Box boxMaterials;
 
 GLuint textureID1, textureID2, textureID3, textureID4;
 // Descomentar
@@ -169,11 +174,14 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	shaderTextureLighting.initialize("../Shaders/iluminacion_texture_res.vs",
 			"../Shaders/iluminacion_texture_res.fs");
 	// Descomentar
-	/*shaderMaterialLighting.initialize("../Shaders/iluminacion_material.vs",
-	 "../Shaders/iluminacion_material.fs");*/
+	shaderMaterialLighting.initialize("../Shaders/iluminacion_material.vs",
+	 "../Shaders/iluminacion_material.fs");
 	// Descomentar
-	/*shaderSkybox.initialize("../Shaders/cubeTexture.vs",
-			"../Shaders/cubeTexture.fs");*/
+	shaderSkybox.initialize("../Shaders/cubeTexture.vs",
+			"../Shaders/cubeTexture.fs");
+
+	shaderMulLigthing.initialize("../Shaders/iluminacion_texture_res.vs",
+		"../Shaders/multipleLights.fs");
 
 	// Inicializar los buffers VAO, VBO, EBO
 	sphere1.init();
@@ -204,18 +212,18 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	cylinder2.setShader(&shaderTexture);
 
 	// Descomentar
-	/*cylinderMaterials.init();
+	cylinderMaterials.init();
 	 cylinderMaterials.setShader(&shaderMaterialLighting);
-	 cylinderMaterials.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));*/
+	 cylinderMaterials.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
 
 	// Descomentar
-	/*skyboxSphere.init();
+	skyboxSphere.init();
 	skyboxSphere.setShader(&shaderSkybox);
-	skyboxSphere.setScale(glm::vec3(20.0f, 20.0f, 20.0f));*/
+	skyboxSphere.setScale(glm::vec3(20.0f, 20.0f, 20.0f));
 
 	box1.init();
 	// Settea el shader a utilizar
-	box1.setShader(&shaderTextureLighting);
+	box1.setShader(&shaderMulLigthing);
 	box1.setColor(glm::vec4(1.0, 1.0, 0.0, 1.0));
 
 	box2.init();
@@ -226,6 +234,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	box3.init();
 	box3.setShader(&shaderTexture);
+
+	boxMaterials.init();
+	boxMaterials.setShader(&shaderMaterialLighting);
 
 	camera->setPosition(glm::vec3(0.0, 0.0, 4.0));
 
@@ -361,8 +372,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	// Descomentar
 	// Carga de texturas para el skybox
-	/*Texture skyboxTexture = Texture("");
+	Texture skyboxTexture = Texture("");
 	glGenTextures(1, &skyboxTextureID);
+	//Tipo de textura CUBE MAP
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTextureID);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);// set texture wrapping to GL_REPEAT (default wrapping method)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);// set texture wrapping to GL_REPEAT (default wrapping method)
@@ -381,7 +393,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		} else
 			std::cout << "Failed to load texture" << std::endl;
 		skyboxTexture.freeImage(bitmap);
-	}*/
+	}
 
 }
 
@@ -530,17 +542,23 @@ void applicationLoop() {
 
 		// Settea la matriz de vista y projection al shader con iluminacion con material
 		// Descomentar
-		/*shaderMaterialLighting.setMatrix4("projection", 1, false,
+		shaderMaterialLighting.setMatrix4("projection", 1, false,
 		 glm::value_ptr(projection));
 		 shaderMaterialLighting.setMatrix4("view", 1, false,
-		 glm::value_ptr(view));*/
+		 glm::value_ptr(view));
 
 		// Settea la matriz de vista y projection al shader con skybox
 		// Descomentar
-		/*shaderSkybox.setMatrix4("projection", 1, false,
+		shaderSkybox.setMatrix4("projection", 1, false,
 				glm::value_ptr(projection));
 		shaderSkybox.setMatrix4("view", 1, false,
-				glm::value_ptr(view));*/
+				glm::value_ptr(glm::mat4(glm::mat3(view))));
+
+		//Settea la matriz de vista y projection al shader con multiples luces
+		shaderMulLigthing.setMatrix4("projection", 1, false,
+			glm::value_ptr(projection));
+		shaderMulLigthing.setMatrix4("view", 1, false,
+			glm::value_ptr(glm::mat4(glm::mat3(view))));
 
 		// Propiedades de la luz para objetos con color
 		shaderColorLighting.setVectorFloat3("viewPos",
@@ -564,10 +582,20 @@ void applicationLoop() {
 
 		// Propiedades de la luz para objetos con textura
 		// Descomentar
-		/*shaderMaterialLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
-		 shaderMaterialLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
-		 shaderMaterialLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.5, 0.5, 0.5)));
-		 shaderMaterialLighting.setVectorFloat3("light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));*/
+		shaderMaterialLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
+		shaderMaterialLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+		shaderMaterialLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.5, 0.5, 0.5)));
+		shaderMaterialLighting.setVectorFloat3("light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
+
+		//propiedades de los obejrtos multiples luces  shaderMulLigthing
+		shaderMulLigthing.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
+		shaderMulLigthing.setVectorFloat3("directionalLight.light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+		shaderMulLigthing.setVectorFloat3("directionalLight.light.diffuse", glm::value_ptr(glm::vec3(0.5, 0.5, 0.5)));
+		shaderMulLigthing.setVectorFloat3("directionalLight.light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
+
+		shaderMulLigthing.setVectorFloat3("directionalLight.direction", glm::value_ptr(glm::vec3(0.0, 0.0, -1.0)));
+
+
 
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle,
 				glm::vec3(1.0f, 0.0f, 0.0f));
@@ -589,11 +617,11 @@ void applicationLoop() {
 
 		// Posicion luz para objetos con materiales
 		// Descomentar
-		/*shaderMaterialLighting.setVectorFloat3("light.position",
+		shaderMaterialLighting.setVectorFloat3("light.position",
 		 glm::value_ptr(
 		 glm::vec4(
 		 lightModelmatrix
-		 * glm::vec4(0.0, 0.0, 0.0, 1.0))));*/
+		 * glm::vec4(0.0, 0.0, 0.0, 1.0))));
 		sphereLamp.render(lightModelmatrix);
 
 		model = glm::translate(model, glm::vec3(0, 0, dz));
@@ -692,13 +720,24 @@ void applicationLoop() {
 
 		// Render del cyindro con materiales
 		// Descomentar
-		/*glm::mat4 cylinderMaterialModel = glm::mat4(1.0);
+		//Cyan plastic
+		 glm::mat4 cylinderMaterialModel = glm::mat4(1.0);
 		 cylinderMaterialModel = glm::translate(cylinderMaterialModel,  glm::vec3(3.0, 2.0, -3.0));
-		 shaderMaterialLighting.setVectorFloat3("material.ambient", glm::value_ptr(glm::vec3(0.61424f, 0.04136f, 0.04136f)));
-		 shaderMaterialLighting.setVectorFloat3("material.diffuse", glm::value_ptr(glm::vec3(0.61424f, 0.04136f, 0.04136f)));
-		 shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.727811f, 0.626959f, 0.626959f)));
-		 shaderMaterialLighting.setInt("material.shininess", 76.8f);
-		 cylinderMaterials.render(cylinderMaterialModel);*/
+		 shaderMaterialLighting.setVectorFloat3("material.ambient", glm::value_ptr(glm::vec3(0.0f, 0.0f, 0.0f)));
+		 shaderMaterialLighting.setVectorFloat3("material.diffuse", glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.0f)));
+		 shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.60f, 0.60f, 0.50f)));
+		 shaderMaterialLighting.setFloat("material.shininess", 32.0f);
+		 cylinderMaterials.render(cylinderMaterialModel);
+
+		 //Crear matriz de transformacion
+		 glm::mat4 boxMaterialModel = glm::mat4(1.0f);
+		 boxMaterialModel = glm::translate(boxMaterialModel, glm::vec3(-3.0, 2.0, -3.0));
+		 shaderMaterialLighting.setVectorFloat3("material.ambient", glm::value_ptr(glm::vec3(0.0f, 0.05f, 0.05f)));
+		 shaderMaterialLighting.setVectorFloat3("material.diffuse", glm::value_ptr(glm::vec3(0.4f, 0.5f, 0.5f)));
+		 shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.04f, 0.7f, 0.7f)));
+		 shaderMaterialLighting.setFloat("material.shininess", 32.0f);
+		 boxMaterials.render(boxMaterialModel);
+
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
@@ -707,8 +746,9 @@ void applicationLoop() {
 
 		// Descomentar
 		// Se Dibuja el Skybox
-		/*GLint oldCullFaceMode;
+		GLint oldCullFaceMode;
 		GLint oldDepthFuncMode;
+		//Se deshabilita  el modo del recorte de caras ocultas ´para ver la esfera desde adentro
 		glGetIntegerv(GL_CULL_FACE_MODE, &oldCullFaceMode);
 		glGetIntegerv(GL_DEPTH_FUNC, &oldDepthFuncMode);
 		shaderSkybox.setFloat("skybox", 0);
@@ -716,7 +756,7 @@ void applicationLoop() {
 		glDepthFunc(GL_LEQUAL);
 		skyboxSphere.render();
 		glCullFace(oldCullFaceMode);
-		glDepthFunc(oldDepthFuncMode);*/
+		glDepthFunc(oldDepthFuncMode);
 
 		dz = 0;
 		rot0 = 0;
