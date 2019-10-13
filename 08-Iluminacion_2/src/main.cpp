@@ -72,9 +72,7 @@ Box box1;
 Box box;
 Box box2;
 Box box3;
-
 Box box8, box9, box10, box4, box5, box6, box7;
-
 Box boxMaterials;
 
 GLuint textureID1, textureID2, textureID3, textureID4,
@@ -915,27 +913,21 @@ void applicationLoop() {
 		shaderTexture.setMatrix4("projection", 1, false,
 			glm::value_ptr(projection));
 		shaderTexture.setMatrix4("view", 1, false, glm::value_ptr(view));
-
 		// Settea la matriz de vista y projection al shader con iluminacion solo color
 		shaderColorLighting.setMatrix4("projection", 1, false,
 			glm::value_ptr(projection));
 		shaderColorLighting.setMatrix4("view", 1, false, glm::value_ptr(view));
-
 		// Settea la matriz de vista y projection al shader con iluminacion con textura
 		shaderTextureLighting.setMatrix4("projection", 1, false,
 			glm::value_ptr(projection));
 		shaderTextureLighting.setMatrix4("view", 1, false,
 			glm::value_ptr(view));
-
 		// Settea la matriz de vista y projection al shader con iluminacion con material
-		// Descomentar
 		shaderMaterialLighting.setMatrix4("projection", 1, false,
 			glm::value_ptr(projection));
 		shaderMaterialLighting.setMatrix4("view", 1, false,
 			glm::value_ptr(view));
-
 		// Settea la matriz de vista y projection al shader con skybox
-		// Descomentar
 		shaderSkybox.setMatrix4("projection", 1, false,
 			glm::value_ptr(projection));
 		shaderSkybox.setMatrix4("view", 1, false,
@@ -945,7 +937,6 @@ void applicationLoop() {
 			glm::value_ptr(projection));
 		shaderMulLighting.setMatrix4("view", 1, false,
 			glm::value_ptr(glm::mat4(glm::mat3(view))));
-
 		// Propiedades de la luz para objetos con color
 		shaderColorLighting.setVectorFloat3("viewPos",
 			glm::value_ptr(camera->getPosition()));
@@ -967,7 +958,6 @@ void applicationLoop() {
 			glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));
 
 		// Propiedades de la luz para objetos con textura
-		// Descomentar
 		shaderMaterialLighting.setVectorFloat3("viewPos", glm::value_ptr(camera->getPosition()));
 		shaderMaterialLighting.setVectorFloat3("light.ambient", glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderMaterialLighting.setVectorFloat3("light.diffuse", glm::value_ptr(glm::vec3(0.5, 0.5, 0.5)));
@@ -999,7 +989,6 @@ void applicationLoop() {
 					* glm::vec4(0.0, 0.0, 0.0, 1.0))));
 
 		// Posicion luz para objetos con materiales
-		// Descomentar
 		shaderMaterialLighting.setVectorFloat3("light.position",
 			glm::value_ptr(
 				glm::vec4(
