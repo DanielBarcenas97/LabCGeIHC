@@ -511,9 +511,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	else
 		std::cout << "Failed to load texture" << std::endl;
 	texture12.freeImage(bitmap);
-
+	//Texture texture13("../Textures/ventana2.png");
 	// Definiendo la textura a utilizar
-	Texture texture13("../Textures/cactus.jpg");
+
+	Texture texture13("../Textures/ventana1.jpg");
 	bitmap = texture13.loadImage(true);
 	data = texture13.convertToData(bitmap, imageWidth, imageHeight);
 	glGenTextures(1, &textureID13);
@@ -532,7 +533,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture13.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture texture14("../Textures/puerta.jpg");
+	Texture texture14("../Textures/cesped.jpg");
 	bitmap = texture14.loadImage(true);
 	data = texture14.convertToData(bitmap, imageWidth, imageHeight);
 	glGenTextures(1, &textureID14);
@@ -1057,68 +1058,640 @@ void applicationLoop() {
 		*/
 
 		/*------------------------------------------------------------------Inicio casa---------------------------------------------------------------------------*/
-		//pared 1 INFERIOR 
+
+		/*Estructura de la casa*/
+
+		//Pared 1 Frente
+		///////////glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		////////////box.setPosition(glm::vec3(15.0, 0.0, -3.0));
+		///////////box.setScale(glm::vec3(60.0, 30.0, 2.0));
+		///////////box.render();
+
+		/// PARED ATRAS ----------------------------Dos pisos completa
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box.setShader(&shaderSpotLight);
 		//box.setProjectionMatrix(projection);
 		//box.setViewMatrix(view);
-		box.setPosition(glm::vec3(15.0, 0.0, -3.0));
+		box.setPosition(glm::vec3(15.0, 0.0, 36.5));
 		box.setScale(glm::vec3(60.0, 30.0, 2.0));
 		box.render();
 
-		/// PARED FRONTAL ----------------------------
-
-		//pared 1 posterior 
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box.setShader(&shaderSpotLight);
-		//box.setProjectionMatrix(projection);
-		//box.setViewMatrix(view);
-		box.setPosition(glm::vec3(15.0, 0.0, 25.0));
-		box.setScale(glm::vec3(60.0, 30.0, 2.0));
-		box.render();
-
-		//piso
+		//Piso
 		glBindTexture(GL_TEXTURE_2D, textureID7);
 		//box1.setShader(&shaderSpotLight);
 		//box1.setProjectionMatrix(projection);
 		//box1.setViewMatrix(view);
 		box8.setPosition(glm::vec3(15.0, -15.0, 0.0));
-		box8.setScale(glm::vec3(60.0, 2.0, 50.0));
+		box8.setScale(glm::vec3(60.0, 2.0, 75.0));
 		box8.render();
-		//techo
+
+		//aTecho
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box1.setShader(&shaderSpotLight);
 		//box1.setProjectionMatrix(projection);
 		//box1.setViewMatrix(view);
 		box8.setPosition(glm::vec3(15.0, 15.0, 0.0));
-		box8.setScale(glm::vec3(60.0, 2.0, 50.0));
+		box8.setScale(glm::vec3(61.0, 2.0, 90.0));
 		box8.render();
 
+		//Pared lateral 1 Derecha AbajoD
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(-15.0, -7.5, 0.0));
+		box9.setScale(glm::vec3(1.0, 17.0, 75.0));
+		box9.render();
 
-
-		//pared lateral 1
+		//Pared lateral 1 Derecha Arriba
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-15.0, 0.0, 0.0));
-		box9.setScale(glm::vec3(2.0, 30.0, 50.0));
+		box9.setPosition(glm::vec3(-15.0, 8.0, 5.00));
+		box9.setScale(glm::vec3(1.0, 16.0, 65.0));
 		box9.render();
 
-		//pared lateral 2
+		//Pared lateral 2 Izquierda
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box3.setShader(&shaderSpotLight);
 		//box3.setProjectionMatrix(projection);
 		//box3.setViewMatrix(view);
 		box10.setPosition(glm::vec3(45.0, 0.0, 0.0));
-		box10.setScale(glm::vec3(2.0, 30.0, 50.0));
+		box10.setScale(glm::vec3(1.0, 32.0, 75.0));
 		box10.render();
 
 
+		//Pared medio por escaleras
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(24.75, 7.5, -18.00));
+		box9.setScale(glm::vec3(0.5, 13.0, 39.0));
+		box9.render();
 
-		//_---------------------------------------
+		//Piso intermedio
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box1.setShader(&shaderSpotLight);
+		//box1.setProjectionMatrix(projection);
+		//box1.setViewMatrix(view);
+		box8.setPosition(glm::vec3(5.0, 0.0, 0.0));
+		box8.setScale(glm::vec3(40.0, 2.0, 90.0));
+		box8.render();
+
+		//Pasto
+		glBindTexture(GL_TEXTURE_2D, textureID14);
+		//box1.setShader(&shaderSpotLight);
+		//box1.setProjectionMatrix(projection);
+		//box1.setViewMatrix(view);
+		box8.setPosition(glm::vec3(15.0, -14.4, 0.0));
+		box8.setScale(glm::vec3(200.0, 0.5, 150.0));
+		box8.render();
+
+		//Piedra izquierda 1
+		glBindTexture(GL_TEXTURE_2D, textureID4);
+		//box1.setShader(&shaderSpotLight);
+		//box1.setProjectionMatrix(projection);
+		//box1.setViewMatrix(view);
+		box8.setPosition(glm::vec3(30.0, -14.20, -50.0));
+		box8.setScale(glm::vec3(5.0, 0.5, 10.0));
+		box8.render();
+
+		//Piedra izquierda 2
+		glBindTexture(GL_TEXTURE_2D, textureID4);
+		//box1.setShader(&shaderSpotLight);
+		//box1.setProjectionMatrix(projection);
+		//box1.setViewMatrix(view);
+		box8.setPosition(glm::vec3(40.0, -14.20, -50.0));
+		box8.setScale(glm::vec3(5.0, 0.5, 10.0));
+		box8.render();
+
+		/*Fin de la Estructura de la casa*/
+
+
+		/* ------------ Escaleras --------------------*/
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(26.0, -0.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(28.0, -2.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(30.0, -4.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(32.0, -6.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(34.0, -8.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(36.0, -10.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(38.0, -12.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(40.0, -14.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+
+		//escalon
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(42.0, -16.5, 33.0));
+		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
+		box9.render();
+		/* ------------ Fin de Escaleras --------------------*/
+
+		/* ----------------- Barandal -----------------------*/
+		glBindTexture(GL_TEXTURE_2D, textureID12);
+		//cylinder3.setShader(&shaderPointLight);
+		//cylinder3.setProjectionMatrix(projection);
+		//cylinder3.setViewMatrix(view);
+		cylinder3.setPosition(glm::vec3(-15.0, 3.0, -44.5));
+		cylinder3.setScale(glm::vec3(1.0, 6.0, 1.0));
+		cylinder3.render();
+
+		//Esfera
+		glBindTexture(GL_TEXTURE_2D, textureID13);
+		//sphere2.setShader(&shaderSpotLight);
+		//sphere2.setProjectionMatrix(projection);
+		//sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(-15.0, 6.0, -44.5));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.render();
+
+		//Murito 1
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-5.0, 3.5, -44.5));
+		box.setScale(glm::vec3(19.0, 5.0, 1.0));
+		box.render();
+
+		//Murito 2
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-15.0, 3.5, -36.250));
+		box.setScale(glm::vec3(1.0, 5.0, 16.0));
+		box.render();
+
+		//Cilindro
+		glBindTexture(GL_TEXTURE_2D, textureID12);
+		//cylinder3.setShader(&shaderPointLight);
+		//cylinder3.setProjectionMatrix(projection);
+		//cylinder3.setViewMatrix(view);
+		cylinder3.setPosition(glm::vec3(-15.0, 3.0, -28.0));
+		cylinder3.setScale(glm::vec3(1.0, 6.0, 1.0));
+		cylinder3.render();
+
+		//Esfera
+		glBindTexture(GL_TEXTURE_2D, textureID13);
+		//sphere2.setShader(&shaderSpotLight);
+		//sphere2.setProjectionMatrix(projection);
+		//sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(-15.0, 6.0, -28.0));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.render();
+
+		//Cilindro
+		glBindTexture(GL_TEXTURE_2D, textureID12);
+		//cylinder3.setShader(&shaderPointLight);
+		//cylinder3.setProjectionMatrix(projection);
+		//cylinder3.setViewMatrix(view);
+		cylinder3.setPosition(glm::vec3(5.0, 3.0, -44.5));
+		cylinder3.setScale(glm::vec3(1.0, 6.0, 1.0));
+		cylinder3.render();
+
+		//Esfera
+		glBindTexture(GL_TEXTURE_2D, textureID13);
+		//sphere2.setShader(&shaderSpotLight);
+		//sphere2.setProjectionMatrix(projection);
+		//sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(5.0, 6.0, -44.5));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.render();
+
+		//Murito 3
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(15.0, 3.5, -44.5));
+		box.setScale(glm::vec3(19.0, 5.0, 1.0));
+		box.render();
+
+		
+
+		/*------------ Fin Barandal --------------------------*/
+
+		/* ----------------- Ventana Superior con puerta DERECHA --------------------*/
+
+		//Murito arriba  izquierda y derecha
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(4.5, 13.0, -27.0));
+		box.setScale(glm::vec3(38.0, 2.0, 1.0));
+		box.render();
+
+		//Murito 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-7.5, 3.0, -27.0));
+		box.setScale(glm::vec3(14.0, 6.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 1
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-1.5, 9.0, -27.0));
+		box.setScale(glm::vec3(2.0, 6.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 2 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-14.0, 9.0, -27.0));
+		box.setScale(glm::vec3(1.0, 6.0, 1.0));
+		box.render();
+
+		/* ---------- Fin de Ventana Superior con puerta ---------------------*/
+
+
+		/* ---------- Ventana Superior con puerta izquierda   ---------------------*/
+
+		//Murito 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(18.0, 3.0, -27.0));
+		box.setScale(glm::vec3(14.0, 6.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 1
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(12.0, 9.0, -27.0));
+		box.setScale(glm::vec3(2.0, 6.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 2 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(24.0, 10.0, -27.0));
+		box.setScale(glm::vec3(1.0, 8.0, 1.0));
+		box.render();
+
+		//mURO 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(5.0, 5.5, -27.0));
+		box.setScale(glm::vec3(1.0, 7.0, 1.0));
+		box.render();
+
+		/* ---------- Fin de Ventana Superior con puerta izquierda ---------------------*/
+
+		// Division de Cuartos Arriba 
+
+		//Pared lateral superior que divide cuartos 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(5.0, 7.0, -13.5));
+		box9.setScale(glm::vec3(1.0, 15.0, 28.0)); //60
+		box9.render();
+
+		/* ---------- Cuarto Derecho Entrada ---------------------*/
+
+		//Murito derecheco de frente
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-7.5, 5.5, 1.0));
+		box.setScale(glm::vec3(14.0, 11.00, 1.0));
+		box.render();
+
+		//Murito arriba  izquierda y derecha dentro casa
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(4.5, 12.5, 1.0));
+		box.setScale(glm::vec3(40.0, 3.0, 1.0));
+		box.render();
+
+		//mURO 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(5.0, 5.5, 1.0));
+		box.setScale(glm::vec3(1.0, 11.0, 1.0));
+		box.render();
+
+		/* ---------- Fin Cuarto Derecho Entrada ---------------------*/
+
+
+		//Murito izuierdo de frente
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(17.5, 5.5, 1.0));
+		box.setScale(glm::vec3(14.0, 11.00, 1.0));
+		box.render();
+
+		/* ---------- Cuarto izquierdo Entrada ---------------------*/
+
+		/*----------------------Baño ------------------------------*/
+
+		//Pared frente de escaleras banio
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(5.0, 7.0, 25.25));
+		box9.setScale(glm::vec3(1.0, 15.0, 20.5));
+		box9.render();
+
+		//Murito Baño entrada
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-7.5, 6.0, 15.25));
+		box.setScale(glm::vec3(14.0, 12.00, 0.5));
+		box.render();
+
+		//Murito arriba  izquierda y derecha dentro banio
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-5.0, 13.0, 15.25));
+		box.setScale(glm::vec3(19.0, 2.0, 0.5));
+		box.render();
+
+		/*---------------------- Fin Baño -----------------------*/
+
+		/*----------------Barandal sala pelis--------------------*/
+
+		//Cilindro
+		glBindTexture(GL_TEXTURE_2D, textureID12);
+		//cylinder3.setShader(&shaderPointLight);
+		//cylinder3.setProjectionMatrix(projection);
+		//cylinder3.setViewMatrix(view);
+		cylinder3.setPosition(glm::vec3(45.0, 3.0, -38.0));
+		cylinder3.setScale(glm::vec3(1.0, 6.0, 1.0));
+		cylinder3.render();
+
+		//Esfera
+		glBindTexture(GL_TEXTURE_2D, textureID13);
+		//sphere2.setShader(&shaderSpotLight);
+		//sphere2.setProjectionMatrix(projection);
+		//sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(45.0, 6.0, -38.0));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.render();
+
+		//Cilindro
+		glBindTexture(GL_TEXTURE_2D, textureID12);
+		//cylinder3.setShader(&shaderPointLight);
+		//cylinder3.setProjectionMatrix(projection);
+		//cylinder3.setViewMatrix(view);
+		cylinder3.setPosition(glm::vec3(25.0, 3.0, -44.5));
+		cylinder3.setScale(glm::vec3(1.0, 6.0, 1.0));
+		cylinder3.render();
+
+		//Esfera
+		glBindTexture(GL_TEXTURE_2D, textureID13);
+		//sphere2.setShader(&shaderSpotLight);
+		//sphere2.setProjectionMatrix(projection);
+		//sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(25.0, 6.0, -44.5));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.render();
+
+		//Cilindro
+		glBindTexture(GL_TEXTURE_2D, textureID12);
+		//cylinder3.setShader(&shaderPointLight);
+		//cylinder3.setProjectionMatrix(projection);
+		//cylinder3.setViewMatrix(view);
+		cylinder3.setPosition(glm::vec3(45.0, 3.0, -44.5));
+		cylinder3.setScale(glm::vec3(1.0, 6.0, 1.0));
+		cylinder3.render();
+
+		//Esfera
+		glBindTexture(GL_TEXTURE_2D, textureID13);
+		//sphere2.setShader(&shaderSpotLight);
+		//sphere2.setProjectionMatrix(projection);
+		//sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(45.0, 6.0, -44.5));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.render();
+
+		//Murito 1
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(35.0, 3.5, -44.5));
+		box.setScale(glm::vec3(19.0, 5.0, 1.0));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(45.0, 3.5, -41.25));
+		box.setScale(glm::vec3(1.0, 5.0, 5.5));
+		box.render();
+
+		/*----------------Fin Barandal sala  pelis--------------------*/
+
+		/*----------------Ventana sala pelis--------------------*/
+
+		//Murito 2 enfrente del brandal
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(32.5, 3.0, -37.0));
+		box.setScale(glm::vec3(15.0, 6.0, 1.0));
+		box.render();
+
+		//Murito 2 enfrente del brandal arriba
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(32.5, 13.0, -37.0));
+		box.setScale(glm::vec3(15.0, 2.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 1
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(26.00, 9.0, -37.0));
+		box.setScale(glm::vec3(2.0, 6.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 2 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(39.00, 9.0, -37.0));
+		box.setScale(glm::vec3(2.0, 6.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO Arriba de puerta
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(42.25, 13.0, -37.0));
+		box.setScale(glm::vec3(4.5, 2.0, 1.0));
+		box.render();
+
+		/*---------------- Fin Ventana sala pelis--------------------*/
+
+		/*--------------------Sala de Pelis--------------------- */
+
+		//Piso intermedio pelis
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box1.setShader(&shaderSpotLight);
+		//box1.setProjectionMatrix(projection);
+		//box1.setViewMatrix(view);
+		box8.setPosition(glm::vec3(35.0, 0.0, -15.0));
+		box8.setScale(glm::vec3(21.0, 2.0, 60.0));
+		box8.render();
+
+		//Murito 2 enfrente de las escaleras
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(34.75, 7.5, 14.75));
+		box.setScale(glm::vec3(19.50, 13.0, 0.5));
+		box.render();
+
+		//Barandal por Escaleras
+		//Pared frente de escaleras banio
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(24.75, 3.5, 22.75));
+		box9.setScale(glm::vec3(0.5, 5.0, 15.5));
+		box9.render();
+
+		//Entrada cuarto cine
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(24.75, 6.5, 5.50));
+		box9.setScale(glm::vec3(0.5, 15.0, 8));
+		box9.render();
+
+		//Entrada cuarto cine cuadro arriba puerta
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(24.75, 13.0, 12.250));
+		box9.setScale(glm::vec3(0.5, 2.0, 5.5));
+		box9.render();
+
+		//Entrada cuarto cine barrita
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(24.75, 6.5, 14.75));
+		box9.setScale(glm::vec3(0.5, 11.0, 0.5));
+		box9.render();
+
+		/*------------------Fin sala Pelis----------------------*/
+
+		//Aqui --------------------------------------
 		//SILLON 1
-
 		// sillon respaldo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
 		//box4.setShader(&shaderSpotLight);
@@ -1259,25 +1832,8 @@ void applicationLoop() {
 		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
 		sphere2.render();
 
-		//----------------PLANTA ALTA 
-			//segundo piso
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box1.setShader(&shaderSpotLight);
-		//box1.setProjectionMatrix(projection);
-		//box1.setViewMatrix(view);
-		box8.setPosition(glm::vec3(5.0, 0.0, 0.0));
-		box8.setScale(glm::vec3(40.0, 2.0, 50.0));
-		box8.render();
-
-		//pared lateral  superior 
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(5.0, 7.0, 0.0));
-		box9.setScale(glm::vec3(2.0, 15.0, 30.0));
-		box9.render();
-
+		/*
+		
 		//PUERTA
 		glBindTexture(GL_TEXTURE_2D, textureID14);
 		//box2.setShader(&shaderSpotLight);
@@ -1287,7 +1843,7 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(2.0, 12.0, 5.0));
 		box9.render();
 
-		//´parte superior PUERTA
+		//parte superior PUERTA
 		glBindTexture(GL_TEXTURE_2D, textureID14);
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
@@ -1296,21 +1852,19 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(2.0, 3.0, 5.0));
 		box9.render();
 
-		//pared lateral  superior 
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(5.0, 7.0, 20.0));
-		box9.setScale(glm::vec3(2.0, 15.0, 5.0));
-		box9.render();
+		*/
+
+		
+
+		
+		
 
 		//_________________cama
 		glBindTexture(GL_TEXTURE_2D, textureID15);
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-5.0, 3.0, 10.0));
+		box9.setPosition(glm::vec3(-5.0, 3.0, -20.0));
 		box9.setScale(glm::vec3(8.0, 2.0, 5.0));
 		box9.render();
 
@@ -1319,7 +1873,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-5.0, 2.0, 10.0));
+		box9.setPosition(glm::vec3(-5.0, 2.0, -20.0));
 		box9.setScale(glm::vec3(8.0, 2.0, 5.0));
 		box9.render();
 
@@ -1328,7 +1882,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-9.0, 4.0, 10.0));
+		box9.setPosition(glm::vec3(-9.0, 4.0, -20.0));
 		box9.setScale(glm::vec3(0.5, 2.0, 5.0));
 		box9.render();
 		//-------almohada
@@ -1336,7 +1890,7 @@ void applicationLoop() {
 		//cylinder3.setShader(&shaderPointLight);
 		//cylinder3.setProjectionMatrix(projection);
 		//cylinder3.setViewMatrix(view);
-		cylinder3.setPosition(glm::vec3(-7.0, 4.0, 10.0));
+		cylinder3.setPosition(glm::vec3(-7.0, 4.0, -20.0));
 		cylinder3.setScale(glm::vec3(1.0, 0.5, 3.0));
 		cylinder3.render();
 
@@ -1345,7 +1899,7 @@ void applicationLoop() {
 		//cylinder3.setShader(&shaderPointLight);
 		//cylinder3.setProjectionMatrix(projection);
 		//cylinder3.setViewMatrix(view);
-		cylinder3.setPosition(glm::vec3(-6.0, 4.0, 9.0));
+		cylinder3.setPosition(glm::vec3(-6.0, 4.0, -19.0));
 		cylinder3.setScale(glm::vec3(1.0, 0.5, 3.0));
 		cylinder3.render();
 
@@ -1354,7 +1908,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(2.0, 5.0, 6.0));
+		box9.setPosition(glm::vec3(2.0, 5.0, -15.0));
 		box9.setScale(glm::vec3(4.0, 6.0, 5.0));
 		box9.render();
 
@@ -1363,7 +1917,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-12.0, 5.0, 14.0));
+		box9.setPosition(glm::vec3(-12.0, 5.0, -14.0));
 		box9.setScale(glm::vec3(4.0, 1.0, 5.0));
 		box9.render();
 		//base mesa 
@@ -1371,7 +1925,7 @@ void applicationLoop() {
 		//cylinder3.setShader(&shaderPointLight);
 		//cylinder3.setProjectionMatrix(projection);
 		//cylinder3.setViewMatrix(view);
-		cylinder3.setPosition(glm::vec3(-12.0, 2.0, 14.0));
+		cylinder3.setPosition(glm::vec3(-12.0, 2.0, -14.0));
 		cylinder3.setScale(glm::vec3(1.0, 5.0, 3.0));
 		cylinder3.render();
 
@@ -1380,7 +1934,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-12.0, 5.5, 14.0));
+		box9.setPosition(glm::vec3(-12.0, 5.5, -14.0));
 		box9.setScale(glm::vec3(1.0, 0.5, 2.0));
 		box9.render();
 		//----- tapa computadora
@@ -1388,7 +1942,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-12.4, 5.4, 14.0));
+		box9.setPosition(glm::vec3(-12.4, 5.4, -14.0));
 		box9.setScale(glm::vec3(0.2, 4.0, 2.0));
 		box9.render();
 
@@ -1397,7 +1951,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-12.3, 5.5, 14.0));
+		box9.setPosition(glm::vec3(-12.3, 5.5, -14.0));
 		box9.setScale(glm::vec3(0.1, 3.6, 1.8));
 		box9.render();
 
@@ -1406,7 +1960,7 @@ void applicationLoop() {
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(-12.0, 5.8, 14.0));
+		box9.setPosition(glm::vec3(-12.0, 5.8, -14.0));
 		box9.setScale(glm::vec3(0.9, 0.1, 1.8));
 		box9.render();
 
@@ -1415,155 +1969,33 @@ void applicationLoop() {
 		//cylinder3.setShader(&shaderPointLight);
 		//cylinder3.setProjectionMatrix(projection);
 		//cylinder3.setViewMatrix(view);
-		cylinder3.setPosition(glm::vec3(-10.0, 2.0, 14.0));
+		cylinder3.setPosition(glm::vec3(-10.0, 2.0, -14.0));
 		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
 		cylinder3.render();
 
-		//----------------PAREDES BAÑO
+		
 
-		glBindTexture(GL_TEXTURE_2D, textureID23);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(12.0, 8.0, -1.0));
-		box9.setScale(glm::vec3(15.0, 15.0, 0.1));
-		box9.render();
 
+		//  pared separa cochera 
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(12.0, 8.0, 10.0));
-		box9.setScale(glm::vec3(15.0, 15.0, 0.1));
+		box9.setPosition(glm::vec3(24.5, -8.5, -9.5));
+		box9.setScale(glm::vec3(1.0, 15.0, 56.0));
 		box9.render();
 
+
+		//  pared separa sala y pared cochera
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box2.setShader(&shaderSpotLight);
 		//box2.setProjectionMatrix(projection);
 		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(20.0, 8.0, 0.0));
-		box9.setScale(glm::vec3(0.5, 15.0, 5.0));
+		box9.setPosition(glm::vec3(10.5, -8.5, -25.5));
+		box9.setScale(glm::vec3(1.0, 15.0, 22.0));
 		box9.render();
 
-
-
-
-		//.--------------------------escaleras
-
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(40.0, -13.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		//box2.setPosition(glm::vec3(38.0, -12.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(37.0, -10.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(36.0, -9.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(35.0, -8.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-
-
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(34.0, -7.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(33.0, -6.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(32.0, -5.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(31.0, -4.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(28.0, -3.0, 20.0));
-		box9.setScale(glm::vec3(3.0, 2.0, 5.0));
-		box9.render();
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(24.0, -1.0, 20.0));
-		box9.setScale(glm::vec3(8.0, 2.0, 5.0));
-		box9.render();
-
-
-
-		// pared separa sala de  cocina
-		glBindTexture(GL_TEXTURE_2D, textureID4);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(10.0, -8.0, 0.0));
-		box9.setScale(glm::vec3(2.0, 15.0, 30.0));
-		box9.render();
-
-
-		// pared final de la cocina 
-		glBindTexture(GL_TEXTURE_2D, textureID4);
-		//box2.setShader(&shaderSpotLight);
-		//box2.setProjectionMatrix(projection);
-		//box2.setViewMatrix(view);
-		box9.setPosition(glm::vec3(25.0, -8.0, 0.0));
-		box9.setScale(glm::vec3(2.0, 15.0, 20.0));
-		box9.render();
-
+		/*
 		// cocina integral 
 		// pared final de la cocina 
 		glBindTexture(GL_TEXTURE_2D, textureID22);
@@ -1573,7 +2005,154 @@ void applicationLoop() {
 		box9.setPosition(glm::vec3(17.0, -8.0, 0.0));
 		box9.setScale(glm::vec3(8.0, 13.0, 1.0));
 		box9.render();
-		/*Fin*/
+		
+		// pared final de la cocina
+		glBindTexture(GL_TEXTURE_2D, textureID4);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.0, -8.0, 0.0));
+		box9.setScale(glm::vec3(1.0, 15.0, 30.0));
+		box9.render();
+
+		*/
+		
+		//// -------------  Frente  ------------------------- 
+
+		//Muro ABAJO IZQUIERDA Funciona como pared del baño
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(17.0, -8.5, -37.0));
+		box.setScale(glm::vec3(14, 15.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 2 ABAJO Derecha
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-7.0, -11.5, -37.0));
+		box.setScale(glm::vec3(13, 5.0, 1.0));
+		box.render();
+
+		//Murito CUADRITO 2 arriba de parte baja
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-2.25, -2.0, -37.0));
+		box.setScale(glm::vec3(24.5, 2.0, 1.0));
+		box.render();
+
+		//cASTILLO puerta 2M
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(0.50, -9.0, -37.0));
+		box.setScale(glm::vec3(2.0, 12.0, 1.0));
+		box.render();
+
+
+		//cASTILLO Ventana 1M
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(-14.0, -9.0, -37.0));
+		box.setScale(glm::vec3(1.0, 12.0, 1.0));
+		box.render();
+
+		///--------------------------------------Cocina-----------------------------------------------////
+		//Murito CUADRITO 2 ABAJO IZQUIERDA
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(17.0, -8.5, 18.0));
+		box.setScale(glm::vec3(14, 15.0, 1.0));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(17.0, -8.5, -8.0));
+		box.setScale(glm::vec3(14, 15.0, 1.0));
+		box.render();
+
+		//  pared  cocina completa der
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.5, -7.5, 14.75));
+		box9.setScale(glm::vec3(1.0, 14.0, 5.5));
+		box9.render();
+
+		//  pared mitad cocina
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.5, -11.5, 6.75));
+		box9.setScale(glm::vec3(1.0, 5.0, 10.5));
+		box9.render();
+
+		//  pared mitad cocina arriba
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.5, -2.0, 6.75));
+		box9.setScale(glm::vec3(1.0, 2.0, 10.5));
+		box9.render();
+
+		//  pared  cocina completa izq
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.5, -7.5, 0.5));
+		box9.setScale(glm::vec3(1.0, 14.0, 2.0));
+		box9.render();
+
+		////-------------------------Arriba 
+
+		//  pared mitad cocina arriba puierta
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.5, -2.0, -4.00));
+		box9.setScale(glm::vec3(1.0, 2.0, 7.0));
+		box9.render();
+
+
+		//  pared mitad cocina arriba
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box2.setShader(&shaderSpotLight);
+		//box2.setProjectionMatrix(projection);
+		//box2.setViewMatrix(view);
+		box9.setPosition(glm::vec3(10.5, -2.0, -11.50));
+		box9.setScale(glm::vec3(1.0, 2.0, 6.0));
+		box9.render();
+
+
+		// -------------------Cochera -----------------------//
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		//box.setShader(&shaderSpotLight);
+		//box.setProjectionMatrix(projection);
+		//box.setViewMatrix(view);
+		box.setPosition(glm::vec3(34.75, -8.5, -37.0));
+		box.setScale(glm::vec3(19.5, 15.0, 1.0));
+		box.render();
+
+
+
+		/*------------------------------------------------------------Fin--------------------------w---------------------------------*/
 		/*
 		glm::mat4 modelSphere = glm::mat4(1.0);
 		modelSphere = glm::translate(modelSphere, glm::vec3(3.0, 0.0, 0.0));
@@ -1603,7 +2182,7 @@ void applicationLoop() {
 			modelCylinder);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		*/
+		
 
 		// Render del cubo con textura de ladrillos y con repeticion en x
 		glm::mat4 cubeTextureModel = glm::mat4(1.0);
@@ -1633,6 +2212,8 @@ void applicationLoop() {
 		shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.04f, 0.7f, 0.7f)));
 		shaderMaterialLighting.setFloat("material.shininess", 32.0f);
 		boxMaterials.render(boxMaterialModel);
+
+		*/
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
