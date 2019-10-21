@@ -76,6 +76,7 @@ Box box8, box9, box10, box4, box5, box6, box7;
 Box boxMaterials;
 //// Models Complex instances
 Model modelRock;
+Model modelCami;
 Model modelRailRoad;
 Model Aircraft;
 
@@ -88,6 +89,12 @@ textureID16, textureID17, textureID18,
 textureID19, textureID20, textureID21,
 textureID22, textureID23, textureID24,
 textureID25, textureID26, textureID27, textureID28, textureCubeTexture, textureID30;
+
+Cylinder torsoR2D2(20, 20, 0.5, 0.5);//se declara el torso de nuevo modelo
+Sphere cabezaR2D2(20, 20);//se declara la cabeza del modelo
+Sphere articulacionR2D2(20, 20);//se declara la articulacion del modelo
+Cylinder brazoR2D2(20, 20, 0.5, 0.5);//se declara el brazo del modelo
+Box pieR2D2;//se declara los pies de soporte del modelo
 
 GLenum types[6] = {
 GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -109,9 +116,29 @@ bool exitApp = false;
 int lastMousePosX, offsetX = 0;
 int lastMousePosY, offsetY = 0;
 
-float rot0 = 0.0, dz = 0.0;
 
 float rot1 = 0.0, rot2 = 0.0, rot3 = 0.0, rot4 = 0.0;
+
+float rota1 = 0.0, rota2 = 0.0;///1
+float rota3 = 0.0, rota4 = 0.0;///2
+
+
+float d11 = 0, d12 = 0, d13 = 0, d14 = 0;   //Movimiento de los dedos
+float r21 = 0, r22 = 0, r23 = 0, r24 = 0;
+
+float desplazamiento = 0.0f;
+float rotacionTotal = 0.0f;
+float brazoDerecho = 0.0f, brazoIzquierdo = 0.0f;
+
+float rot0 = 0;
+float dz = 0;
+
+float rota0 = 0;
+float dza = 0;
+
+float rotr20 = 0;
+float dzd2 = 0;
+
 bool sentido = true;
 
 double deltaTime;
@@ -276,7 +303,34 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelRailRoad.loadModel("../models/railroad/railroad_track.obj");
 	modelRailRoad.setShader(&shaderMulLighting);
 
-	
+	modelCami.loadModel("../models/dog/12228_Dog_v1_L2.obj");
+	modelCami.setShader(&shaderMulLighting);
+
+
+
+	//////////////////////////////////
+	//se inicializan los objetos para el modelo de R2D2
+
+	torsoR2D2.init();
+	torsoR2D2.setShader(&shader);
+	torsoR2D2.setColor(glm::vec4(255, 255, 255, 255));
+
+	cabezaR2D2.init();
+	cabezaR2D2.setShader(&shader);
+	cabezaR2D2.setColor(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+
+	articulacionR2D2.init();
+	articulacionR2D2.setShader(&shader);
+	articulacionR2D2.setColor(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	brazoR2D2.init();
+	brazoR2D2.setShader(&shader);
+	brazoR2D2.setColor(glm::vec4(255, 255, 255, 255));
+
+	pieR2D2.init();
+	pieR2D2.setShader(&shader);
+	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
+	////////////////////////////////////
 
 	camera->setPosition(glm::vec3(0.0, 0.0, 4.0));
 
@@ -816,6 +870,13 @@ void destroy() {
 	box6.destroy();
 	box7.destroy();
 
+	torsoR2D2.destroy();
+	sphere3.destroy();
+	cabezaR2D2.destroy();
+	articulacionR2D2.destroy();
+	brazoR2D2.destroy();
+	pieR2D2.destroy();
+
 	shader.destroy();
 }
 
@@ -881,42 +942,61 @@ bool processInput(bool continueApplication) {
 	offsetX = 0;
 	offsetY = 0;
 
-	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		sentido = false;
-
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)///3
+		sentido = false;///1
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && sentido)
-		rot1 += 0.001;
+		rot1 += 0.1;///1
 	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && !sentido)
-		rot1 -= 0.001;
-	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS
-		&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		rot2 += 0.001;
-	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS
-		&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
-		rot2 -= 0.001;
+		rot1 -= 0.1;///3
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && sentido)
+		rot2 += 0.1;///1
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && sentido)
-		rot3 += 0.001;
+		rot3 += 0.1;///2
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && sentido)
-		rot4 += 0.001;
+		rot4 += 0.1;///2
+	if (glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)///3
+		sentido = true;///1
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS && sentido)
+		rota1 += 0.1;///1
+	else if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS && !sentido)
+		rota1 -= 0.1;///3
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS && sentido)
+		rota2 += 0.1;///1
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS && sentido)
+		rota3 += 0.1;///2
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS && sentido)
+		rota4 += 0.1;///2
 
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		rot0 = 0.0001;
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-		rot0 = -0.0001;
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		dz = 0.0001;
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		dz = -0.0001;
-
-	sentido = true;
-
+	//Movimiento de los dedos:
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS && sentido)
+		d11 += 0.01;///2
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS && sentido)
+		d12 -= 0.01;///2
+	//Se mueva completo:
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)///3
+		rot0 = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)///3
+		rot0 = -0.01;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)///3
+		dz = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)///3
+		dz = -0.01;
+	//R2D2
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)///3
+		rota0 = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)///3
+		rota0 = -0.01;
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)///3
+		dza = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)///3
+		dza = -0.01;
 	glfwPollEvents();
 	return continueApplication;
 }
 
 void applicationLoop() {
 	bool psi = true;
-
+	glm::mat4 modelR2D2 = glm::mat4(1.0f);//referencia para el nuevo modelo
 	glm::mat4 model = glm::mat4(1.0f);
 	float offX = 0.0;
 	float angle = 0.0;
@@ -1774,77 +1854,10 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(1.0, 15.0, 22.0));
 		box9.render();
 
-
-
-
-
-
-
 		/*------------------------------------------------------------Fin--------------------------w---------------------------------*/
 
 		/*
 		
-			model = glm::translate(model, glm::vec3(0, 0, dz));
-		model = glm::rotate(model, rot0, glm::vec3(0, 1, 0));
-		//box1.enableWireMode();
-		// Usamos la textura ID 1
-		glBindTexture(GL_TEXTURE_2D, textureID1);
-		box1.render(glm::scale(model, glm::vec3(1.0, 1.0, 0.1)));
-		// No utilizar ninguna textura
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		// Articulacion 1
-		glm::mat4 j1 = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
-		j1 = glm::rotate(j1, rot1, glm::vec3(0, 0, 1));
-		j1 = glm::rotate(j1, rot2, glm::vec3(0, 1, 0));
-		sphere1.enableWireMode();
-		sphere1.render(glm::scale(j1, glm::vec3(0.1, 0.1, 0.1)));
-
-		// Hueso 1
-		glm::mat4 l1 = glm::translate(j1, glm::vec3(0.25f, 0.0, 0.0));
-		l1 = glm::rotate(l1, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
-		//cylinder1.enableWireMode();
-		cylinder1.render(glm::scale(l1, glm::vec3(0.1, 0.5, 0.1)));
-
-		// Articulacion 2
-		glm::mat4 j2 = glm::translate(j1, glm::vec3(0.5, 0.0f, 0.0f));
-		j2 = glm::rotate(j2, rot3, glm::vec3(0.0, 0.0, 1.0));
-		j2 = glm::rotate(j2, rot4, glm::vec3(1.0, 0.0, 0.0));
-		sphere1.enableWireMode();
-		sphere1.render(glm::scale(j2, glm::vec3(0.1, 0.1, 0.1)));
-
-		// Hueso 2
-		glm::mat4 l2 = glm::translate(j2, glm::vec3(0.25, 0.0, 0.0));
-		l2 = glm::rotate(l2, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
-		//cylinder1.enableWireMode();
-		cylinder1.render(glm::scale(l2, glm::vec3(0.1, 0.5, 0.1)));
-
-		// Ojo
-		glm::mat4 ojo = glm::translate(model, glm::vec3(0.25, 0.25, 0.05));
-		//sphere1.enableWireMode();
-		sphere1.render(glm::scale(ojo, glm::vec3(0.2, 0.2, 0.1)));
-
-		glm::mat4 ojo2 = glm::translate(model, glm::vec3(-0.25, 0.25, 0.05));
-		//sphere2.enableWireMode();
-		sphere2.render(glm::scale(ojo2, glm::vec3(0.2, 0.2, 0.1)));
-
-		glm::mat4 modelAgua = glm::mat4(1.0);
-		modelAgua = glm::translate(modelAgua, glm::vec3(0.0, -3.0, 0.0));
-		modelAgua = glm::scale(modelAgua, glm::vec3(5.0, 0.01, 5.0));
-		// Se activa la textura del agua
-		glBindTexture(GL_TEXTURE_2D, textureID2);
-		///Le cambiamos el shader con multiples luces
-		shaderMulLighting.setFloat("offsetX", offX);
-		box2.render(modelAgua);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		shaderMulLighting.setFloat("offsetX", 0);
-
-		glm::mat4 modelSphere = glm::mat4(1.0);
-		modelSphere = glm::translate(modelSphere, glm::vec3(3.0, 0.0, 0.0));
-		glBindTexture(GL_TEXTURE_2D, textureID3);
-		sphere3.render(modelSphere);
-		glBindTexture(GL_TEXTURE_2D, 0);
-
 		glm::mat4 modelCylinder = glm::mat4(1.0);
 		modelCylinder = glm::translate(modelCylinder,
 			glm::vec3(-3.0, 0.0, 0.0));
@@ -1894,32 +1907,272 @@ void applicationLoop() {
 		shaderMaterialLighting.setFloat("material.shininess", 76.8f);
 		boxMaterials.render(boxMaterialModel);
 
+		*/
+	
+		//El AirCraft
+		glm::mat4 matrixAircraft = glm::mat4(1.0);
+		matrixAircraft = glm::translate(matrixAircraft, glm::vec3(60.0, -10.0, -55.0));
+		Aircraft.render(matrixAircraft);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//El AirCraft II perro
+		glm::mat4 camioneta = glm::mat4(0.5);
+		camioneta = glm::translate(camioneta, glm::vec3(60.0, -0.0, -50.0));
+		modelCami.render(camioneta);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
 		//////////////Models Complex Render
 		glm::mat4 matrixModelRock = glm::mat4(1.0);
-		matrixModelRock = glm::translate(matrixModelRock, glm::vec3(-3.0, 0.0, 4.0));
+		matrixModelRock = glm::translate(matrixModelRock, glm::vec3(63.0, -14.0, -60.0));
 		modelRock.render(matrixModelRock);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE);
 		/////Esto es para las vias del tren
 		glm::mat4 matrixModelRailroad = glm::mat4(1.0);
-		matrixModelRailroad = glm::translate(matrixModelRailroad, glm::vec3(3.0, 0.0, 4.0));
+		matrixModelRailroad = glm::translate(matrixModelRailroad, glm::vec3(63.0, -14.0, -40.0));
 		modelRailRoad.render(matrixModelRailroad);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
-		//El AirCraft
-		glm::mat4 matrixAircraft = glm::mat4(1.0);
-		matrixAircraft = glm::translate(matrixAircraft, glm::vec3(3.0, 0.0, 4.0));
-		Aircraft.render(matrixAircraft);
-		//Forze to enable the unit texture 0 always ............ IMPORTANT
-		glActiveTexture(GL_TEXTURE0);
+
+		//Alberc
+		glm::mat4 modelAgua = glm::mat4(1.0);
+		modelAgua = glm::translate(modelAgua, glm::vec3(60.0, -14.1, -55.0));
+		modelAgua = glm::scale(modelAgua, glm::vec3(20.0, 0.01, 20.0));
+		// Se activa la textura del agua
+		glBindTexture(GL_TEXTURE_2D, textureID2);
+		///Le cambiamos el shader con multiples luces
+		shaderMulLighting.setFloat("offsetX", offX);
+		box2.render(modelAgua);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		shaderMulLighting.setFloat("offsetX", 0);
+
+		///----------------------------------------------------------------------Bob 
+		sphereLamp.render(lightModelmatrix);
+
+		model = glm::translate(model, glm::vec3(0, 0, dz));
+		model = glm::rotate(model, rot0, glm::vec3(0, 1, 0));
+		//box1.enableWireMode();
+		//Descomentar
+		// Usamos la textura ID 1
+		glBindTexture(GL_TEXTURE_2D, textureID1);
+		box1.render(glm::scale(model, glm::vec3(1.0, 1.0, 0.1)));
+		//Descomentar
+		// No utilizar ninguna textura
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		// Articulacion 1
+		glm::mat4 j1 = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
+		j1 = glm::rotate(j1, rot1, glm::vec3(0, 0, 1));
+		j1 = glm::rotate(j1, rot2, glm::vec3(0, 1, 0));
+		//sphere1.enableWireMode();
+		sphere1.render(glm::scale(j1, glm::vec3(0.1, 0.1, 0.1)));
+
+		// Hueso 1
+		glm::mat4 l1 = glm::translate(j1, glm::vec3(0.25f, 0.0, 0.0));
+		l1 = glm::rotate(l1, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(l1, glm::vec3(0.1, 0.5, 0.1)));
+
+		// Articulacion 2
+		glm::mat4 j2 = glm::translate(j1, glm::vec3(0.5, 0.0f, 0.0f));
+		j2 = glm::rotate(j2, rot3, glm::vec3(0.0, 0.0, 1.0));
+		j2 = glm::rotate(j2, rot4, glm::vec3(1.0, 0.0, 0.0));
+		//sphere1.enableWireMode();
+		sphere1.render(glm::scale(j2, glm::vec3(0.1, 0.1, 0.1)));
+
+		// Hueso 2
+		glm::mat4 l2 = glm::translate(j2, glm::vec3(0.25, 0.0, 0.0));
+		l2 = glm::rotate(l2, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(l2, glm::vec3(0.1, 0.5, 0.1)));
+
 		
-		*/
+
 	
+		//Articulacion3
+		glm::mat4 j3 = glm::translate(j2, glm::vec3(0.45, 0.2523, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(j3, glm::vec3(0.1, 0.1, 0.1)));
+		j3 = glm::rotate(j3, d11, glm::vec3(1, 0, 0));///1
+		//j3 = glm::rotate(j3, d11, glm::vec3(0, 1, 0));///1
+		
+		//dedo 1
+		glm::mat4 d1 = glm::translate(j3, glm::vec3(0.1, 0.1, 0.0f));
+		d1 = glm::rotate(d1, glm::radians(120.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d1, glm::vec3(0.04, 0.2, 0.1)));
 
 
+		//dedo 2
+		glm::mat4 d2 = glm::translate(j3, glm::vec3(0.12, 0.05, 0.0f));
+		d2 = glm::rotate(d2, glm::radians(100.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d2, glm::vec3(0.04, 0.2, 0.1)));
+
+		//dedo 3
+		glm::mat4 d3 = glm::translate(j3, glm::vec3(0.14, 0.00, 0.0f));
+		d3 = glm::rotate(d3, glm::radians(80.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d3, glm::vec3(0.04, 0.2, 0.1)));
+
+		//dedo 4
+		glm::mat4 d4 = glm::translate(j3, glm::vec3(0.16, -0.05, 0.0f));
+		d4 = glm::rotate(d4, glm::radians(60.0f), glm::vec3(0, 0, 1.0));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(d4, glm::vec3(0.04, 0.2, 0.1)));
 
 
+		//Pupila 
+		glm::mat4 pupila1 = glm::translate(model, glm::vec3(0.25, 0.25, 0.065f));
+		//sphere1.enableWireMode();						
+		sphere1.render(glm::scale(pupila1, glm::vec3(0.1, 0.1, 0.1)));
+		//Pupila 2
+		glm::mat4 pupila2 = glm::translate(model, glm::vec3(-0.25, 0.25, 0.065f));
+		//sphere1.enableWireMode();					
+		sphere1.render(glm::scale(pupila2, glm::vec3(0.1, 0.1, 0.1)));
+
+		//articulacion Izq
+		glm::mat4 a1 = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(a1, glm::vec3(0.1, 0.1, 0.1)));
+		a1 = glm::rotate(a1, rot3, glm::vec3(0, 0, 1));///1
+		a1 = glm::rotate(a1, rot3, glm::vec3(0, 1, 0));///1
+
+		//hueso Izq
+		glm::mat4 h1 = glm::translate(a1, glm::vec3(-0.25f, 0.0f, 0.0f));
+		h1 = glm::rotate(h1, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(h1, glm::vec3(0.1, 0.5, 0.1)));
+
+		//articulacion2 Izq
+		glm::mat4 a2 = glm::translate(a1, glm::vec3(-0.5f, 0.0f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(a2, glm::vec3(0.1, 0.1, 0.1)));
+		a2 = glm::rotate(a2, rot4, glm::vec3(1, 0, 0));///1
+		a2 = glm::rotate(a2, rot4, glm::vec3(0, 1, 0));///1
+
+		//hueso2 Izq 
+		glm::mat4 h2 = glm::translate(a2, glm::vec3(-0.215, -0.1223, 0.0f));
+		h2 = glm::rotate(h2, glm::radians(120.0f), glm::vec3(0, 0, 1.0));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(h2, glm::vec3(0.1, 0.5, 0.1)));
+
+		//Pantalon
+		glm::mat4 p = glm::translate(model, glm::vec3(0.0f, -0.625f, 0.0f));
+		//box2.enableWireMode();
+		box2.render(glm::scale(p, glm::vec3(1.0, 0.25, 0.1)));
+
+		glm::mat4 p2 = glm::translate(p, glm::vec3(-0.25f, -0.25f, 0.0f));
+		//cylinder2.enableWireMode();
+		cylinder2.render(glm::scale(p2, glm::vec3(0.25, 0.25, 0.1)));
+
+		glm::mat4 p3 = glm::translate(p, glm::vec3(0.25f, -0.25f, 0.0f));
+		//cylinder2.enableWireMode();
+		cylinder2.render(glm::scale(p3, glm::vec3(0.25, 0.25, 0.1)));
+
+		//Pies
+
+		glm::mat4 pie = glm::translate(p2, glm::vec3(0.0f, -0.375f, 0.0f));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(pie, glm::vec3(0.1, 0.5, 0.1)));
+
+		glm::mat4 pie2 = glm::translate(p3, glm::vec3(0.0f, -0.375f, 0.0f));
+		//cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(pie2, glm::vec3(0.1, 0.5, 0.1)));
+
+
+		//Pie IZQ
+		glm::mat4 p6 = glm::translate(pie, glm::vec3(0.0f, -0.275f, 0.15f));
+		p6 = glm::rotate(p6, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		cylinder2.enableWireMode();
+		cylinder2.render(glm::scale(p6, glm::vec3(0.1f, 0.25f, 0.1f)));
+
+		//Pie DER
+		glm::mat4 p7 = glm::translate(pie2, glm::vec3(0.0f, -0.275f, 0.15f));
+		p7 = glm::rotate(p7, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		cylinder2.enableWireMode();
+		cylinder2.render(glm::scale(p7, glm::vec3(0.1f, 0.25f, 0.1f)));
+
+
+		//BOCA
+		glm::mat4 b = glm::translate(model, glm::vec3(0.0f, -0.30f, 0.05f));
+		//box3.enableWireMode();
+		box3.render(glm::scale(b, glm::vec3(0.50, 0.15, 0.1)));
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		//apartir de aqui se modelara a R2D2
+
+		glm::mat4 torso = glm::translate(modelR2D2, glm::vec3(5.0f, 0.0f, 0.0f));
+		torso = glm::rotate(torso, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//torsoR2D2.enableWireMode();
+		torsoR2D2.render(glm::scale(torso, glm::vec3(1.0f, 1.0f, 1.0f)));
+
+		glm::mat4 cabeza = glm::translate(torso, glm::vec3(0.0f, 0.5f, 0.0f));
+		//cabezaR2D2.enableWireMode();
+		cabezaR2D2.render(glm::scale(cabeza, glm::vec3(1.0f, 1.0f, 1.0f)));
+
+		//
+		///ojo
+		glm::mat4 oj1 = glm::translate(cabeza, glm::vec3(0.0f, 0.2f, 0.4f));
+		//sphere1.enableWireMode();
+		sphere3.render(glm::scale(oj1, glm::vec3(0.15, 0.15, 0.15)));
+
+		glm::mat4 articulacioDerecha = glm::translate(torso, glm::vec3(0.55f, 0.35f, 0.0f));
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(articulacioDerecha, glm::vec3(0.15f, 0.15f, 0.15f)));
+		articulacioDerecha = glm::rotate(articulacioDerecha, rota1, glm::vec3(0, 0, 1));///1
+		articulacioDerecha = glm::rotate(articulacioDerecha, rota1, glm::vec3(0, 1, 0));///1
+
+		glm::mat4 brazoDer = glm::translate(articulacioDerecha, glm::vec3(0.05f, -0.4f, -0.13f));
+		brazoDer = glm::rotate(brazoDer, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//brazoR2D2.enableWireMode();
+		brazoR2D2.render(glm::scale(brazoDer, glm::vec3(0.15f, 1.0f, 0.1f)));
+
+		glm::mat4 munecaDerecha = glm::translate(brazoDer, glm::vec3(0.0f, -0.5f, 0.0f));;
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(munecaDerecha, glm::vec3(0.15f, 0.15f, 0.15f)));
+
+		glm::mat4 pataDerecha = glm::translate(munecaDerecha, glm::vec3(0.0f, -0.1f, 0.0f));
+		//pieR2D2.enableWireMode();
+		pieR2D2.render(glm::scale(pataDerecha, glm::vec3(0.2f, 0.2f, 0.2f)));
+
+		glm::mat4 articulacioIzquierda = glm::translate(torso, glm::vec3(-0.55f, 0.35f, 0.0f));
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(articulacioIzquierda, glm::vec3(0.15f, 0.15f, 0.15f)));
+		articulacioIzquierda = glm::rotate(articulacioIzquierda, rota2, glm::vec3(1, 0, 0));///1
+
+		glm::mat4 brazoIzq = glm::translate(articulacioIzquierda, glm::vec3(-0.05f, -0.4f, -0.13f));
+		brazoIzq = glm::rotate(brazoIzq, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//brazoR2D2.enableWireMode();
+		brazoR2D2.render(glm::scale(brazoIzq, glm::vec3(0.15f, 1.0f, 0.1f)));
+
+		glm::mat4 munecaIzquierda = glm::translate(brazoIzq, glm::vec3(0.0f, -0.5f, 0.0f));;
+		articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(munecaIzquierda, glm::vec3(0.15f, 0.15f, 0.15f)));
+
+		glm::mat4 pataIzquierda = glm::translate(munecaIzquierda, glm::vec3(0.0f, -0.1f, 0.0f));
+		//pieR2D2.enableWireMode();
+		pieR2D2.render(glm::scale(pataIzquierda, glm::vec3(0.2f, 0.2f, 0.2f)));
+
+		glm::mat4 coxis = glm::translate(torso, glm::vec3(0.0f, -0.15f, 0.0f));
+		//cabezaR2D2.enableWireMode();
+		cabezaR2D2.render(glm::scale(coxis, glm::vec3(1.0f, 1.0f, 1.0f)));
+
+		glm::mat4 artiulacionCentral = glm::translate(coxis, glm::vec3(0.0f, -0.55f, 0.0f));
+		//articulacionR2D2.enableWireMode();
+		articulacionR2D2.render(glm::scale(artiulacionCentral, glm::vec3(0.15f, 0.15f, 0.15f)));
+
+		glm::mat4 pataCentral = glm::translate(artiulacionCentral, glm::vec3(0.0f, -0.1f, 0.0f));
+		pataCentral = glm::rotate(pataCentral, glm::radians(5.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//pieR2D2.enableWireMode();
+		pieR2D2.render(glm::scale(pataCentral, glm::vec3(0.2f, 0.2f, 0.2f)));
+		/////////////////////////////////////////////////////////////////////////////////////////
+		shader.turnOff();
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
@@ -1939,9 +2192,11 @@ void applicationLoop() {
 		glCullFace(oldCullFaceMode);
 		glDepthFunc(oldDepthFuncMode);
 
-		dz = 0;
-		rot0 = 0;
 		offX += 0.001;
+		dz = 0;
+		dza = 0;
+		rot0 = 0;
+		rota0 = 0;
 
 		glfwSwapBuffers(window);
 	}
