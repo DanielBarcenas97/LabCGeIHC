@@ -55,6 +55,7 @@ Shader shaderSkybox;
 Shader shaderMulLighting;
 
 
+
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
 Sphere sphere1(20, 20);
@@ -66,6 +67,7 @@ Sphere skyboxSphere(20, 20);
 Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 Cylinder cylinder3(20, 20, 0.5, 0.5);
+
 // Descomentar
 Cylinder cylinderMaterials(20, 20, 0.5, 0.5);
 Box box1;
@@ -85,6 +87,7 @@ textureID22, textureID23, textureID24,
 textureID25, textureID26, textureID27, textureID28, textureCubeTexture, textureID30;
 // Descomentar
 GLuint skyboxTextureID;
+
 
 GLenum types[6] = {
 GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -182,10 +185,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		"../Shaders/iluminacion_color_res.fs");
 	shaderTextureLighting.initialize("../Shaders/iluminacion_texture_res.vs",
 		"../Shaders/iluminacion_texture_res.fs");
-	// Descomentar
 	shaderMaterialLighting.initialize("../Shaders/iluminacion_material.vs",
 		"../Shaders/iluminacion_material.fs");
-	// Descomentar
 	shaderSkybox.initialize("../Shaders/cubeTexture.vs",
 		"../Shaders/cubeTexture.fs");
 	shaderMulLighting.initialize("../Shaders/Iluminacion_texture_res.vs",
@@ -222,7 +223,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	cylinder3.init();
 	cylinder3.setShader(&shaderTextureLighting);
 
-	// Descomentar
 	cylinderMaterials.init();
 	cylinderMaterials.setShader(&shaderMaterialLighting);
 	cylinderMaterials.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
@@ -266,9 +266,18 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	box7.init();
 	box7.setShader(&shaderTextureLighting);
 
+
+
+
+
+
+
+
+
+
+
+
 	camera->setPosition(glm::vec3(0.0, 0.0, 4.0));
-
-
 
 	// Descomentar
 	// Definimos el tamanio de la imagen
@@ -757,13 +766,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture30.freeImage(bitmap);
 
 
-
-
-
 	/*------------------------------------------------------------------------------------------------------------*/
 
-	
-	// Descomentar
 	// Carga de texturas para el skybox
 	Texture skyboxTexture = Texture("");
 	glGenTextures(1, &skyboxTextureID);
@@ -1078,16 +1082,6 @@ void applicationLoop() {
 		/*------------------------------------------------------------------Inicio casa---------------------------------------------------------------------------*/
 
 		/*Estructura de la casa*/
-
-		//Pared 1 Frente
-		///////////glBindTexture(GL_TEXTURE_2D, textureID6);
-		//box.setShader(&shaderSpotLight);
-		//box.setProjectionMatrix(projection);
-		//box.setViewMatrix(view);
-		////////////box.setPosition(glm::vec3(15.0, 0.0, -3.0));
-		///////////box.setScale(glm::vec3(60.0, 30.0, 2.0));
-		///////////box.render();
-
 		/// PARED ATRAS ----------------------------Dos pisos completa
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		//box.setShader(&shaderSpotLight);
