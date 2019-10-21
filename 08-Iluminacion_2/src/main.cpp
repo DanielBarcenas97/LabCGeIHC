@@ -494,7 +494,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture11.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture texture12("../Textures/maceta.jpg");
+	Texture texture12("../Textures/madera.jpg");
 	bitmap = texture12.loadImage(true);
 	data = texture12.convertToData(bitmap, imageWidth, imageHeight);
 	glGenTextures(1, &textureID12);
@@ -1870,7 +1870,7 @@ void applicationLoop() {
 
 
 		// -------------------Cochera -----------------------//
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID12);
 		//box.setShader(&shaderSpotLight);
 		//box.setProjectionMatrix(projection);
 		//box.setViewMatrix(view);
