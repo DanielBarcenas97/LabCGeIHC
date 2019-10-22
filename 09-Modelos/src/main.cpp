@@ -656,7 +656,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture16.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture texture17("../Textures/ropero.jpg");
+	Texture texture17("../Textures/pisoMaderados.jpg");
 	bitmap = texture17.loadImage(true);
 	data = texture17.convertToData(bitmap, imageWidth, imageHeight);
 	glGenTextures(1, &textureID17);
@@ -1197,58 +1197,48 @@ void applicationLoop() {
 		/* ------------ Escaleras --------------------*/
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(26.0, -0.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(28.0, -2.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(30.0, -4.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(32.0, -6.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(34.0, -8.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(36.0, -10.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
 		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box9.setPosition(glm::vec3(38.0, -12.5, 33.0));
 		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
 		box9.render();
 
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box9.setPosition(glm::vec3(40.0, -14.5, 33.0));
-		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
-		box9.render();
 
-		//escalon
-		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box9.setPosition(glm::vec3(42.0, -16.5, 33.0));
-		box9.setScale(glm::vec3(3.0, 1.0, 5.0));
-		box9.render();
 		/* ------------ Fin de Escaleras --------------------*/
 
 		/* ----------------- Barandal -----------------------*/
@@ -1670,6 +1660,88 @@ void applicationLoop() {
 		box.render();
 
 
+		//------------------Piso Madera -------------------//
+		//Piso Q1
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(-5.0, 1.00, -13.0));
+		box8.setScale(glm::vec3(20.0, 0.1, 27.0));
+		box8.render();
+		//Piso Q2
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(15.0, 1.00, -13.0));
+		box8.setScale(glm::vec3(20.0, 0.1, 27.0));
+		box8.render();
+		//Piso Q3 p1
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(35.0, 1.00, -23.0));
+		box8.setScale(glm::vec3(20.0, 0.1, 27.0));
+		box8.render();
+		//Piso Q3 p2W
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(35.0, 1.00, 2.5));
+		box8.setScale(glm::vec3(20.0, 0.1, 24.0));
+		box8.render();
+
+		//Piso Fuera Banio P1
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(15.0, 1.00, 18.75));
+		box8.setScale(glm::vec3(20.0, 0.1, 36.75));
+		box8.render();
+
+		//Piso Fuera Banio P2
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(-5.0, 1.00, 8.00));
+		box8.setScale(glm::vec3(20.0, 0.1, 14.00));
+		box8.render();
+
+		//Piso Banio
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(-5.0, 1.00, 25.50));
+		box8.setScale(glm::vec3(20.0, 0.1, 21.00));
+		box8.render();
+
+		//Piso sala
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(-2.50, -14.00, -22.50));
+		box8.setScale(glm::vec3(25.0, 0.1, 28.0));
+		box8.render();
+		
+		//Piso sala II
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(-2.50, -14.00, 5.0));
+		box8.setScale(glm::vec3(25.0, 0.1, 27.0));
+		box8.render();
+
+		//Piso banio abajo
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(17.0, -14.00, -22.50));
+		box8.setScale(glm::vec3(14.0, 0.1, 28.0));
+		box8.render();
+
+		//Piso cocina 
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(17.0, -14.00, 5.0));
+		box8.setScale(glm::vec3(14.0, 0.1, 27.0));
+		box8.render();
+
+		//Piso atras 
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box8.setPosition(glm::vec3(-2.50, -14.00, 27.0));
+		box8.setScale(glm::vec3(25.0, 0.1, 17.0));
+		box8.render();
+
+		/*Entrada por estacionamiento*/
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box9.setPosition(glm::vec3(10.5, -2.0,32.750));
+		box9.setScale(glm::vec3(1.0, 2.0, 6.5));
+		box9.render();
+
+		//  pared  grande
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box9.setPosition(glm::vec3(10.5, -7.5, 24.0));
+		box9.setScale(glm::vec3(1.0, 14.0, 11.0));
+		box9.render();
+
 		/* -----------------------Inician Accesorios ----------------------------------*/
 		//SILLON 1
 				// sillon respaldo 
@@ -1916,10 +1988,12 @@ void applicationLoop() {
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
-		//El AirCraft II perro
-		glm::mat4 camioneta = glm::mat4(0.5);
-		camioneta = glm::translate(camioneta, glm::vec3(60.0, -0.0, -50.0));
-		modelCami.render(camioneta);
+		//Perro
+		glm::mat4 perro = glm::mat4(1.0);
+		perro = glm::translate(perro, glm::vec3(35.0, 1.0, -42.0));
+		perro = glm::scale(perro, glm::vec3(0.10, 0.10, 0.10));
+		perro = glm::rotate(perro, glm::radians(360.0f), glm::vec3(1.0, 0.0, 2.0));
+		modelCami.render(perro);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
@@ -1950,7 +2024,10 @@ void applicationLoop() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		shaderMulLighting.setFloat("offsetX", 0);
 
-		///----------------------------------------------------------------------Bob 
+		///----------------------------------------------------------------------Bob
+
+		/*
+		
 		sphereLamp.render(lightModelmatrix);
 
 		model = glm::translate(model, glm::vec3(0, 0, dz));
@@ -2172,7 +2249,11 @@ void applicationLoop() {
 		//pieR2D2.enableWireMode();
 		pieR2D2.render(glm::scale(pataCentral, glm::vec3(0.2f, 0.2f, 0.2f)));
 		/////////////////////////////////////////////////////////////////////////////////////////
-		shader.turnOff();
+
+				shader.turnOff();
+		*/
+		
+
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
