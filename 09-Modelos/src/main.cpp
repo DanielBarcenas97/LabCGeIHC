@@ -332,7 +332,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
 	////////////////////////////////////
 
-	camera->setPosition(glm::vec3(0.0, 0.0, 4.0));
+	camera->setPosition(glm::vec3(-80.0, 0.0, 4.0));
 
 	// Descomentar
 		// Definimos el tamanio de la imagen
@@ -1926,6 +1926,177 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(1.0, 15.0, 22.0));
 		box9.render();
 
+
+		//---- Entrada del coche Cochera -----//
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(34.75, -14.00, -56.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 38.0));
+		box8.render();
+		//---- Entrada del coche Calle -----//
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(34.75, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(13.25, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-8.25, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-29.75, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-51.25, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		//izquierda
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, -63.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, -41.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, -18.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, 4.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, 26.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, 49.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		//izquierda Atras
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-72.75, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-51.25, -14.00, 71.5));
+		box8.setScale(glm::vec3(22.0, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-29.5, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(-8.25, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(13.25, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(34.75, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(56.25, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(77.75, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		//esquina derecha atras
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, 71.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, 49.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, 26.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, 4.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, -18.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, -41.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, -63.5));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		//Esquina dercha
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(99.25, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(77.75, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box8.setPosition(glm::vec3(56.25, -14.00, -86.0));
+		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
+		box8.render();
+
+		//-- Bardas casa
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(63.25, -8.5, -37.0));
+		box.setScale(glm::vec3(35.5, 15.0, 1.0));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(80.75, -8.5, 11.5));
+		box.setScale(glm::vec3(1.0, 15.0, 97.5));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(9.0, -8.5, 60.0));
+		box.setScale(glm::vec3(143.5, 15.0, 1.0));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-61.75, -8.5, 11.5));
+		box.setScale(glm::vec3(1.0, 15.0, 97.5));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-31.75, -8.5, -37.0));
+		box.setScale(glm::vec3(35.5, 15.0, 1.0));
+		box.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-31.75, -8.5, -37.0));
+		box.setScale(glm::vec3(15.5, 15.0, 1.0));
+		box.render();
+
 		/*------------------------------------------------------------Fin--------------------------w---------------------------------*/
 
 		/*
@@ -2278,6 +2449,7 @@ void applicationLoop() {
 		dza = 0;
 		rot0 = 0;
 		rota0 = 0;
+		
 
 		glfwSwapBuffers(window);
 	}
