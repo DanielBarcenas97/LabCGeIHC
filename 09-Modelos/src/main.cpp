@@ -332,7 +332,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
 	////////////////////////////////////
 
-	camera->setPosition(glm::vec3(-80.0, 0.0, 4.0));
+	camera->setPosition(glm::vec3(00.0, -03.0, 6.0));
 
 	// Descomentar
 		// Definimos el tamanio de la imagen
@@ -1120,7 +1120,7 @@ void applicationLoop() {
 		sphereLamp.render(lightModelmatrix);
 
 		/*----------------------------------------------Todo Bien Hasta Aqui --------------------------------------------------*/
-		
+
 
 		/*------------------------------------------------------------------Inicio casa---------------------------------------------------------------------------*/
 
@@ -1177,18 +1177,6 @@ void applicationLoop() {
 		glBindTexture(GL_TEXTURE_2D, textureID14);
 		box8.setPosition(glm::vec3(15.0, -14.4, 0.0));
 		box8.setScale(glm::vec3(200.0, 0.5, 150.0));
-		box8.render();
-
-		//Piedra izquierda 1
-		glBindTexture(GL_TEXTURE_2D, textureID4);
-		box8.setPosition(glm::vec3(30.0, -14.20, -50.0));
-		box8.setScale(glm::vec3(5.0, 0.5, 10.0));
-		box8.render();
-
-		//Piedra izquierda 2
-		glBindTexture(GL_TEXTURE_2D, textureID4);
-		box8.setPosition(glm::vec3(40.0, -14.20, -50.0));
-		box8.setScale(glm::vec3(5.0, 0.5, 10.0));
 		box8.render();
 
 		/*Fin de la Estructura de la casa*/
@@ -1428,10 +1416,125 @@ void applicationLoop() {
 		box.setScale(glm::vec3(19.0, 2.0, 0.5));
 		box.render();
 
+		//Forro de arriba barrita
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-5.0, 13.0, 15.55));
+		box.setScale(glm::vec3(19.0, 2.00, 0.025));
+		box.render();
+
 		//Puerta BANIO
 		glBindTexture(GL_TEXTURE_2D, textureID22);
 		box.setPosition(glm::vec3(2.00, 6.5, 15.25));
 		box.setScale(glm::vec3(5.0, 11.0, 0.5));
+		box.render();
+
+		//Cristal baño
+		glBindTexture(GL_TEXTURE_2D, textureID23);
+		box.setPosition(glm::vec3(-8.5, 6.0, 30.250));
+		box.setScale(glm::vec3(12.20, 10.00, 0.2));
+		box.render();
+		/*
+		//cristal baño ancho chico largo alto Muro
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-2.5, 4.0, 32.90));
+		box.setScale(glm::vec3(0.20, 6.00, 5.20));
+		box.render();
+
+		*/
+		
+
+		//cristal baño ancho chico largo alto cristal
+		glBindTexture(GL_TEXTURE_2D, textureID23);
+		box.setPosition(glm::vec3(-2.5, 6.0, 32.90));
+		box.setScale(glm::vec3(0.20, 10.00, 5.20));
+		box.render();
+
+		//mueble madera
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-8.5, 2.0, 19.00));
+		box.setScale(glm::vec3(12.20, 6.00, 0.2));
+		box.render();
+
+		//mueble madera chico
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-2.5, 2.0, 17.20));
+		box.setScale(glm::vec3(0.20, 6.00, 3.5));
+		box.render();
+
+		//mueble madera tapa
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-8.5, 5.1, 17.225));
+		box.setScale(glm::vec3(12.20, 0.20, 3.75));
+		box.render();
+
+		//EspejoNO madera
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-8.5, 8.7, 15.55));
+		box.setScale(glm::vec3(12.20, 6.00, 0.17));
+		box.render();
+
+		//pared atras espejo forro
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-7.5, 6.0, 15.55));
+		box.setScale(glm::vec3(14.0, 12.00, 0.025));
+		box.render();
+		//pared izquierda entrada forro
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(4.45, 7.5, 25.55));
+		box.setScale(glm::vec3(00.050, 13.00, 020.0));
+		box.render();
+		//pared derecha entrada forro
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-14.5, 7.5, 25.55));
+		box.setScale(glm::vec3(00.050, 13.00, 20.0));
+		box.render();
+		
+		//pared REGADER
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-5.0, 7.5, 35.50));
+		box.setScale(glm::vec3(19.0, 13.00, 0.025));
+		box.render();
+
+		//Espejo
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box.setPosition(glm::vec3(-8.35, 8.7, 15.650));
+		box.setScale(glm::vec3(8.20, 6.00, 0.10));
+		box.render();
+
+		//Tapitas1
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-3.3, 7.0, 16.0));
+		box.setScale(glm::vec3(1.80, 0.20, 1.0));
+		box.render();
+		//Tapitas2
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-3.3, 8.50, 16.0));
+		box.setScale(glm::vec3(1.80, 0.20, 1.0));
+		box.render();
+		//Tapitas3
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-3.3, 10.0, 16.0));
+		box.setScale(glm::vec3(1.80, 0.20, 1.0));
+		box.render();
+
+		//Tapitas4
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-13.5, 7.0, 16.0));
+		box.setScale(glm::vec3(1.80, 0.20, 1.0));
+		box.render();
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-13.5, 8.5, 16.0));
+		box.setScale(glm::vec3(1.80, 0.20, 1.0));
+		box.render();
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(-13.5, 10, 16.0));
+		box.setScale(glm::vec3(1.80, 0.20, 1.0));
+		box.render();
+
+		//Piso Banio regadera
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box.setPosition(glm::vec3(-8.5, 1.0, 33.0));
+		box.setScale(glm::vec3(12.0, 0.20, 5.50));
 		box.render();
 
 		/*---------------------- Fin Baño -----------------------*/
@@ -2067,6 +2170,7 @@ void applicationLoop() {
 		box8.render();
 
 		//-- Bardas casa
+		/*
 		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box.setPosition(glm::vec3(63.25, -8.5, -37.0));
 		box.setScale(glm::vec3(35.5, 15.0, 1.0));
@@ -2081,7 +2185,9 @@ void applicationLoop() {
 		box.setPosition(glm::vec3(9.0, -8.5, 60.0));
 		box.setScale(glm::vec3(143.5, 15.0, 1.0));
 		box.render();
-
+		*/
+		
+		/*
 		glBindTexture(GL_TEXTURE_2D, textureID7);
 		box.setPosition(glm::vec3(-61.75, -8.5, 11.5));
 		box.setScale(glm::vec3(1.0, 15.0, 97.5));
@@ -2091,11 +2197,10 @@ void applicationLoop() {
 		box.setPosition(glm::vec3(-31.75, -8.5, -37.0));
 		box.setScale(glm::vec3(35.5, 15.0, 1.0));
 		box.render();
+		*/
+		
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
-		box.setPosition(glm::vec3(-31.75, -8.5, -37.0));
-		box.setScale(glm::vec3(15.5, 15.0, 1.0));
-		box.render();
+
 
 		/*------------------------------------------------------------Fin--------------------------w---------------------------------*/
 
