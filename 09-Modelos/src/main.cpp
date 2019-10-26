@@ -2312,13 +2312,17 @@ void applicationLoop() {
 		box.setScale(glm::vec3(3.0, 11.00, 5.0));
 		box.render();
 
-		//Mueble madera  izq
+		//Mueble madera  der
 		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box.setPosition(glm::vec3(22.63, -11.0, 15.00));
+		box.setPosition(glm::vec3(22.63, -11.0, 14.50));
 		box.setScale(glm::vec3(3.0, 6.00, 6.0));
 		box.render();
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.63, -11.0, 10.55));
+		box.setScale(glm::vec3(3.0, 6.00, 1.9));
+		box.render();
 
-		//Mueble madera  der
+		//Mueble madera izq
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.6, -11.0, 1.00));
 		box.setScale(glm::vec3(3.0, 6.00, 6.0));
@@ -2326,15 +2330,15 @@ void applicationLoop() {
 
 		//Estufa
 		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box.setPosition(glm::vec3(22.6, -11.0, 8.000));//.25
-		box.setScale(glm::vec3(3.0, 6.00, 8.0));
+		box.setPosition(glm::vec3(22.6, -11.0, 6.800));//.25
+		box.setScale(glm::vec3(3.0, 6.00, 5.6));
 		box.render();
 
 		//--Arriba
 		//Mueble madera  der
 		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box.setPosition(glm::vec3(22.63, -2.5, 15.00));
-		box.setScale(glm::vec3(3.0, 3.00, 6.0));
+		box.setPosition(glm::vec3(22.63, -2.5, 13.50));
+		box.setScale(glm::vec3(3.0, 3.00, 8.9));
 		box.render();
 
 		//Mueble madera  izq
@@ -2345,14 +2349,40 @@ void applicationLoop() {
 
 		//Arriba Estufa mueble
 		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box.setPosition(glm::vec3(22.6, -2.25, 8.000));//.25
-		box.setScale(glm::vec3(3.0, 2.50, 8.0));
+		box.setPosition(glm::vec3(22.6, -2.25, 6.800));//.25
+		box.setScale(glm::vec3(3.0, 2.50, 5.6));
 		box.render();
-		//Arriba Estufa 
+		//Arriba Estufa grasa
 		glBindTexture(GL_TEXTURE_2D, textureID6);
-		box.setPosition(glm::vec3(22.1, -3.75, 8.000));//.25
-		box.setScale(glm::vec3(4.0, 0.50, 8.0));
+		box.setPosition(glm::vec3(22.1, -3.75, 6.800));//.25
+		box.setScale(glm::vec3(4.0, 0.50, 5.6));
 		box.render();
+
+		//Mueble madera  izqcosas  
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(14.5, -11.0, 16.00));
+		box.setScale(glm::vec3(7.0, 6.00, 3.0));
+		box.render();
+
+		//Mueble madera izqcosas  arriba
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(14.5, -2.5, 16.00));
+		box.setScale(glm::vec3(7.0, 3.00, 3.0));
+		box.render();
+
+		//microondaas
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(16.5, -7.25, 16.750));
+		box.setScale(glm::vec3(3.0, 1.50, 1.5));
+		box.render();
+
+		//mesa
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(10.5, -9.00, 6.750));
+		box.setScale(glm::vec3(3.5, 0.20, 10.50));
+		box.render();
+
+		
 
 		/*-----------------------*/
 
