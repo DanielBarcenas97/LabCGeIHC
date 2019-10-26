@@ -1867,22 +1867,22 @@ void applicationLoop() {
 		//SILLON 1
 				// sillon respaldo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(0.0, -11.0, 0.0));
+		box4.setPosition(glm::vec3(0.0, -11.0, -30.0));
 		box4.setScale(glm::vec3(6.0, 4.0, 4.0));
 		box4.render();
 		// sillon asiento
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(0.0, -13.0, 0.0));
+		box5.setPosition(glm::vec3(0.0, -13.0, -30.0));
 		box5.setScale(glm::vec3(6.0, 2.0, 8.0));
 		box5.render();
 		// sillon codo izquierdo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(-2.5, -12.0, 0.0));
+		box6.setPosition(glm::vec3(-2.5, -12.0, -30.0));
 		box6.setScale(glm::vec3(1.0, 1.5, 8.0));
 		box6.render();
 		// sillon codo derecho
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box7.setPosition(glm::vec3(2.5, -12.0, 0.0));
+		box7.setPosition(glm::vec3(2.5, -12.0, -30.0));
 		box7.setScale(glm::vec3(1.0, 1.5, 8.0));
 		box7.render();
 
@@ -1891,17 +1891,17 @@ void applicationLoop() {
 
 		// sillon respaldo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(-8.0, -11.0, 8.0));
+		box4.setPosition(glm::vec3(-8.0, -11.0, -22.0));
 		box4.setScale(glm::vec3(1.0, 2.0, 8.0));
 		box4.render();
 		// sillon asiento
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(-7.0, -13.0, 8.0));
+		box5.setPosition(glm::vec3(-7.0, -13.0, -22.0));
 		box5.setScale(glm::vec3(3.0, 2.0, 8.0));
 		box5.render();
 		// sillon codo izquierdo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(-7.0, -11.0, 11.5));
+		box6.setPosition(glm::vec3(-7.0, -11.0, -18.5));
 		box6.setScale(glm::vec3(3.0, 1.0, 1.0));
 		box6.render();
 
@@ -1910,23 +1910,23 @@ void applicationLoop() {
 
 		// sillon respaldo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(8.0, -11.0, 8.0));
+		box4.setPosition(glm::vec3(8.0, -11.0, -22.0));
 		box4.setScale(glm::vec3(1.0, 2.0, 8.0));
 		box4.render();
 		// sillon asiento
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(7.0, -13.0, 8.0));
+		box5.setPosition(glm::vec3(7.0, -13.0, -22.0));
 		box5.setScale(glm::vec3(3.0, 2.0, 8.0));
 		box5.render();
 		// sillon codo izquierdo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(7.0, -11.0, 11.5));
+		box6.setPosition(glm::vec3(7.0, -11.0, -18.5));
 		box6.setScale(glm::vec3(3.0, 1.0, 1.0));
 		box6.render();
 
 		// sillon codo derecho
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box7.setPosition(glm::vec3(7.0, -11.0, 5.0));
+		box7.setPosition(glm::vec3(7.0, -11.0, -25.0));
 		box7.setScale(glm::vec3(3.0, 1.0, 1.0));
 		box7.render();
 
@@ -1934,13 +1934,13 @@ void applicationLoop() {
 		//--------------------------- centro de mesa
 		//cilindro
 		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(0.0, -13.0, 8.0));
+		cylinder3.setPosition(glm::vec3(0.0, -13.0, -22.0));
 		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
 		cylinder3.render();
 
 		//-----------------------espejo
 		glBindTexture(GL_TEXTURE_2D, textureID11);
-		box4.setPosition(glm::vec3(0.0, -5.0, 0.0));
+		box4.setPosition(glm::vec3(0.0, -5.0, -30.0));
 		box4.setScale(glm::vec3(2.0, 5.0, 0.5));
 		box4.render();
 
@@ -1948,13 +1948,13 @@ void applicationLoop() {
 		//----------------------- maceta 
 		//cilindro
 		glBindTexture(GL_TEXTURE_2D, textureID12);
-		cylinder3.setPosition(glm::vec3(6.0, -12.0, 14.0));
+		cylinder3.setPosition(glm::vec3(6.0, -12.0, -16.0));
 		cylinder3.setScale(glm::vec3(1.0, 3.0, 1.0));
 		cylinder3.render();
 
 		//cactus
 		glBindTexture(GL_TEXTURE_2D, textureID13);
-		sphere2.setPosition(glm::vec3(6.0, -10.0, 14.0));
+		sphere2.setPosition(glm::vec3(6.0, -10.0,-16.0));
 		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
 		sphere2.render();
 
@@ -2195,14 +2195,14 @@ void applicationLoop() {
 
 		//__________________Ropero
 		glBindTexture(GL_TEXTURE_2D, textureID17);
-		box9.setPosition(glm::vec3(38, 6.0, -0.750));
+		box9.setPosition(glm::vec3(38.5, 6.0, -0.750));
 		box9.setScale(glm::vec3(12.0, 10.0, 2.5));
 		box9.render();
 
 		//______________________TV
 		glBindTexture(GL_TEXTURE_2D, textureID9);
-		box9.setPosition(glm::vec3(4.5 + 39.5, 7.5, -14.0));
-		box9.setScale(glm::vec3(0.15, 3.0, 6.0));
+		box9.setPosition(glm::vec3(4.95 + 39.5, 7.5, -14.0));
+		box9.setScale(glm::vec3(0.15, 4.0, 8.0));
 		box9.render();
 
 		//___________________Cabecera cama
@@ -2272,24 +2272,24 @@ void applicationLoop() {
 		//_____________________Mesa Estudio 
 		//_____________________Lados
 		glBindTexture(GL_TEXTURE_2D, textureID17);
-		box9.setPosition(glm::vec3(-13.5 + 39.5, 2.5, -22.00));
+		box9.setPosition(glm::vec3(-13.5 + 39.5, 2.5, -24.00));
 		box9.setScale(glm::vec3(2.0, 3.5, 0.2));
 		box9.render();
 		glBindTexture(GL_TEXTURE_2D, textureID17);
-		box9.setPosition(glm::vec3(-13.5 + 39.5, 2.5, -26.00));
+		box9.setPosition(glm::vec3(-13.5 + 39.5, 2.5, -32.00));
 		box9.setScale(glm::vec3(2.0, 3.5, 0.2));
 		box9.render();
 
 		//______________________Tapa Mesa
 		glBindTexture(GL_TEXTURE_2D, textureID17);
-		box9.setPosition(glm::vec3(-13.5 + 39.5, 4.45, -24.00));
-		box9.setScale(glm::vec3(2.0, 0.4, 4.20));
+		box9.setPosition(glm::vec3(-13.5 + 39.5, 4.45, -28.00));
+		box9.setScale(glm::vec3(2.0, 0.4, 8.20));
 		box9.render();
 
 		//______________________Tapa abajo
 		glBindTexture(GL_TEXTURE_2D, textureID17);
-		box9.setPosition(glm::vec3(-14.4 + 39.5, 2.00, -24.00));
-		box9.setScale(glm::vec3(0.1, 1.0, 4.20));
+		box9.setPosition(glm::vec3(-14.4 + 39.5, 2.00, -28.00));
+		box9.setScale(glm::vec3(0.1, 1.0, 8.20));
 		box9.render();
 
 		//________________________Alfombra
@@ -2297,6 +2297,62 @@ void applicationLoop() {
 		box9.setPosition(glm::vec3(-5.0 + 39.5, 1.05, -14.00));
 		box9.setScale(glm::vec3(8.0, 0.05, 14.00));
 		box9.render();
+
+		//_________________________Pizarron
+		glBindTexture(GL_TEXTURE_2D, textureID17);
+		box9.setPosition(glm::vec3(-14.4 + 39.5, 8.4, -28.00));
+		box9.setScale(glm::vec3(0.1, 6.0, 10.0));
+		box9.render();
+
+		/*---------- Cocina Muebles-------------*/
+
+		//Refrijerador
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.5, -8.5, -5.00));
+		box.setScale(glm::vec3(3.0, 11.00, 5.0));
+		box.render();
+
+		//Mueble madera  izq
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.63, -11.0, 15.00));
+		box.setScale(glm::vec3(3.0, 6.00, 6.0));
+		box.render();
+
+		//Mueble madera  der
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.6, -11.0, 1.00));
+		box.setScale(glm::vec3(3.0, 6.00, 6.0));
+		box.render();
+
+		//Estufa
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.6, -11.0, 8.000));//.25
+		box.setScale(glm::vec3(3.0, 6.00, 8.0));
+		box.render();
+
+		//--Arriba
+		//Mueble madera  der
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.63, -2.5, 15.00));
+		box.setScale(glm::vec3(3.0, 3.00, 6.0));
+		box.render();
+
+		//Mueble madera  izq
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.6, -2.5, 1.00));
+		box.setScale(glm::vec3(3.0, 3.00, 6.0));
+		box.render();
+
+		//Arriba Estufa mueble
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.6, -2.25, 8.000));//.25
+		box.setScale(glm::vec3(3.0, 2.50, 8.0));
+		box.render();
+		//Arriba Estufa 
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.1, -3.75, 8.000));//.25
+		box.setScale(glm::vec3(4.0, 0.50, 8.0));
+		box.render();
 
 		/*-----------------------*/
 
