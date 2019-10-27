@@ -27,6 +27,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include "Headers/Texture.h"
 
 /// Include Loader Model Class
@@ -66,8 +67,8 @@ Sphere skyboxSphere(20, 20);
 Cylinder cylinder1(20, 20, 0.5, 0.5);
 Cylinder cylinder2(20, 20, 0.5, 0.5);
 Cylinder cylinder3(20, 20, 0.5, 0.5);
-
 Cylinder cylinderMaterials(20, 20, 0.5, 0.5);
+
 Box box1;
 Box box;
 Box box2;
@@ -88,7 +89,7 @@ textureID13, textureID14, textureID15,
 textureID16, textureID17, textureID18,
 textureID19, textureID20, textureID21,
 textureID22, textureID23, textureID24,
-textureID25, textureID26, textureID27, textureID28, textureCubeTexture, textureID30;
+textureID25, textureID26, textureID27, textureID28, textureCubeTexture, textureID30, textureID29;
 
 Cylinder torsoR2D2(20, 20, 0.5, 0.5);//se declara el torso de nuevo modelo
 Sphere cabezaR2D2(20, 20);//se declara la cabeza del modelo
@@ -120,16 +121,12 @@ int lastMousePosY, offsetY = 0;
 float rot1 = 0.0, rot2 = 0.0, rot3 = 0.0, rot4 = 0.0;
 
 float rota1 = 0.0, rota2 = 0.0;///1
-float rota3 = 0.0, rota4 = 0.0;///2
-
-
+float rota3 = 0.0, rota4 = 0.0;///
 float d11 = 0, d12 = 0, d13 = 0, d14 = 0;   //Movimiento de los dedos
 float r21 = 0, r22 = 0, r23 = 0, r24 = 0;
-
 float desplazamiento = 0.0f;
 float rotacionTotal = 0.0f;
 float brazoDerecho = 0.0f, brazoIzquierdo = 0.0f;
-
 float rot0 = 0;
 float dz = 0;
 
@@ -257,6 +254,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	boxMaterials.init();
 	boxMaterials.setShader(&shaderMaterialLighting);
+	
 	// Inicializacion de la esfera del skybox
 	skyboxSphere.init();
 	skyboxSphere.setShader(&shaderSkybox);
@@ -332,7 +330,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
 	////////////////////////////////////
 
-	camera->setPosition(glm::vec3(00.0, -03.0, 6.0));
+	camera->setPosition(glm::vec3(34.0, -03.0, -50.0));
+
 
 	// Descomentar
 		// Definimos el tamanio de la imagen
@@ -403,7 +402,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture2.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture texture3("../Textures/goku.png");
+	//Texture texture3("../Textures/goku.png");
+	Texture texture3("../Textures/calle.tif");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
 	bitmap = texture3.loadImage(true);
@@ -436,7 +436,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture3.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture texture4("../Textures/texturaLadrillos.jpg");
+	//Texture texture4("../Textures/texturaLadrillos.jpg");
+	Texture texture4("../Textures/calle2.tif");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
 	bitmap = texture4.loadImage(true);
@@ -465,6 +466,24 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	texture4.freeImage(bitmap);
 
 	/*-----------------------------------------------------------------------------------------------------------*/
+	Texture texture5("../Textures/CornerStreet.tif");
+	bitmap = texture5.loadImage(true);
+	data = texture5.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &textureID5);
+	glBindTexture(GL_TEXTURE_2D, textureID5);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture5.freeImage(bitmap);
+
 	Texture texture6("../Textures/pared.jpg");
 	bitmap = texture6.loadImage(true);
 	data = texture6.convertToData(bitmap, imageWidth, imageHeight);
@@ -820,6 +839,24 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cout << "Failed to load texture" << std::endl;
 	texture30.freeImage(bitmap);
 
+	Texture texture29("../Textures/muebles.png");
+	bitmap = texture29.loadImage(true);
+	data = texture29.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &textureID29);
+	glBindTexture(GL_TEXTURE_2D, textureID29);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture29.freeImage(bitmap);
+
 	/*------------------------------------------------------------------------------------------------------------*/
 
 	// Carga de texturas para el skybox
@@ -998,9 +1035,16 @@ void applicationLoop() {
 	bool psi = true;
 	glm::mat4 modelR2D2 = glm::mat4(1.0f);//referencia para el nuevo modelo
 	glm::mat4 model = glm::mat4(1.0f);
+
 	float offX = 0.0;
 	float angle = 0.0;
 	float ratio = 5.0;
+
+	glm::mat4 matrixModelAircraft = glm::mat4(1.0);
+	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(34.5, -9.0, -50.0));
+	int state = 0;
+	float offsetAircraftAdvance = 0;
+	float offsetAircraftRot = 0;
 
 	float pos = -20;
 	while (psi) {
@@ -1014,6 +1058,7 @@ void applicationLoop() {
 		// Settea la matriz de vista y projection al shader con solo color
 		shader.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shader.setMatrix4("view", 1, false, glm::value_ptr(view));
+
 		// Settea la matriz de vista y projection al shader con solo textura
 		shaderTexture.setMatrix4("projection", 1, false,
 			glm::value_ptr(projection));
@@ -1092,13 +1137,16 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("spotLights[0].constant", 1.0);
 		shaderMulLighting.setFloat("spotLights[0].linear", 0.1);
 		shaderMulLighting.setFloat("spotLights[0].cuadratic", 0.05);
+		//Aqui deben ir las luces // Esto es para la luces pointlights
 
 
+		/*Esto es  para colocar las esferas de las luces*/
 
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle,
 			glm::vec3(1.0f, 0.0f, 0.0f));
 		lightModelmatrix = glm::translate(lightModelmatrix,
 			glm::vec3(0.0f, 0.0f, -ratio));
+
 		// Posicion luz para objetos con color
 		shaderColorLighting.setVectorFloat3("light.position",
 			glm::value_ptr(
@@ -1966,10 +2014,17 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(0.10, 13.0, 27.0));
 		box9.render();
 		//__________________Ropero
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-8.5, 6.0, -0.750));
 		box9.setScale(glm::vec3(12.0, 10.0, 2.5));
-		box9.render();
+		box9.render(0,6);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box9.render(6, 6);
+		glBindTexture(GL_TEXTURE_2D, textureID5);
+		box9.render(12, 6);
+		glBindTexture(GL_TEXTURE_2D, textureID7);
+		box9.render(12, 12);
+
 
 		//______________________TV
 		glBindTexture(GL_TEXTURE_2D, textureID9);
@@ -1978,7 +2033,7 @@ void applicationLoop() {
 		box9.render();
 
 		//___________________Cabecera cama
-		glBindTexture(GL_TEXTURE_2D, textureID9);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-14.3, 3.50, -14.0));
 		box9.setScale(glm::vec3(0.25, 6.0, 7.0));
 		box9.render();
@@ -1990,7 +2045,7 @@ void applicationLoop() {
 		box9.render();
 
 		//___________________Base cama
-		glBindTexture(GL_TEXTURE_2D, textureID9);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-10.0, 1.5, -14.0));
 		box9.setScale(glm::vec3(8.3, 1.0, 7.0));
 		box9.render();
@@ -2008,13 +2063,13 @@ void applicationLoop() {
 		cylinder3.setScale(glm::vec3(1.0, 0.5, 3.0));
 		cylinder3.render();
 		//___________________Mueble izquierdo
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-13.7, 2.0, -9.50));
 		box9.setScale(glm::vec3(1.5, 2.5, 2.0));
 		box9.render();
 
 		//___________________Mueble Derecho 
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-13.7, 2.0, -18.50));
 		box9.setScale(glm::vec3(1.5, 2.5, 2.0));
 		box9.render();
@@ -2043,23 +2098,23 @@ void applicationLoop() {
 
 		//_____________________Mesa Estudio 
 		//_____________________Lados
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-13.5, 2.5, -22.00));
 		box9.setScale(glm::vec3(2.0, 3.5, 0.2));
 		box9.render();
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-13.5, 2.5, -26.00));
 		box9.setScale(glm::vec3(2.0, 3.5, 0.2));
 		box9.render();
 
 		//______________________Tapa Mesa
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-13.5, 4.45, -24.00));
 		box9.setScale(glm::vec3(2.0, 0.4, 4.20));
 		box9.render();
 
 		//______________________Tapa abajo
-		glBindTexture(GL_TEXTURE_2D, textureID17);
+		glBindTexture(GL_TEXTURE_2D, textureID29);
 		box9.setPosition(glm::vec3(-14.4, 2.00, -24.00));
 		box9.setScale(glm::vec3(0.1, 1.0, 4.20));
 		box9.render();
@@ -2427,13 +2482,8 @@ void applicationLoop() {
 		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
 		cylinder3.render();
 
-
-	
-
 		/*Acaba Cuarto 1*/
-
 		/*Compu afuera de cuartos */
-
 		//  pared separa cochera 
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box9.setPosition(glm::vec3(24.5, -8.5, -9.5));
@@ -2445,142 +2495,141 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(1.0, 15.0, 22.0));
 		box9.render();
 
-
 		//---- Entrada del coche Cochera -----//
-		glBindTexture(GL_TEXTURE_2D, textureID7);
-		box8.setPosition(glm::vec3(34.75, -14.00, -56.0));
+		glBindTexture(GL_TEXTURE_2D, textureID5);
+		box8.setPosition(glm::vec3(34.75, -14.00, -55.8));
 		box8.setScale(glm::vec3(21.5, 0.1, 38.0));
 		box8.render();
 		//---- Entrada del coche Calle -----//
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(34.75, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(13.25, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(-8.25, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(-29.75, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(-51.25, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 		//izquierda
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID5);
 		box8.setPosition(glm::vec3(-72.75, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(-72.75, -14.00, -63.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(-72.75, -14.00, -41.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(-72.75, -14.00, -18.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(-72.75, -14.00, 4.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(-72.75, -14.00, 26.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(-72.75, -14.00, 49.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 		//izquierda Atras
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID5);
 		box8.setPosition(glm::vec3(-72.75, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 		
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(-51.25, -14.00, 71.5));
 		box8.setScale(glm::vec3(22.0, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(-29.5, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(-8.25, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(13.25, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(34.75, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(56.25, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(77.75, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 		//esquina derecha atras
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID5);
 		box8.setPosition(glm::vec3(99.25, -14.00, 71.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(99.25, -14.00, 49.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(99.25, -14.00, 26.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(99.25, -14.00, 4.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(99.25, -14.00, -18.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(99.25, -14.00, -41.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID4);
 		box8.setPosition(glm::vec3(99.25, -14.00, -63.5));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
 		//Esquina dercha
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID5);
 		box8.setPosition(glm::vec3(99.25, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(77.75, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
-		glBindTexture(GL_TEXTURE_2D, textureID7);
+		glBindTexture(GL_TEXTURE_2D, textureID3);
 		box8.setPosition(glm::vec3(56.25, -14.00, -86.0));
 		box8.setScale(glm::vec3(21.5, 0.1, 22.5));
 		box8.render();
@@ -2688,9 +2737,9 @@ void applicationLoop() {
 		*/
 	
 		//El AirCraft
-		glm::mat4 matrixAircraft = glm::mat4(1.0);
-		matrixAircraft = glm::translate(matrixAircraft, glm::vec3(60.0, -10.0, -55.0));
-		Aircraft.render(matrixAircraft);
+		//glm::mat4 matrixAircraft = glm::mat4(1.0);
+		//matrixAircraft = glm::translate(matrixAircraft, glm::vec3(60.0, -10.0, -55.0));
+		Aircraft.render(matrixModelAircraft);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
@@ -2984,6 +3033,33 @@ void applicationLoop() {
 		dza = 0;
 		rot0 = 0;
 		rota0 = 0;
+
+		switch (state) {
+		case 0:
+			std::cout << "Advance" << std::endl;
+			std::cout << offsetAircraftAdvance << std::endl;
+			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, -0.05));
+			offsetAircraftAdvance += 0.01;
+			if (offsetAircraftAdvance > 16.0) {
+				offsetAircraftAdvance = 0.0;
+				state = 1;
+			}
+			break;
+
+		case 1:
+			std::cout << "Turn" << std::endl;
+			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, -0.01));
+			matrixModelAircraft = glm::rotate(matrixModelAircraft, glm::radians(0.05f), glm::vec3(0.0, 1.0, 0.00));
+			offsetAircraftRot += 0.05;
+			if (offsetAircraftRot > 90.0) {
+				offsetAircraftRot = 0.0;
+				state = 0;
+			}
+			break;
+		default:
+			break;
+
+		}
 		
 
 		glfwSwapBuffers(window);
