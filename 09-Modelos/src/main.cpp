@@ -342,7 +342,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
 	////////////////////////////////////
 
-	camera->setPosition(glm::vec3(15.0, 03.0, -5.0));
+	camera->setPosition(glm::vec3(-30.0, 03.0, -10.0));
 
 
 	// Descomentar
@@ -1073,8 +1073,15 @@ void applicationLoop() {
 	glm::mat4 matrixModelAircraft = glm::mat4(1.0);
 	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(-73.0, -14.0, -85.0));
 	int state = 0;
+	int state2 = 4;
 	float offsetAircraftAdvance = 0;
+	float offsetAircraftAdvanceII = 0;
 	float offsetAircraftRot = 0;
+
+	glm::mat4 Helicopter = glm::mat4(1.0);
+	Helicopter = glm::translate(Helicopter, glm::vec3(-35.0, 31.0, 55.0));
+	Helicopter = glm::scale(Helicopter, glm::vec3(3.0, 3.0, 3.00));
+	Helicopter = glm::rotate(Helicopter, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
 
 	float pos = -20;
 	while (psi) {
@@ -2803,10 +2810,10 @@ void applicationLoop() {
 		glActiveTexture(GL_TEXTURE0);
 
 		//Helicopter
-		glm::mat4 Helicopter = glm::mat4(1.0);
-		Helicopter = glm::translate(Helicopter, glm::vec3(-35.0, -14.0, -30.0));
-		Helicopter = glm::scale(Helicopter, glm::vec3(3.0, 3.0, 3.00));
-		Helicopter = glm::rotate(Helicopter, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+		//glm::mat4 Helicopter = glm::mat4(1.0);
+		//Helicopter = glm::translate(Helicopter, glm::vec3(-35.0, -14.0, -30.0));
+		//Helicopter = glm::scale(Helicopter, glm::vec3(3.0, 3.0, 3.00));
+		//Helicopter = glm::rotate(Helicopter, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
 		ModelPlanta.render(Helicopter);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
@@ -3101,6 +3108,32 @@ void applicationLoop() {
 		rot0 = 0;
 		rota0 = 0;
 
+		switch (state2){
+		case 3:
+			std::cout << "Land the plane" << std::endl;
+			std::cout << offsetAircraftAdvanceII << std::endl;
+			Helicopter = glm::translate(Helicopter, glm::vec3(0.0, -0.015, 0.00));
+			offsetAircraftAdvanceII += 0.01;
+			if (offsetAircraftAdvanceII > 10.0) {
+				offsetAircraftAdvanceII = 0.0;
+				state2 = 5;
+				break;
+			}
+			break;
+		case 4:
+			std::cout << "Fly" << std::endl;
+			std::cout << offsetAircraftAdvanceII << std::endl;
+			Helicopter = glm::translate(Helicopter, glm::vec3(0.0, 0.0, 0.02));
+			offsetAircraftAdvanceII += 0.01;
+			if (offsetAircraftAdvanceII > 13.50) {
+				offsetAircraftAdvanceII = 0.0;
+				state2 = 3;
+			}
+			break;
+		default:
+			break;
+		}
+
 		switch (state) {
 		case 0:
 			std::cout << "Advance" << std::endl;
@@ -3123,15 +3156,8 @@ void applicationLoop() {
 				state = 0;
 			}
 			break;
-		case 3:
-			std::cout << offsetAircraftAdvance << std::endl;
-			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.05));
-			offsetAircraftAdvance += 0.01;
-			if (offsetAircraftAdvance > 28.0) {
-				offsetAircraftAdvance = 0.0;
-				state = 0;
-			}
-			break;
+			///
+			///
 
 		default:
 			break;
