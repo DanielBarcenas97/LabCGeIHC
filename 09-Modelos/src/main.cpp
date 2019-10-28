@@ -80,6 +80,9 @@ Model modelRock;
 Model modelCami;
 Model modelRailRoad;
 Model Aircraft;
+Model ModelAircraft;
+Model ModelMesa;
+Model ModelPlanta;
 
 GLuint skyboxTextureID;
 GLuint textureID1, textureID2, textureID3, textureID4,
@@ -89,7 +92,7 @@ textureID13, textureID14, textureID15,
 textureID16, textureID17, textureID18,
 textureID19, textureID20, textureID21,
 textureID22, textureID23, textureID24,
-textureID25, textureID26, textureID27, textureID28, textureCubeTexture, textureID30, textureID29;
+textureID25, textureID26, textureID27, textureID28, textureCubeTexture, textureID30, textureID29, textureID31;
 
 Cylinder torsoR2D2(20, 20, 0.5, 0.5);//se declara el torso de nuevo modelo
 Sphere cabezaR2D2(20, 20);//se declara la cabeza del modelo
@@ -254,7 +257,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	boxMaterials.init();
 	boxMaterials.setShader(&shaderMaterialLighting);
-	
+
 	// Inicializacion de la esfera del skybox
 	skyboxSphere.init();
 	skyboxSphere.setShader(&shaderSkybox);
@@ -295,8 +298,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelRock.loadModel("../models/rock/rock.obj");
 	modelRock.setShader(&shaderMulLighting);
 
-	Aircraft.loadModel("../models/Aircraft_obj/E 45 Aircraft_obj.obj");
+	ModelAircraft.loadModel("../models/Aircraft_obj/E 45 Aircraft_obj.obj");
+	ModelAircraft.setShader(&shaderMulLighting);
+
+	Aircraft.loadModel("../models/Eclipse/2003eclipse.obj");
 	Aircraft.setShader(&shaderMulLighting);
+
 
 	modelRailRoad.loadModel("../models/railroad/railroad_track.obj");
 	modelRailRoad.setShader(&shaderMulLighting);
@@ -304,7 +311,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelCami.loadModel("../models/dog/12228_Dog_v1_L2.obj");
 	modelCami.setShader(&shaderMulLighting);
 
+	ModelMesa.loadModel("../models/Wood_Table/Wood_Table.obj");
+	ModelMesa.setShader(&shaderMulLighting);
 
+	
+	ModelPlanta.loadModel("../models/Helicopter/Mi_24.obj");
+	ModelPlanta.setShader(&shaderMulLighting);
 
 	//////////////////////////////////
 	//se inicializan los objetos para el modelo de R2D2
@@ -330,7 +342,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
 	////////////////////////////////////
 
-	camera->setPosition(glm::vec3(34.0, -03.0, -50.0));
+	camera->setPosition(glm::vec3(15.0, 03.0, -5.0));
 
 
 	// Descomentar
@@ -857,6 +869,24 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cout << "Failed to load texture" << std::endl;
 	texture29.freeImage(bitmap);
 
+	Texture texture31("../Textures/logo.png");
+	bitmap = texture31.loadImage(true);
+	data = texture31.convertToData(bitmap, imageWidth, imageHeight);
+	glGenTextures(1, &textureID31);
+	glBindTexture(GL_TEXTURE_2D, textureID31);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	texture31.freeImage(bitmap);
+
 	/*------------------------------------------------------------------------------------------------------------*/
 
 	// Carga de texturas para el skybox
@@ -1041,7 +1071,7 @@ void applicationLoop() {
 	float ratio = 5.0;
 
 	glm::mat4 matrixModelAircraft = glm::mat4(1.0);
-	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(34.5, -9.0, -50.0));
+	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(-73.0, -14.0, -85.0));
 	int state = 0;
 	float offsetAircraftAdvance = 0;
 	float offsetAircraftRot = 0;
@@ -2648,6 +2678,17 @@ void applicationLoop() {
 		box.setScale(glm::vec3(1, 11.0, 6.0));
 		box.render();
 
+		//Helipuerto
+		glBindTexture(GL_TEXTURE_2D, textureID4);
+		box8.setPosition(glm::vec3(-35.00, -14.00, -20.0));
+		box8.setScale(glm::vec3(25.0, 0.1, 35.0));
+		box8.render();
+		//HelipuertoLogo
+		glBindTexture(GL_TEXTURE_2D, textureID31);
+		box8.setPosition(glm::vec3(-35.00, -13.95, -20.0));
+		box8.setScale(glm::vec3(25.0, 0.1, 35.0));
+		box8.render();
+
 		//-- Bardas casa
 		/*
 		glBindTexture(GL_TEXTURE_2D, textureID7);
@@ -2749,6 +2790,32 @@ void applicationLoop() {
 		perro = glm::scale(perro, glm::vec3(0.10, 0.10, 0.10));
 		perro = glm::rotate(perro, glm::radians(360.0f), glm::vec3(1.0, 0.0, 2.0));
 		modelCami.render(perro);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//ModelMesa
+
+		glm::mat4 Mesa = glm::mat4(1.0);
+		Mesa = glm::translate(Mesa, glm::vec3(-12.0, 1.0, 8.0));
+		Mesa = glm::scale(Mesa, glm::vec3(8.0, 8.0, 8.00));
+		ModelMesa.render(Mesa);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Helicopter
+		glm::mat4 Helicopter = glm::mat4(1.0);
+		Helicopter = glm::translate(Helicopter, glm::vec3(-35.0, -14.0, -30.0));
+		Helicopter = glm::scale(Helicopter, glm::vec3(3.0, 3.0, 3.00));
+		Helicopter = glm::rotate(Helicopter, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelPlanta.render(Helicopter);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Aircraf Real
+		glm::mat4 Air = glm::mat4(1.0);
+		Air = glm::translate(Air, glm::vec3(60.0, -10.0, -45.0));
+		//Air = glm::scale(Air, glm::vec3(0.10, 0.10, 0.10));
+		ModelAircraft.render(Air);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
@@ -3038,9 +3105,9 @@ void applicationLoop() {
 		case 0:
 			std::cout << "Advance" << std::endl;
 			std::cout << offsetAircraftAdvance << std::endl;
-			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, -0.05));
+			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.05));
 			offsetAircraftAdvance += 0.01;
-			if (offsetAircraftAdvance > 16.0) {
+			if (offsetAircraftAdvance > 28.0) {
 				offsetAircraftAdvance = 0.0;
 				state = 1;
 			}
@@ -3048,7 +3115,7 @@ void applicationLoop() {
 
 		case 1:
 			std::cout << "Turn" << std::endl;
-			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, -0.01));
+			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.01));
 			matrixModelAircraft = glm::rotate(matrixModelAircraft, glm::radians(0.05f), glm::vec3(0.0, 1.0, 0.00));
 			offsetAircraftRot += 0.05;
 			if (offsetAircraftRot > 90.0) {
@@ -3056,6 +3123,16 @@ void applicationLoop() {
 				state = 0;
 			}
 			break;
+		case 3:
+			std::cout << offsetAircraftAdvance << std::endl;
+			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.05));
+			offsetAircraftAdvance += 0.01;
+			if (offsetAircraftAdvance > 28.0) {
+				offsetAircraftAdvance = 0.0;
+				state = 0;
+			}
+			break;
+
 		default:
 			break;
 
