@@ -1071,12 +1071,14 @@ void applicationLoop() {
 	float ratio = 5.0;
 
 	glm::mat4 matrixModelAircraft = glm::mat4(1.0);
-	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(-73.0, -14.0, -85.0));
+	matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(-73.0, -14.0, -82.0));
 	int state = 0;
 	int state2 = 4;
 	float offsetAircraftAdvance = 0;
 	float offsetAircraftAdvanceII = 0;
 	float offsetAircraftRot = 0;
+	float luces = 0.00;
+	float luces2 = 5.00;
 
 	glm::mat4 Helicopter = glm::mat4(1.0);
 	Helicopter = glm::translate(Helicopter, glm::vec3(-35.0, 31.0, 55.0));
@@ -1174,10 +1176,191 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("spotLights[0].constant", 1.0);
 		shaderMulLighting.setFloat("spotLights[0].linear", 0.1);
 		shaderMulLighting.setFloat("spotLights[0].cuadratic", 0.05);
-		//Aqui deben ir las luces // Esto es para la luces pointlights
+		
+
+		
+
+		if(luces >= 5.00){
+			luces = 0.00;
+			luces2 = 5.0;
+		}
+		else {
+			/*Luces*/
+		// Esto es para la luces pointlights
+		//Numero de luces a utilizar de tipo poinlights=3
+			shaderMulLighting.setInt("pointLightCount", 11);   //Multiple Light .fs
+			//01Verde
+			shaderMulLighting.setVectorFloat3("pointLights[0].position", glm::value_ptr((glm::vec3(-14.4, 13, 4.0))));  //  position de la luz
+			shaderMulLighting.setVectorFloat3("pointLights[0].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[0].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.01, 0.0)));
+			shaderMulLighting.setVectorFloat3("pointLights[0].light.specular", glm::value_ptr(glm::vec3(0.0, 0.6, 0.0))); //Brilla la luz
+			shaderMulLighting.setFloat("pointLights[0].constant", luces); //Casi siempre a 1
+			shaderMulLighting.setFloat("pointLights[0].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[0].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//02 Roja
+			shaderMulLighting.setVectorFloat3("pointLights[1].position", glm::value_ptr((glm::vec3(-14.4, 13, 4.7))));
+			shaderMulLighting.setVectorFloat3("pointLights[1].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[1].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.0, 0.0)));  //Red
+			shaderMulLighting.setVectorFloat3("pointLights[1].light.specular", glm::value_ptr(glm::vec3(0.6, 0.0, 0.0)));
+			shaderMulLighting.setFloat("pointLights[1].constant", luces2);
+			shaderMulLighting.setFloat("pointLights[1].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[1].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//03 Azul
+			shaderMulLighting.setVectorFloat3("pointLights[2].position", glm::value_ptr((glm::vec3(-14.4, 13, 5.4))));
+			shaderMulLighting.setVectorFloat3("pointLights[2].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[2].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.0, 0.1)));  //BLUE
+			shaderMulLighting.setVectorFloat3("pointLights[2].light.specular", glm::value_ptr(glm::vec3(0.0, 0.0, 0.6)));
+			shaderMulLighting.setFloat("pointLights[2].constant", luces);
+			shaderMulLighting.setFloat("pointLights[2].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[2].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//04 Amarilla
+			shaderMulLighting.setVectorFloat3("pointLights[3].position", glm::value_ptr((glm::vec3(-14.4, 13, 6.1))));
+			shaderMulLighting.setVectorFloat3("pointLights[3].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[3].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+			shaderMulLighting.setVectorFloat3("pointLights[3].light.specular", glm::value_ptr(glm::vec3(0.6, 0.6, 0.0)));
+			shaderMulLighting.setFloat("pointLights[3].constant", luces2);
+			shaderMulLighting.setFloat("pointLights[3].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[3].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//05  Morada
+			shaderMulLighting.setVectorFloat3("pointLights[4].position", glm::value_ptr((glm::vec3(-14.4, 13, 6.8))));
+			shaderMulLighting.setVectorFloat3("pointLights[4].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[4].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.1)));
+			shaderMulLighting.setVectorFloat3("pointLights[4].light.specular", glm::value_ptr(glm::vec3(0.6, 0.6, 0.6)));
+			shaderMulLighting.setFloat("pointLights[4].constant", luces);
+			shaderMulLighting.setFloat("pointLights[4].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[4].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//06Verde
+			shaderMulLighting.setVectorFloat3("pointLights[5].position", glm::value_ptr((glm::vec3(-14.4, 13, 7.5))));  //  position de la luz
+			shaderMulLighting.setVectorFloat3("pointLights[5].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[5].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.01, 0.0)));
+			shaderMulLighting.setVectorFloat3("pointLights[5].light.specular", glm::value_ptr(glm::vec3(0.0, 0.6, 0.0))); //Brilla la luz
+			shaderMulLighting.setFloat("pointLights[5].constant", luces2); //Casi siempre a 1
+			shaderMulLighting.setFloat("pointLights[5].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[5].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//07 Roja
+			shaderMulLighting.setVectorFloat3("pointLights[6].position", glm::value_ptr((glm::vec3(-14.4, 13, 8.2))));
+			shaderMulLighting.setVectorFloat3("pointLights[6].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[6].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.0, 0.0)));  //Red
+			shaderMulLighting.setVectorFloat3("pointLights[6].light.specular", glm::value_ptr(glm::vec3(0.6, 0.0, 0.0)));
+			shaderMulLighting.setFloat("pointLights[6].constant", luces);
+			shaderMulLighting.setFloat("pointLights[6].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[6].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//08 Azul
+			shaderMulLighting.setVectorFloat3("pointLights[7].position", glm::value_ptr((glm::vec3(-14.4, 13, 8.9))));
+			shaderMulLighting.setVectorFloat3("pointLights[7].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[7].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.0, 0.1)));  //BLUE
+			shaderMulLighting.setVectorFloat3("pointLights[7].light.specular", glm::value_ptr(glm::vec3(0.0, 0.0, 0.6)));
+			shaderMulLighting.setFloat("pointLights[7].constant", luces2);
+			shaderMulLighting.setFloat("pointLights[7].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[7].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//09 Amarilla
+			shaderMulLighting.setVectorFloat3("pointLights[8].position", glm::value_ptr((glm::vec3(-14.4, 13, 9.6))));
+			shaderMulLighting.setVectorFloat3("pointLights[8].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[8].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+			shaderMulLighting.setVectorFloat3("pointLights[8].light.specular", glm::value_ptr(glm::vec3(0.6, 0.6, 0.0)));
+			shaderMulLighting.setFloat("pointLights[8].constant", luces);
+			shaderMulLighting.setFloat("pointLights[8].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[8].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//010  Morada
+			shaderMulLighting.setVectorFloat3("pointLights[9].position", glm::value_ptr((glm::vec3(-14.4, 13, 10.3))));
+			shaderMulLighting.setVectorFloat3("pointLights[9].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[9].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.1)));
+			shaderMulLighting.setVectorFloat3("pointLights[9].light.specular", glm::value_ptr(glm::vec3(0.6, 0.6, 0.6)));
+			shaderMulLighting.setFloat("pointLights[9].constant", luces2);
+			shaderMulLighting.setFloat("pointLights[9].linear", 0.04);
+			shaderMulLighting.setFloat("pointLights[9].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+			//////LUZ nueva 11
+			shaderMulLighting.setVectorFloat3("pointLights[10].position", glm::value_ptr((glm::vec3(-14.4, 13, 11.0))));
+			shaderMulLighting.setVectorFloat3("pointLights[10].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+			shaderMulLighting.setVectorFloat3("pointLights[10].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.01, 0.0)));
+			shaderMulLighting.setVectorFloat3("pointLights[10].light.specular", glm::value_ptr(glm::vec3(0.0, 0.6, 0.0))); //Brilla la luz
+			shaderMulLighting.setFloat("pointLights[10].constant", luces);
+			shaderMulLighting.setFloat("pointLights[10].linear", 1.14);
+			shaderMulLighting.setFloat("pointLights[10].quadratic", 0.004);
+			luces2 -= 0.001;
+			luces += 0.001;
+
+		}
 
 
 		/*Esto es  para colocar las esferas de las luces*/
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 4.0));
+		sphereLamp.setColor(glm::vec4(0.0, 1.0, 0.0, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4,13, 4.7));
+		sphereLamp.setColor(glm::vec4(1.0, 0.0, 0.0, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 5.4));
+		sphereLamp.setColor(glm::vec4(0.0, 0.0, 1.0, 1.0));
+		sphereLamp.render();
+		//_---------
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 6.1));
+		sphereLamp.setColor(glm::vec4(0.8, 0.8, 0.0, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 6.8));
+		sphereLamp.setColor(glm::vec4(0.34, 0.13, 0.39, 1.0));
+		sphereLamp.render();
+
+		///::_________
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 7.5));
+		sphereLamp.setColor(glm::vec4(0.0, 1.0, 0.0, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 8.2));
+		sphereLamp.setColor(glm::vec4(1.0, 0.0, 0.0, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 8.9));
+		sphereLamp.setColor(glm::vec4(0.0, 0.0, 1.0, 1.0));
+		sphereLamp.render();
+		//_---------
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 9.6));
+		sphereLamp.setColor(glm::vec4(0.8, 0.8, 0.0, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 10.3));
+		sphereLamp.setColor(glm::vec4(0.34, 0.13, 0.39, 1.0));
+		sphereLamp.render();
+
+		sphereLamp.setScale(glm::vec3(0.2, 0.2, 0.3));
+		sphereLamp.setPosition(glm::vec3(-14.4, 13, 11.0));
+		sphereLamp.setColor(glm::vec4(0.0, 1.0, 0.0, 1.0));
+		sphereLamp.render();
+
+		/*Fin  Luces*/
 
 		glm::mat4 lightModelmatrix = glm::rotate(glm::mat4(1.0f), angle,
 			glm::vec3(1.0f, 0.0f, 0.0f));
@@ -3140,7 +3323,7 @@ void applicationLoop() {
 			std::cout << offsetAircraftAdvance << std::endl;
 			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.05));
 			offsetAircraftAdvance += 0.01;
-			if (offsetAircraftAdvance > 28.0) {
+			if (offsetAircraftAdvance > 29.0) {
 				offsetAircraftAdvance = 0.0;
 				state = 1;
 			}
