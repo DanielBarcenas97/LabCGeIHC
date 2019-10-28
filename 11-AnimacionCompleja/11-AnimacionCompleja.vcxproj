@@ -46,15 +46,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-<<<<<<< HEAD:11-AnimacionKeyFrames/11-AnimacionKeyFrames.vcxproj
-    <ProjectGuid>{2351b8dc-0b6b-4f9b-8f65-117802d51356}</ProjectGuid>
-    <RootNamespace>_11_AnimacionKeyFrames</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-=======
     <ProjectGuid>{a420f145-b4d8-43ee-8f21-71ddea42041b}</ProjectGuid>
     <RootNamespace>_11_AnimacionCompleja</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
->>>>>>> 44653b0d379dcadceedd213f956ae97c4e36214e:11-AnimacionCompleja/11-AnimacionCompleja.vcxproj
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
