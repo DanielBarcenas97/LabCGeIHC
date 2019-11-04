@@ -83,6 +83,18 @@ Model Aircraft;
 Model ModelAircraft;
 Model ModelMesa;
 Model ModelPlanta;
+Model ModelEjemplo;
+
+Model modelEclipseChasis;
+Model modelEclipseRearWheels;
+Model modelEclipseFrontalWheels;
+Model modelHeliChasis;
+Model modelHeliHeli;
+Model modelLambo;
+Model modelLamboLeftDor;
+Model modelLamboRightDor;
+Model modelLamboWheelsFrontal;
+Model modelLamboWheelsRear;
 
 GLuint skyboxTextureID;
 GLuint textureID1, textureID2, textureID3, textureID4,
@@ -317,6 +329,35 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	
 	ModelPlanta.loadModel("../models/Helicopter/Mi_24.obj");
 	ModelPlanta.setShader(&shaderMulLighting);
+
+	ModelEjemplo.loadModel("../models/silla/10239_Office_Chair_v1_L3.obj");
+	ModelEjemplo.setShader(&shaderMulLighting);
+
+	//////////////////////7//////////////////
+	// Eclipse
+	modelEclipseChasis.loadModel("../models/Eclipse/2003eclipse_chasis.obj");
+	modelEclipseChasis.setShader(&shaderMulLighting);
+	modelEclipseFrontalWheels.loadModel("../models/Eclipse/2003eclipse_frontal_wheels.obj");
+	modelEclipseFrontalWheels.setShader(&shaderMulLighting);
+	modelEclipseRearWheels.loadModel("../models/Eclipse/2003eclipse_rear_wheels.obj");
+	modelEclipseRearWheels.setShader(&shaderMulLighting);
+	// Helicopter
+	modelHeliChasis.loadModel("../models/Helicopter/Mi_24_chasis.obj");
+	modelHeliChasis.setShader(&shaderMulLighting);
+	modelHeliHeli.loadModel("../models/Helicopter/Mi_24_heli.obj");
+	modelHeliHeli.setShader(&shaderMulLighting);
+	// Lamborginhi
+	modelLambo.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_chasis.obj");
+	modelLambo.setShader(&shaderMulLighting);
+	modelLamboLeftDor.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_left_dor.obj");
+	modelLamboLeftDor.setShader(&shaderMulLighting);
+
+	modelLamboRightDor.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_right_dor.obj");
+	modelLamboRightDor.setShader(&shaderMulLighting);
+	modelLamboWheelsFrontal.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_wheels.obj");
+	modelLamboWheelsFrontal.setShader(&shaderMulLighting);
+	modelLamboWheelsRear.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_wheels.obj");
+	modelLamboWheelsRear.setShader(&shaderMulLighting);
 
 	//////////////////////////////////
 	//se inicializan los objetos para el modelo de R2D2
@@ -1086,6 +1127,32 @@ void applicationLoop() {
 	Helicopter = glm::rotate(Helicopter, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
 
 	float pos = -20;
+
+
+	//////((///////////////////////////
+	model = glm::translate(model, glm::vec3(0.0, 1.5, 0.0));
+	glm::mat4 modelMatrixEclipse = glm::mat4(1.0f);
+	modelMatrixEclipse = glm::translate(modelMatrixEclipse, glm::vec3(-73.0, -14.0, -82.0));
+	modelMatrixEclipse = glm::scale(modelMatrixEclipse, glm::vec3(3.0, 3.0, 3.00));
+	float advanceCount = 0.0;
+	float rotCount = 0.0;
+	float rotWheelsX = 0.0;
+	float rotWheelsY = 0.0;
+	float rotWheelsXlamb  = 0.0;
+	glm::mat4 modelMatrixHeli = glm::mat4(1.0f);
+	modelMatrixHeli = glm::translate(modelMatrixHeli, glm::vec3(-35.0, 31.0, 55.0));
+	modelMatrixHeli = glm::scale(modelMatrixHeli, glm::vec3(3.0, 3.0, 3.00));
+	modelMatrixHeli = glm::rotate(modelMatrixHeli, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+	float rotHelHelYStop = 5.0;
+	float rotHelHelY = 0.0;
+	int stateDoor = 0;
+	float dorRotCount = 0.0;
+
+	glm::mat4 modelMatrixDart = glm::mat4(1.0f);
+	modelMatrixDart = glm::translate(modelMatrixDart, glm::vec3(3.0, 0.0, 20.0));
+	modelMatrixDart = glm::scale(modelMatrixDart, glm::vec3(0.5, 0.5, 0.5));
+
+	/////////////////////////
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -3009,6 +3076,16 @@ void applicationLoop() {
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
+		//Modelo de pruebas
+		glm::mat4 silla = glm::mat4(1.0);
+		silla = glm::translate(silla, glm::vec3(-12.0, 2.0, 8.0));
+		silla = glm::scale(silla, glm::vec3(0.10, 0.10, 0.10));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		ModelEjemplo.render(silla);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
 
 		//////////////Models Complex Render
 		glm::mat4 matrixModelRock = glm::mat4(1.0);
@@ -3265,6 +3342,74 @@ void applicationLoop() {
 				shader.turnOff();
 		*/
 		
+		// Render for the eclipse car
+		glm::mat4 modelMatrixEclipseChasis = glm::mat4(modelMatrixEclipse);
+		modelMatrixEclipseChasis = glm::scale(modelMatrixEclipse, glm::vec3(0.5, 0.5, 0.5));
+		modelEclipseChasis.render(modelMatrixEclipseChasis);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 modelMatrixFrontalWheels = glm::mat4(modelMatrixEclipseChasis);
+		modelMatrixFrontalWheels = glm::translate(modelMatrixFrontalWheels, glm::vec3(0.0, 1.05813, 4.11483 ));
+		modelMatrixFrontalWheels = glm::rotate(modelMatrixFrontalWheels, rotWheelsY, glm::vec3(0, 1, 0));
+		modelMatrixFrontalWheels = glm::rotate(modelMatrixFrontalWheels, rotWheelsX, glm::vec3(1, 0, 0));
+		modelMatrixFrontalWheels = glm::translate(modelMatrixFrontalWheels, glm::vec3(0.0, -1.05813, -4.11483));
+		modelEclipseFrontalWheels.render(modelMatrixFrontalWheels);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 modelMatrixRearWheels = glm::mat4(modelMatrixEclipseChasis);
+		modelMatrixRearWheels = glm::translate(modelMatrixRearWheels, glm::vec3(0.0, 1.05813, -4.35157 ));
+		modelMatrixRearWheels = glm::rotate(modelMatrixRearWheels, rotWheelsX, glm::vec3(1, 0, 0));
+		modelMatrixRearWheels = glm::translate(modelMatrixRearWheels, glm::vec3(0.0, -1.05813, 4.35157));
+		modelEclipseRearWheels.render(modelMatrixRearWheels);
+		glActiveTexture(GL_TEXTURE0);
+
+		// Helicopter
+		glm::mat4 modelMatrixHeliChasis = glm::mat4(modelMatrixHeli);
+		modelHeliChasis.render(modelMatrixHeliChasis);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 modelMatrixHeliHeli = glm::mat4(modelMatrixHeliChasis);
+
+		glActiveTexture(GL_TEXTURE0);
+
+		// Lambo car
+		glm::mat4 modelMatrixLambo = glm::mat4(1.0);
+		modelMatrixLambo = glm::translate(modelMatrixLambo, glm::vec3(-43.0, -14.0, -72.0));
+		modelMatrixLambo = glm::scale(modelMatrixLambo, glm::vec3(5.0, 5.0, 5.0));
+		modelLambo.render(modelMatrixLambo);
+		glActiveTexture(GL_TEXTURE0);
+		glm::mat4 modelMatrixLamboLeftDor = glm::mat4(modelMatrixLambo);
+		modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(1.08676, 0.707316, 0.982601));
+		modelMatrixLamboLeftDor = glm::rotate(modelMatrixLamboLeftDor, glm::radians(dorRotCount), glm::vec3(1.0, 0, 0));
+		modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(-1.08676, -0.707316, -0.982601));
+		modelLamboLeftDor.render(modelMatrixLamboLeftDor);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 modelMatrixLamboRightDor = glm::mat4(modelMatrixLambo);
+		modelMatrixLamboRightDor = glm::translate(modelMatrixLamboRightDor, glm::vec3(4.08676, 0.707316, 0.982601));
+		modelMatrixLamboRightDor = glm::rotate(modelMatrixLamboRightDor, glm::radians(dorRotCount), glm::vec3(1.0, 0, 0));
+		modelMatrixLamboRightDor = glm::translate(modelMatrixLamboRightDor, glm::vec3(-4.08676, -0.707316, -0.982601));
+		modelLamboRightDor.render(modelMatrixLamboRightDor);
+		glActiveTexture(GL_TEXTURE0);
+
+
+		glm::mat4 modelMatrixLamboWheelFrente = glm::mat4(modelMatrixLambo);
+		modelMatrixLamboWheelFrente = glm::translate(modelMatrixLamboWheelFrente, glm::vec3(-0.20, 0.3722,-1.670));
+		modelMatrixLamboWheelFrente = glm::rotate(modelMatrixLamboWheelFrente, rotWheelsXlamb, glm::vec3(1.0, 0, 0));
+		//modelMatrixLamboWheelFrente = glm::translate(modelMatrixLamboWheelFrente, glm::vec3(-0.20, 0.3722, -1.670));
+		modelLamboWheelsFrontal.render(modelMatrixLamboWheelFrente);
+		glActiveTexture(GL_TEXTURE0);
+
+		
+		glm::mat4 modelMatrixLamboWheelAtras = glm::mat4(modelMatrixLambo);
+		modelMatrixLamboWheelAtras = glm::translate(modelMatrixLamboWheelAtras, glm::vec3(-0.20, 0.3722, 1.359));
+		modelMatrixLamboWheelAtras = glm::rotate(modelMatrixLamboWheelAtras, rotWheelsXlamb, glm::vec3(1.0, 0, 0));
+		//modelMatrixLamboWheelAtras = glm::translate(modelMatrixLamboWheelAtras, glm::vec3(-0.20, 0.3722, 1.359));
+		modelLamboWheelsRear.render(modelMatrixLamboWheelAtras);
+		glActiveTexture(GL_TEXTURE0);
+
+		rotWheelsXlamb += 0.05;
+/////////////////////////////////////////////////////
 
 
 		if (angle > 2 * M_PI)
@@ -3290,13 +3435,23 @@ void applicationLoop() {
 		dza = 0;
 		rot0 = 0;
 		rota0 = 0;
+		rotHelHelY += 0.5;
 
-		switch (state2){
+		
+
+		switch (state2) {
 		case 3:
 			std::cout << "Land the plane" << std::endl;
 			std::cout << offsetAircraftAdvanceII << std::endl;
-			Helicopter = glm::translate(Helicopter, glm::vec3(0.0, -0.015, 0.00));
+			modelMatrixHeli = glm::translate(modelMatrixHeli, glm::vec3(0.0, -0.015, 0.00));
 			offsetAircraftAdvanceII += 0.01;
+
+			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
+			modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelY, glm::vec3(0, 1, 0));
+			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
+			modelHeliHeli.render(modelMatrixHeliHeli);
+			glActiveTexture(GL_TEXTURE0);
+
 			if (offsetAircraftAdvanceII > 10.0) {
 				offsetAircraftAdvanceII = 0.0;
 				state2 = 5;
@@ -3306,47 +3461,105 @@ void applicationLoop() {
 		case 4:
 			std::cout << "Fly" << std::endl;
 			std::cout << offsetAircraftAdvanceII << std::endl;
-			Helicopter = glm::translate(Helicopter, glm::vec3(0.0, 0.0, 0.02));
+			modelMatrixHeli = glm::translate(modelMatrixHeli, glm::vec3(0.0, 0.0, 0.02));
+
+			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
+			modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelY, glm::vec3(0, 1, 0));
+			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
+			modelHeliHeli.render(modelMatrixHeliHeli);
+			glActiveTexture(GL_TEXTURE0);
+
 			offsetAircraftAdvanceII += 0.01;
 			if (offsetAircraftAdvanceII > 13.50) {
 				offsetAircraftAdvanceII = 0.0;
 				state2 = 3;
 			}
 			break;
+		case 5:
+
+			std::cout << "Stop" << std::endl;
+			std::cout << rotHelHelYStop << std::endl;
+			if (offsetAircraftAdvanceII == 0.0) {
+				rotHelHelYStop -= 0.10;
+				offsetAircraftAdvanceII = 1.0;
+			}
+			if (offsetAircraftAdvanceII == 1.0) {
+				rotHelHelYStop -= 0.05;
+			}
+			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
+			modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelYStop, glm::vec3(0, 1, 0));
+			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
+			modelHeliHeli.render(modelMatrixHeliHeli);
+			glActiveTexture(GL_TEXTURE0);
+
+			
+			if (rotHelHelYStop <= 0.0) {
+				rotHelHelY = 0.0;
+				state2 = 6;
+				break;
+				
+			}
+			break;
 		default:
 			break;
 		}
 
+		modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
+		//modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelY, glm::vec3(0, 1, 0));
+		modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
+		modelHeliHeli.render(modelMatrixHeliHeli);
+		glActiveTexture(GL_TEXTURE0);
+		/*******************************************
+		 * State machines
+		 *******************************************/
+		 // State machine for eclipse car
 		switch (state) {
 		case 0:
 			std::cout << "Advance" << std::endl;
 			std::cout << offsetAircraftAdvance << std::endl;
-			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.05));
-			offsetAircraftAdvance += 0.01;
-			if (offsetAircraftAdvance > 29.0) {
-				offsetAircraftAdvance = 0.0;
+			modelMatrixEclipse = glm::translate(modelMatrixEclipse, glm::vec3(0.0, 0.0, 0.1));
+			advanceCount += 0.1;
+			rotWheelsX += 0.05;
+			rotWheelsY -= 0.02;
+			if (rotWheelsY < 0)
+				rotWheelsY = 0;
+			if (advanceCount > 45.0) {
+				advanceCount = 0;
 				state = 1;
 			}
 			break;
-
 		case 1:
-			std::cout << "Turn" << std::endl;
-			matrixModelAircraft = glm::translate(matrixModelAircraft, glm::vec3(0.0, 0.0, 0.01));
-			matrixModelAircraft = glm::rotate(matrixModelAircraft, glm::radians(0.05f), glm::vec3(0.0, 1.0, 0.00));
-			offsetAircraftRot += 0.05;
-			if (offsetAircraftRot > 90.0) {
-				offsetAircraftRot = 0.0;
+			modelMatrixEclipse = glm::translate(modelMatrixEclipse, glm::vec3(0.0, 0.0, 0.025));
+			modelMatrixEclipse = glm::rotate(modelMatrixEclipse, glm::radians(0.5f), glm::vec3(0, 1, 0));
+			rotCount += 0.5f;
+			rotWheelsX += 0.05;
+			rotWheelsY += 0.02;
+			if (rotWheelsY > 0.25)
+				rotWheelsY = 0.25;
+			if (rotCount >= 90.0) {
+				rotCount = 0;
 				state = 0;
 			}
 			break;
-			///
-			///
-
-		default:
-			break;
-
 		}
-		
+
+		// State machine for the lambo car
+		switch (stateDoor) {
+		case 0:
+			dorRotCount += 0.5;
+			if (dorRotCount > 75)
+				stateDoor = 1;
+			break;
+		case 1:
+			dorRotCount -= 0.5;
+			if (dorRotCount < 0) {
+				dorRotCount = 0.0;
+				stateDoor = 0;
+			}
+			break;
+		}
+
+		/////////////////////////////
 
 		glfwSwapBuffers(window);
 	}
