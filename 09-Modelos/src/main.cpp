@@ -3396,7 +3396,7 @@ void applicationLoop() {
 		glm::mat4 modelMatrixLamboWheelFrente = glm::mat4(modelMatrixLambo);
 		modelMatrixLamboWheelFrente = glm::translate(modelMatrixLamboWheelFrente, glm::vec3(-0.20, 0.3722,-1.670));
 		modelMatrixLamboWheelFrente = glm::rotate(modelMatrixLamboWheelFrente, rotWheelsXlamb, glm::vec3(1.0, 0, 0));
-		//modelMatrixLamboWheelFrente = glm::translate(modelMatrixLamboWheelFrente, glm::vec3(-0.20, 0.3722, -1.670));
+		modelMatrixLamboWheelFrente = glm::translate(modelMatrixLamboWheelFrente, glm::vec3(-0.20, 0.3722, -1.670));
 		modelLamboWheelsFrontal.render(modelMatrixLamboWheelFrente);
 		glActiveTexture(GL_TEXTURE0);
 
@@ -3404,7 +3404,7 @@ void applicationLoop() {
 		glm::mat4 modelMatrixLamboWheelAtras = glm::mat4(modelMatrixLambo);
 		modelMatrixLamboWheelAtras = glm::translate(modelMatrixLamboWheelAtras, glm::vec3(-0.20, 0.3722, 1.359));
 		modelMatrixLamboWheelAtras = glm::rotate(modelMatrixLamboWheelAtras, rotWheelsXlamb, glm::vec3(1.0, 0, 0));
-		//modelMatrixLamboWheelAtras = glm::translate(modelMatrixLamboWheelAtras, glm::vec3(-0.20, 0.3722, 1.359));
+		modelMatrixLamboWheelAtras = glm::translate(modelMatrixLamboWheelAtras, glm::vec3(-0.20, 0.3722, 1.359));
 		modelLamboWheelsRear.render(modelMatrixLamboWheelAtras);
 		glActiveTexture(GL_TEXTURE0);
 
