@@ -89,6 +89,30 @@ Model modelLamboRightDor;
 Model modelLamboWheelsFrontal;
 Model modelLamboWheelsRear;
 
+Model modelMesa;
+Model ModelSilla;
+Model ModelBaston;
+Model ModelCaballito;
+Model ModelCalceta;
+Model ModelChimenea;
+Model ModelPinoNavidad;
+Model ModelHat;
+Model ModelDinosaur;
+Model Modeljardinera;
+Model ModelNochebuena;
+Model ModelRegaloUno;
+Model ModelRegaloDos;
+Model ModelRosa;
+
+Model ModelSpiderman;
+Model ModelTren;
+Model ModelTrineo;
+Model ModelSofa;
+Model ModelSofaP;
+Model ModelWC;
+Model ModelPinata;
+Model ModelPrueba;
+
 GLuint skyboxTextureID;
 GLuint textureID1, textureID2, textureID3, textureID4,
 textureID5, textureID6, textureID7, textureID8,
@@ -287,6 +311,74 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	box6.setShader(&shaderMulLighting);
 	box7.init();
 	box7.setShader(&shaderMulLighting);
+
+	/*Cosas de Navidad*/
+
+	modelMesa.loadModel("../models/rock/rock.obj");
+	modelMesa.setShader(&shaderMulLighting);
+
+	ModelSilla.loadModel("../models/rock/rock.obj");
+	ModelSilla.setShader(&shaderMulLighting);
+
+	ModelBaston.loadModel("../models/rock/rock.obj");
+	ModelBaston.setShader(&shaderMulLighting);
+
+	ModelCaballito.loadModel("../models/rock/rock.obj");
+	ModelCaballito.setShader(&shaderMulLighting);
+
+	ModelChimenea.loadModel("../models/rock/rock.obj");
+	ModelChimenea.setShader(&shaderMulLighting);
+
+	ModelPinoNavidad.loadModel("../models/rock/rock.obj");
+	ModelPinoNavidad.setShader(&shaderMulLighting);
+
+	ModelHat.loadModel("../models/rock/rock.obj");
+	ModelHat.setShader(&shaderMulLighting);
+
+	ModelSpiderman.loadModel("../models/rock/rock.obj");
+	ModelSpiderman.setShader(&shaderMulLighting);
+
+	ModelRegaloUno.loadModel("../models/rock/rock.obj");
+	ModelRegaloUno.setShader(&shaderMulLighting);
+
+	ModelRegaloDos.loadModel("../models/rock/rock.obj");
+	ModelRegaloDos.setShader(&shaderMulLighting);
+
+	ModelRosa.loadModel("../models/rock/rock.obj");
+	ModelRosa.setShader(&shaderMulLighting);
+
+	ModelNochebuena.loadModel("../models/rock/rock.obj");
+	ModelNochebuena.setShader(&shaderMulLighting);
+
+	Modeljardinera.loadModel("../models/rock/rock.obj");
+	Modeljardinera.setShader(&shaderMulLighting);
+
+	ModelDinosaur.loadModel("../models/rock/rock.obj");
+	ModelDinosaur.setShader(&shaderMulLighting);
+
+	ModelTren.loadModel("../models/rock/rock.obj");
+	ModelTren.setShader(&shaderMulLighting);
+
+	ModelTrineo.loadModel("../models/rock/rock.obj");
+	ModelTrineo.setShader(&shaderMulLighting);
+
+	ModelPinata.loadModel("../models/rock/rock.obj");
+	ModelPinata.setShader(&shaderMulLighting);
+
+	ModelWC.loadModel("../models/rock/rock.obj");
+	ModelWC.setShader(&shaderMulLighting);
+
+
+	ModelSofa.loadModel("../models/rock/rock.obj");
+	ModelSofa.setShader(&shaderMulLighting);
+
+	ModelSofaP.loadModel("../models/rock/rock.obj");
+	ModelSofaP.setShader(&shaderMulLighting);
+
+	ModelPrueba.loadModel("../models/rock/rock.obj");
+	ModelPrueba.setShader(&shaderMulLighting);
+
+	/*Fin cosas de Navidad*/
 
 	/*Ubicacion de los modelos*/
 	modelRock.loadModel("../models/rock/rock.obj");
@@ -2840,99 +2932,24 @@ void applicationLoop() {
 		box9.render();
 
 		/* -----------------------Inician Accesorios ----------------------------------*/
-		//SILLON 1
-				// sillon respaldo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(0.0, -11.0, -30.0));
-		box4.setScale(glm::vec3(6.0, 4.0, 4.0));
-		box4.render();
-		// sillon asiento
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(0.0, -13.0, -30.0));
-		box5.setScale(glm::vec3(6.0, 2.0, 8.0));
-		box5.render();
-		// sillon codo izquierdo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(-2.5, -12.0, -30.0));
-		box6.setScale(glm::vec3(1.0, 1.5, 8.0));
-		box6.render();
-		// sillon codo derecho
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box7.setPosition(glm::vec3(2.5, -12.0, -30.0));
-		box7.setScale(glm::vec3(1.0, 1.5, 8.0));
-		box7.render();
 
-		//_---------------------------------------
-		//SILLON 2
+		/*Comedor*/
 
-		// sillon respaldo 
 		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(-8.0, -11.0, -22.0));
-		box4.setScale(glm::vec3(1.0, 2.0, 8.0));
-		box4.render();
-		// sillon asiento
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(-7.0, -13.0, -22.0));
-		box5.setScale(glm::vec3(3.0, 2.0, 8.0));
-		box5.render();
-		// sillon codo izquierdo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(-7.0, -11.0, -18.5));
-		box6.setScale(glm::vec3(3.0, 1.0, 1.0));
-		box6.render();
-
-		//_---------------------------------------
-		//SILLON 3
-
-		// sillon respaldo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(8.0, -11.0, -22.0));
-		box4.setScale(glm::vec3(1.0, 2.0, 8.0));
-		box4.render();
-		// sillon asiento
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(7.0, -13.0, -22.0));
-		box5.setScale(glm::vec3(3.0, 2.0, 8.0));
-		box5.render();
-		// sillon codo izquierdo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(7.0, -11.0, -18.5));
-		box6.setScale(glm::vec3(3.0, 1.0, 1.0));
-		box6.render();
-
-		// sillon codo derecho
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box7.setPosition(glm::vec3(7.0, -11.0, -25.0));
-		box7.setScale(glm::vec3(3.0, 1.0, 1.0));
-		box7.render();
-
-
-		//--------------------------- centro de mesa
-		//cilindro
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(0.0, -13.0, -22.0));
-		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
-		cylinder3.render();
-
-		//-----------------------espejo
-		glBindTexture(GL_TEXTURE_2D, textureID11);
-		box4.setPosition(glm::vec3(0.0, -5.0, -30.0));
-		box4.setScale(glm::vec3(2.0, 5.0, 0.5));
+		box4.setPosition(glm::vec3(-07.0, -11.0, 32.0));
+		box4.setScale(glm::vec3(2.50, 6.0, 7.0));
 		box4.render();
 
 
-		//----------------------- maceta 
-		//cilindro
-		glBindTexture(GL_TEXTURE_2D, textureID12);
-		cylinder3.setPosition(glm::vec3(6.0, -12.0, -16.0));
-		cylinder3.setScale(glm::vec3(1.0, 3.0, 1.0));
-		cylinder3.render();
+		glBindTexture(GL_TEXTURE_2D, textureID8);
+		box4.setPosition(glm::vec3(-07.0, -3.0, 32.0));
+		box4.setScale(glm::vec3(2.50, 2.0, 7.0));
+		box4.render();
 
-		//cactus
-		glBindTexture(GL_TEXTURE_2D, textureID13);
-		sphere2.setPosition(glm::vec3(6.0, -10.0, -16.0));
-		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
-		sphere2.render();
+		glBindTexture(GL_TEXTURE_2D, textureID8);
+		box4.setPosition(glm::vec3(-07.0, -3.0, 28.0));
+		box4.setScale(glm::vec3(2.50, 2.0, 2.0));
+		box4.render();
 
 		/* Primer Cuarto */
 
@@ -5559,6 +5576,45 @@ void applicationLoop() {
 			angle = 0.0;
 		else
 			angle += 0.0001;
+
+		/*Objetos de Navidad*/
+
+		//Modelo de pruebas
+		glm::mat4 mesa = glm::mat4(1.0);
+		mesa = glm::translate(mesa, glm::vec3(-12.0, -6.0, 8.0));
+		mesa = glm::scale(mesa, glm::vec3(0.10, 0.10, 0.10));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		modelMesa.render(mesa);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		/*
+
+		;
+		ModelSilla;
+		ModelBaston;
+		ModelCaballito;
+		ModelCalceta;
+		ModelChimenea;
+		ModelPinoNavidad;
+		ModelHat;
+		ModelDinosaur;
+		Modeljardinera;
+		ModelNochebuena;
+		ModelRegaloUno;
+		ModelRegaloDos;
+		ModelRosa;
+
+		ModelSpiderman;
+		ModelTren;
+		ModelTrineo;
+		ModelSofa;
+		ModelSofaP;
+		ModelWC;
+		ModelPinata;
+		ModelPrueba;
+		*/
+		/*Fin de objetos Navidad*/
 
 		// Se Dibuja el Skybox
 		GLint oldCullFaceMode;
