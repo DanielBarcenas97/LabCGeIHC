@@ -12,6 +12,7 @@ newmtl Nuovo_1
 	Kd 0.4900 0.0343 0.0343
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
+map_Kd dorado.jpg
 
 newmtl Material__25
 	Ns 10.0000
@@ -24,7 +25,7 @@ newmtl Material__25
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__26
 	Ns 10.0000
 	Ni 1.5000
@@ -36,7 +37,7 @@ newmtl Material__26
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__27
 	Ns 10.0000
 	Ni 1.5000
@@ -48,7 +49,7 @@ newmtl Material__27
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__28
 	Ns 10.0000
 	Ni 1.5000
@@ -60,7 +61,7 @@ newmtl Material__28
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__29
 	Ns 10.0000
 	Ni 1.5000
@@ -72,7 +73,7 @@ newmtl Material__29
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__30
 	Ns 10.0000
 	Ni 1.5000
@@ -84,7 +85,7 @@ newmtl Material__30
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__31
 	Ns 10.0000
 	Ni 1.5000
@@ -96,7 +97,7 @@ newmtl Material__31
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__32
 	Ns 10.0000
 	Ni 1.5000
@@ -108,7 +109,7 @@ newmtl Material__32
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__33
 	Ns 10.0000
 	Ni 1.5000
@@ -120,7 +121,7 @@ newmtl Material__33
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__34
 	Ns 10.0000
 	Ni 1.5000
@@ -132,7 +133,7 @@ newmtl Material__34
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__35
 	Ns 10.0000
 	Ni 1.5000
@@ -144,7 +145,7 @@ newmtl Material__35
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__36
 	Ns 10.0000
 	Ni 1.5000
@@ -156,7 +157,7 @@ newmtl Material__36
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__37
 	Ns 10.0000
 	Ni 1.5000
@@ -168,7 +169,7 @@ newmtl Material__37
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__38
 	Ns 10.0000
 	Ni 1.5000
@@ -180,7 +181,7 @@ newmtl Material__38
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__39
 	Ns 10.0000
 	Ni 1.5000
@@ -192,7 +193,7 @@ newmtl Material__39
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__40
 	Ns 10.0000
 	Ni 1.5000
@@ -204,7 +205,7 @@ newmtl Material__40
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__41
 	Ns 10.0000
 	Ni 1.5000
@@ -216,7 +217,7 @@ newmtl Material__41
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__42
 	Ns 10.0000
 	Ni 1.5000
@@ -228,7 +229,7 @@ newmtl Material__42
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__43
 	Ns 10.0000
 	Ni 1.5000
@@ -240,7 +241,7 @@ newmtl Material__43
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__44
 	Ns 10.0000
 	Ni 1.5000
@@ -252,7 +253,7 @@ newmtl Material__44
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__45
 	Ns 10.0000
 	Ni 1.5000
@@ -264,7 +265,7 @@ newmtl Material__45
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__46
 	Ns 10.0000
 	Ni 1.5000
@@ -276,7 +277,7 @@ newmtl Material__46
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__47
 	Ns 10.0000
 	Ni 1.5000
@@ -288,7 +289,7 @@ newmtl Material__47
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-
+map_Kd dorado.jpg
 newmtl Material__48
 	Ns 10.0000
 	Ni 1.5000
@@ -300,6 +301,7 @@ newmtl Material__48
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
+map_Kd dorado.jpg
 
 newmtl Material__49
 	Ns 10.0000
@@ -312,6 +314,7 @@ newmtl Material__49
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
+map_Kd dorado.jpg
 
 newmtl Material__50
 	Ns 10.0000
@@ -324,6 +327,7 @@ newmtl Material__50
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
+map_Kd 51XTHlZdXQL._SX466_.jpg
 
 newmtl Nuovo_2
 	Ns 47.0000
@@ -336,3 +340,4 @@ newmtl Nuovo_2
 	Kd 0.8000 0.0000 0.0000
 	Ks 0.4200 0.4200 0.4200
 	Ke 0.0000 0.0000 0.0000
+map_Kd 51XTHlZdXQL._SX466_.jpg

@@ -96,6 +96,8 @@ Model ModelCaballito;
 Model ModelCalceta;
 Model ModelChimenea;
 Model ModelPinoNavidad;
+Model ModelEstrella;
+Model ModelEsfera;
 Model ModelHat;
 Model ModelDinosaur;
 Model Modeljardinera;
@@ -103,6 +105,8 @@ Model ModelNochebuena;
 Model ModelRegaloUno;
 Model ModelRegaloDos;
 Model ModelRosa;
+
+Model ModelCampana;
 
 Model ModelSpiderman;
 Model ModelTren;
@@ -329,6 +333,31 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelPinata.loadModel("../models/Navidad/pinata/pinata.obj");
 	ModelPinata.setShader(&shaderMulLighting);
 	
+	ModelTrineo.loadModel("../models/Navidad/trineo/trineo.obj");
+	ModelTrineo.setShader(&shaderMulLighting);
+
+	ModelPinoNavidad.loadModel("../models/Navidad/christmas_tree/Christmas+tree.obj");
+	ModelPinoNavidad.setShader(&shaderMulLighting);
+
+	//ModelPinoNavidad.loadModel("../models/Navidad/ArbolChido/arbolNav.obj");
+	//ModelPinoNavidad.setShader(&shaderMulLighting);
+	
+	ModelCampana.loadModel("../models/Navidad/bell/11566_Bell_V5_l3.obj");
+	ModelCampana.setShader(&shaderMulLighting);
+
+	ModelEsfera.loadModel("../models/Navidad/sfera/11.obj");
+	ModelEsfera.setShader(&shaderMulLighting);
+
+
+	ModelChimenea.loadModel("../models/Navidad/fuego/13110_Fireplace_v2_l3.obj");
+	ModelChimenea.setShader(&shaderMulLighting);
+
+	
+	ModelEstrella.loadModel("../models/Navidad/ArbolChido/estrella.obj");
+	ModelEstrella.setShader(&shaderMulLighting);
+
+	ModelCalceta.loadModel("../models/Navidad/calceta/calceta_roja.obj");
+	ModelCalceta.setShader(&shaderMulLighting);
 	/*
 
 	ModelBaston.loadModel("../models/Navidad/baston/baston1.obj");
@@ -336,8 +365,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	ModelCaballito.loadModel("../models/Navidad/caballito/caballito.obj");
 	ModelCaballito.setShader(&shaderMulLighting);
-
-	
 
 	ModelPinoNavidad.loadModel("../models/Navidad/pino/pine_tree.obj");
 	ModelPinoNavidad.setShader(&shaderMulLighting);
@@ -360,22 +387,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelNochebuena.loadModel("../models/Navidad/nochebuena/nochebuena.obj");
 	ModelNochebuena.setShader(&shaderMulLighting);
 
-	
 
 	ModelDinosaur.loadModel("../models/Navidad/Dinosaur/Dinosaur.obj");
 	ModelDinosaur.setShader(&shaderMulLighting);
 
 	ModelTren.loadModel("../models/Navidad/rock/rock.obj");
 	ModelTren.setShader(&shaderMulLighting);
-
-	ModelTrineo.loadModel("../models/Navidad/trineo/trineo.obj");
-	ModelTrineo.setShader(&shaderMulLighting);
-
-
-
-
-
-
 
 
 	ModelPrueba.loadModel("../models/Navidad/calceta/calceta_roja.obj");
@@ -390,6 +407,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelSofaP.setShader(&shaderMulLighting);
 
 	/*Ubicacion de los modelos*/
+
+	/*
 	modelRock.loadModel("../models/rock/rock.obj");
 	modelRock.setShader(&shaderMulLighting);
 
@@ -408,7 +427,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelMesa.loadModel("../models/Wood_Table/Wood_Table.obj");
 	ModelMesa.setShader(&shaderMulLighting);
 
-
+	*/
 	ModelPlanta.loadModel("../models/Helicopter/Mi_24.obj");
 	ModelPlanta.setShader(&shaderMulLighting);
 
@@ -4341,6 +4360,7 @@ void applicationLoop() {
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
+		/*
 		//ModelMesa
 
 		glm::mat4 Mesa = glm::mat4(1.0);
@@ -4349,7 +4369,7 @@ void applicationLoop() {
 		ModelMesa.render(Mesa);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
-
+		*/
 
 		/*------------------------------------------------------------------Inicio de segunda casa ---------------------------------------------------------------------------*/
 
@@ -5700,7 +5720,7 @@ void applicationLoop() {
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
-		//Modelo de pruebas
+		/*	//Modelo de pruebas
 		glm::mat4 silla = glm::mat4(1.0);
 		silla = glm::translate(silla, glm::vec3(-12.0, 2.0, 8.0));
 		silla = glm::scale(silla, glm::vec3(0.10, 0.10, 0.10));
@@ -5708,7 +5728,7 @@ void applicationLoop() {
 		ModelEjemplo.render(silla);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
-
+		*/
 
 
 		//////////////Models Complex Render
@@ -6221,7 +6241,7 @@ void applicationLoop() {
 		glActiveTexture(GL_TEXTURE0);
 		
 		/*Objetos de Navidad*/
-
+		/*
 		//PINATA
 		glm::mat4 pinata = glm::mat4(1.0);
 		pinata = glm::translate(pinata, glm::vec3(-12.0, 9.0, -44.0));
@@ -6254,23 +6274,65 @@ void applicationLoop() {
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
-		/*
 		//ModelTrineo
 		glm::mat4 trineo = glm::mat4(1.0);
 		trineo = glm::translate(trineo, glm::vec3(-12.0, 6.0, -44.0));
-		trineo = glm::scale(trineo, glm::vec3(1.2, 1.2, 1.20));
+		trineo = glm::scale(trineo, glm::vec3(0.02, 0.02, 0.020));
 		ModelTrineo.render(trineo);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
 		//ModelPinoNavidad
 		glm::mat4 pino = glm::mat4(1.0);
-		pino = glm::translate(pino, glm::vec3(-13.0, -6.0, 24.5));
-		pino = glm::scale(pino, glm::vec3(1.5, 1.5, 1.50));
+		pino = glm::translate(pino, glm::vec3(-11.0, -14.0, 30.0));
+		pino = glm::scale(pino, glm::vec3(3.0, 3.0, 3.00));
 		ModelPinoNavidad.render(pino);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
+
+		
+
+		//esfera
+		glm::mat4 esfera = glm::mat4(1.0);
+		esfera = glm::translate(esfera, glm::vec3(0.0, -14.0, 30.0));
+		esfera = glm::scale(esfera, glm::vec3(0.050, 0.050, 0.050));
+		ModelEsfera.render(esfera);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
 		*/
+		//ModelChimenea
+		glm::mat4 chimenea = glm::mat4(1.0);
+		chimenea = glm::translate(chimenea, glm::vec3(-14.5, 01.2, 7.5));
+		chimenea = glm::scale(chimenea, glm::vec3(0.1, 0.1, 0.10));
+		chimenea = glm::rotate(chimenea, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelChimenea.render(chimenea);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+		
+		//ModelChimenea
+		glm::mat4 estrella = glm::mat4(1.0);
+		estrella = glm::translate(estrella, glm::vec3(-0.0, -14.2, 27.5));
+		estrella = glm::scale(estrella, glm::vec3(0.1, 0.1, 0.10));
+		ModelEstrella.render(chimenea);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//ModelChimenea
+		glm::mat4 calceta = glm::mat4(1.0);
+		calceta = glm::translate(calceta, glm::vec3(2.0, -14.2, 27.5));
+		calceta = glm::scale(calceta, glm::vec3(0.1, 0.1, 0.10));
+		calceta = glm::rotate(calceta, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelCalceta.render(chimenea);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+		
+		//campana
+		glm::mat4 campana = glm::mat4(1.0);
+		campana = glm::translate(campana, glm::vec3(0.0, -14.0, 30.0));
+		campana = glm::scale(campana, glm::vec3(0.10, 0.10, 0.10));
+		ModelCampana.render(campana);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
 
 		/*
 
@@ -6279,11 +6341,9 @@ void applicationLoop() {
 		ModelBaston;
 		ModelCaballito;
 		ModelCalceta;
-		ModelChimenea;
 		ModelPinoNavidad;
 		ModelHat;
 		ModelDinosaur;
-		Modeljardinera;
 		ModelNochebuena;
 		ModelRegaloUno;
 		ModelRegaloDos;

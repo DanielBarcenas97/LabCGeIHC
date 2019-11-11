@@ -12,5 +12,5 @@ newmtl sock4
 	Kd 0.6400 0.6400 0.6400
 	Ks 0.5000 0.5000 0.5000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka C:\Users\sayun\Desktop\PROYECTO FINAL\ProyectoFinalCGeIHC-master\P9\models\calceta\69983337-tela-roja-textura-del-paño.jpg
-	map_Kd C:\Users\sayun\Desktop\PROYECTO FINAL\ProyectoFinalCGeIHC-master\P9\models\calceta\69983337-tela-roja-textura-del-paño.jpg
+	map_Ka 69983337-tela-roja-textura-del-paño.jpg
+	map_Kd 69983337-tela-roja-textura-del-paño.jpg
