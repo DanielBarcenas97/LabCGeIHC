@@ -96,6 +96,7 @@ Model ModelCaballito;
 Model ModelCalceta;
 Model ModelChimenea;
 Model ModelPinoNavidad;
+Model ModelPinoNavidad2;
 Model ModelEstrella;
 Model ModelEsfera;
 Model ModelHat;
@@ -332,15 +333,16 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	ModelPinata.loadModel("../models/Navidad/pinata/pinata.obj");
 	ModelPinata.setShader(&shaderMulLighting);
-	
+
 	ModelTrineo.loadModel("../models/Navidad/trineo/trineo.obj");
 	ModelTrineo.setShader(&shaderMulLighting);
 
 	ModelPinoNavidad.loadModel("../models/Navidad/christmas_tree/Christmas+tree.obj");
 	ModelPinoNavidad.setShader(&shaderMulLighting);
 
-	//ModelPinoNavidad.loadModel("../models/Navidad/ArbolChido/arbolNav.obj");
-	//ModelPinoNavidad.setShader(&shaderMulLighting);
+	
+	ModelPinoNavidad2.loadModel("../models/Navidad/ArbolChido/arbolNav.obj");
+	ModelPinoNavidad2.setShader(&shaderMulLighting);
 	
 	ModelCampana.loadModel("../models/Navidad/bell/11566_Bell_V5_l3.obj");
 	ModelCampana.setShader(&shaderMulLighting);
@@ -358,16 +360,16 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	ModelCalceta.loadModel("../models/Navidad/calceta/calceta_roja.obj");
 	ModelCalceta.setShader(&shaderMulLighting);
-	/*
 
 	ModelBaston.loadModel("../models/Navidad/baston/baston1.obj");
 	ModelBaston.setShader(&shaderMulLighting);
+	/*
+
+
 
 	ModelCaballito.loadModel("../models/Navidad/caballito/caballito.obj");
 	ModelCaballito.setShader(&shaderMulLighting);
 
-	ModelPinoNavidad.loadModel("../models/Navidad/pino/pine_tree.obj");
-	ModelPinoNavidad.setShader(&shaderMulLighting);
 
 	ModelHat.loadModel("../models/Navidad/hat/santa_hat(BLENDER).obj");
 	ModelHat.setShader(&shaderMulLighting);
@@ -427,7 +429,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelMesa.loadModel("../models/Wood_Table/Wood_Table.obj");
 	ModelMesa.setShader(&shaderMulLighting);
 
-	*/
+
 	ModelPlanta.loadModel("../models/Helicopter/Mi_24.obj");
 	ModelPlanta.setShader(&shaderMulLighting);
 
@@ -473,7 +475,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.init();
 	pieR2D2.setShader(&shader);
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
-
+		*/
 	/*Posicion de la Camara al iniciar*/
 	camera->setPosition(glm::vec3(-30.0, 03.0, -10.0));
 
@@ -6241,7 +6243,7 @@ void applicationLoop() {
 		glActiveTexture(GL_TEXTURE0);
 		
 		/*Objetos de Navidad*/
-		/*
+		
 		//PINATA
 		glm::mat4 pinata = glm::mat4(1.0);
 		pinata = glm::translate(pinata, glm::vec3(-12.0, 9.0, -44.0));
@@ -6290,57 +6292,72 @@ void applicationLoop() {
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
-		
 
 		//esfera
 		glm::mat4 esfera = glm::mat4(1.0);
 		esfera = glm::translate(esfera, glm::vec3(0.0, -14.0, 30.0));
 		esfera = glm::scale(esfera, glm::vec3(0.050, 0.050, 0.050));
 		ModelEsfera.render(esfera);
-		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
-		*/
+	
 		//ModelChimenea
 		glm::mat4 chimenea = glm::mat4(1.0);
 		chimenea = glm::translate(chimenea, glm::vec3(-14.5, 01.2, 7.5));
 		chimenea = glm::scale(chimenea, glm::vec3(0.1, 0.1, 0.10));
 		chimenea = glm::rotate(chimenea, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.00));
 		ModelChimenea.render(chimenea);
-		//Forze to enable the unit texture 0 always ............ IMPORTANT
-		glActiveTexture(GL_TEXTURE0);
-		
-		//ModelChimenea
-		glm::mat4 estrella = glm::mat4(1.0);
-		estrella = glm::translate(estrella, glm::vec3(-0.0, -14.2, 27.5));
-		estrella = glm::scale(estrella, glm::vec3(0.1, 0.1, 0.10));
-		ModelEstrella.render(chimenea);
-		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
-		//ModelChimenea
-		glm::mat4 calceta = glm::mat4(1.0);
-		calceta = glm::translate(calceta, glm::vec3(2.0, -14.2, 27.5));
-		calceta = glm::scale(calceta, glm::vec3(0.1, 0.1, 0.10));
-		calceta = glm::rotate(calceta, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.00));
-		ModelCalceta.render(chimenea);
-		//Forze to enable the unit texture 0 always ............ IMPORTANT
-		glActiveTexture(GL_TEXTURE0);
-		
 		//campana
 		glm::mat4 campana = glm::mat4(1.0);
 		campana = glm::translate(campana, glm::vec3(0.0, -14.0, 30.0));
 		campana = glm::scale(campana, glm::vec3(0.10, 0.10, 0.10));
 		ModelCampana.render(campana);
+		glActiveTexture(GL_TEXTURE0);
+
+
+		//calceta
+		glm::mat4 calceta = glm::mat4(1.0);
+		calceta = glm::translate(calceta, glm::vec3(2.0, -10.0, 27.5));
+		calceta = glm::scale(calceta, glm::vec3(0.1, 0.1, 0.10));
+		calceta = glm::rotate(calceta, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelCalceta.render(calceta);
+		glActiveTexture(GL_TEXTURE0);
+
+		//estrella
+		glm::mat4 estrella = glm::mat4(1.0);
+		estrella = glm::translate(estrella, glm::vec3(-0.0, -14.2, 27.5));
+		estrella = glm::scale(estrella, glm::vec3(0.01, 0.01, 0.010));
+		ModelEstrella.render(estrella);
+		glActiveTexture(GL_TEXTURE0);
+
+		//baston
+		glm::mat4 baston = glm::mat4(1.0);
+		baston = glm::translate(baston, glm::vec3(3.0, -14.2, 27.5));
+		baston = glm::scale(baston, glm::vec3(1.01, 1.01, 1.010));
+		ModelBaston.render(baston);
+		glActiveTexture(GL_TEXTURE0);
+		
+		///-----------------------------------------------------------------------
+
+
+
+
+
+		//ModelPinoNavidad2
+		glm::mat4 pino2 = glm::mat4(1.0);
+		pino2 = glm::translate(pino2, glm::vec3(5.0, 4.0, 30.0));
+		pino2 = glm::scale(pino2, glm::vec3(5.0, 5.0, 5.00));
+		ModelPinoNavidad2.render(pino2);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
+		
+
+
 
 		/*
 
-		;
-		;
-		ModelBaston;
 		ModelCaballito;
-		ModelCalceta;
 		ModelPinoNavidad;
 		ModelHat;
 		ModelDinosaur;
@@ -6350,11 +6367,29 @@ void applicationLoop() {
 		ModelRosa;
 		ModelSpiderman;
 		ModelTren;
-		ModelTrineo;
 
 		ModelPrueba;
 
 		*/
+		
+		//pecebre
+		glBindTexture(GL_TEXTURE_2D, textureID22);
+		box.setPosition(glm::vec3(28.00, 6.5, 20.0));
+		box.setScale(glm::vec3(0.6, 1.0, 0.1));
+		box.render();
+
+		//pecebre
+		glBindTexture(GL_TEXTURE_2D, textureID22);
+		box.setPosition(glm::vec3(30.00, 6.5, 20.0));
+		box.setScale(glm::vec3(0.6, 1.0, 0.1));
+		box.render();
+
+		//base 
+		glBindTexture(GL_TEXTURE_2D, textureID22);
+		box.setPosition(glm::vec3(28.00, 0.5, 25.0));
+		box.setScale(glm::vec3(0.01, 0.01, 0.01));
+		box.render();
+		
 		/*Fin de objetos Navidad*/
 
 		// Se Dibuja el Skybox

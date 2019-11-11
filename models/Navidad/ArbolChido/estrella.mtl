@@ -13,4 +13,6 @@ newmtl bubble
 	Ks 0.5800 0.5800 0.5800
 	Ke 0.0000 0.0000 0.0000
 	map_Ke dorado1.jpg
-	map_refl dorado1.jpg
+	map_Ks dorado1.jpg
+	map_Kd dorado1.jpg
+	map_Ka dorado1.jpg

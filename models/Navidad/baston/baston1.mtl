@@ -12,5 +12,5 @@ newmtl 07___Default
 	Kd 0.5882 0.5882 0.5882
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka C:\Users\sayun\Documents\CompuGrafica\experimento\navidad\depositphotos_102822324-stock-illustration-abstract-background-with-red-diagonal.jpg
-	map_Kd C:\Users\sayun\Documents\CompuGrafica\experimento\navidad\depositphotos_102822324-stock-illustration-abstract-background-with-red-diagonal.jpg
+	map_Ka depositphotos_102822324-stock-illustration-abstract-background-with-red-diagonal.jpg
+	map_Kd depositphotos_102822324-stock-illustration-abstract-background-with-red-diagonal.jpg
