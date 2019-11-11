@@ -314,71 +314,75 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	/*Cosas de Navidad*/
 
-	modelMesa.loadModel("../models/rock/rock.obj");
+	modelMesa.loadModel("../models/table/table.obj");
 	modelMesa.setShader(&shaderMulLighting);
 
-	ModelSilla.loadModel("../models/rock/rock.obj");
+	ModelSilla.loadModel("../models/SillaComedor/Chair.obj");
 	ModelSilla.setShader(&shaderMulLighting);
 
-	ModelBaston.loadModel("../models/rock/rock.obj");
+	/*
+
+	ModelBaston.loadModel("../models/Navidad/baston/baston1.obj");
 	ModelBaston.setShader(&shaderMulLighting);
 
-	ModelCaballito.loadModel("../models/rock/rock.obj");
+	ModelCaballito.loadModel("../models/Navidad/caballito/caballito.obj");
 	ModelCaballito.setShader(&shaderMulLighting);
 
-	ModelChimenea.loadModel("../models/rock/rock.obj");
+	ModelChimenea.loadModel("../models/Navidad/chimenea/chimenea1.obj");
 	ModelChimenea.setShader(&shaderMulLighting);
 
-	ModelPinoNavidad.loadModel("../models/rock/rock.obj");
+	ModelPinoNavidad.loadModel("../models/Navidad/pino/pine_tree.obj");
 	ModelPinoNavidad.setShader(&shaderMulLighting);
 
-	ModelHat.loadModel("../models/rock/rock.obj");
+	ModelHat.loadModel("../models/Navidad/hat/santa_hat(BLENDER).obj");
 	ModelHat.setShader(&shaderMulLighting);
 
-	ModelSpiderman.loadModel("../models/rock/rock.obj");
+	ModelSpiderman.loadModel("../models/Navidad/spiderman/M-CoC_iOS_HERO_Peter_Parker_Spider-Man_Stark_Enhanced.obj");
 	ModelSpiderman.setShader(&shaderMulLighting);
 
-	ModelRegaloUno.loadModel("../models/rock/rock.obj");
+	ModelRegaloUno.loadModel("../models/Navidad/regalo/REGALO_Alex.obj");
 	ModelRegaloUno.setShader(&shaderMulLighting);
 
-	ModelRegaloDos.loadModel("../models/rock/rock.obj");
+	ModelRegaloDos.loadModel("../models/Navidad/regalo2/regalo.obj");
 	ModelRegaloDos.setShader(&shaderMulLighting);
 
-	ModelRosa.loadModel("../models/rock/rock.obj");
+	ModelRosa.loadModel("../models/Navidad/rosa/rosa.obj");
 	ModelRosa.setShader(&shaderMulLighting);
 
-	ModelNochebuena.loadModel("../models/rock/rock.obj");
+	ModelNochebuena.loadModel("../models/Navidad/nochebuena/nochebuena.obj");
 	ModelNochebuena.setShader(&shaderMulLighting);
 
-	Modeljardinera.loadModel("../models/rock/rock.obj");
+	Modeljardinera.loadModel("../models/Navidad/jardinera/jardinera.obj");
 	Modeljardinera.setShader(&shaderMulLighting);
 
-	ModelDinosaur.loadModel("../models/rock/rock.obj");
+	ModelDinosaur.loadModel("../models/Navidad/Dinosaur/Dinosaur.obj");
 	ModelDinosaur.setShader(&shaderMulLighting);
 
-	ModelTren.loadModel("../models/rock/rock.obj");
+	ModelTren.loadModel("../models/Navidad/rock/rock.obj");
 	ModelTren.setShader(&shaderMulLighting);
 
-	ModelTrineo.loadModel("../models/rock/rock.obj");
+	ModelTrineo.loadModel("../models/Navidad/trineo/trineo.obj");
 	ModelTrineo.setShader(&shaderMulLighting);
 
-	ModelPinata.loadModel("../models/rock/rock.obj");
+	ModelPinata.loadModel("../models/Navidad/pinata/pinata.obj");
 	ModelPinata.setShader(&shaderMulLighting);
 
-	ModelWC.loadModel("../models/rock/rock.obj");
+	ModelWC.loadModel("../models/toilet/toilet.obj");
 	ModelWC.setShader(&shaderMulLighting);
 
 
-	ModelSofa.loadModel("../models/rock/rock.obj");
+
+
+	ModelPrueba.loadModel("../models/Navidad/calceta/calceta_roja.obj");
+	ModelPrueba.setShader(&shaderMulLighting);
+	*/
+	/*Fin cosas de Navidad*/
+
+	ModelSofa.loadModel("../models/Navidad/sofa/sofa.obj");
 	ModelSofa.setShader(&shaderMulLighting);
 
-	ModelSofaP.loadModel("../models/rock/rock.obj");
+	ModelSofaP.loadModel("../models/Navidad/sofap/sofap.obj");
 	ModelSofaP.setShader(&shaderMulLighting);
-
-	ModelPrueba.loadModel("../models/rock/rock.obj");
-	ModelPrueba.setShader(&shaderMulLighting);
-
-	/*Fin cosas de Navidad*/
 
 	/*Ubicacion de los modelos*/
 	modelRock.loadModel("../models/rock/rock.obj");
@@ -2935,21 +2939,55 @@ void applicationLoop() {
 
 		/*Comedor*/
 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(-07.0, -11.0, 32.0));
-		box4.setScale(glm::vec3(2.50, 6.0, 7.0));
-		box4.render();
+		//___________________Cuadros  Sala
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4, -5.4, -22.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID36);
+		box9.setPosition(glm::vec3(-14.4, -4.5, -19.00));
+		box9.setScale(glm::vec3(0.1, 1.5, 1.7));
+		box9.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID37);
+		box9.setPosition(glm::vec3(-14.4, -6.2, -19.00));
+		box9.setScale(glm::vec3(0.1, 1.5, 1.7));
+		box9.render();
+
+		//___________________Cuadros  comedor
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4, -5.4, 4.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4, -5.4, 8.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4, -5.4, 12.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		//___________________Cuadros  comedor frente 
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(10.0, -4.4, 22.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
 
 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(-07.0, -3.0, 32.0));
-		box4.setScale(glm::vec3(2.50, 2.0, 7.0));
-		box4.render();
 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(-07.0, -3.0, 28.0));
-		box4.setScale(glm::vec3(2.50, 2.0, 2.0));
-		box4.render();
+		/* init  Sala */
+
+		//______________________TV Sala
+		glBindTexture(GL_TEXTURE_2D, textureID47);
+		box9.setPosition(glm::vec3(10.0, -6.0, -21.0));
+		box9.setScale(glm::vec3(0.15, 4.5, 8.0));
+		box9.render();
 
 		/* Primer Cuarto */
 
@@ -3406,19 +3444,26 @@ void applicationLoop() {
 		box9.render();
 
 
+		/*---------- Cocina Muebles-------------*/
+
+		//Refrijerador
+		glBindTexture(GL_TEXTURE_2D, textureID6);
+		box.setPosition(glm::vec3(22.5, -8.5, -5.00));
+		box.setScale(glm::vec3(3.0, 11.00, 5.0));
+		box.render();
+
 		//Mueble madera  der
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.63, -11.0, 14.50));
 		box.setScale(glm::vec3(3.0, 6.00, 6.0));
 		box.render();
-
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.63, -11.0, 10.55));
 		box.setScale(glm::vec3(3.0, 6.00, 1.9));
 		box.render();
 
 		//Mueble madera izq
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.6, -11.0, 1.00));
 		box.setScale(glm::vec3(3.0, 6.00, 6.0));
 		box.render();
@@ -3427,24 +3472,23 @@ void applicationLoop() {
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.6, -11.0, 6.800));//.25
 		box.setScale(glm::vec3(3.0, 6.00, 5.6));
-		box9.render();
-
+		box.render();
 
 		//--Arriba
 		//Mueble madera  der
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.63, -2.5, 13.50));
 		box.setScale(glm::vec3(3.0, 3.00, 8.9));
 		box.render();
 
 		//Mueble madera  izq
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.6, -2.5, 1.00));
 		box.setScale(glm::vec3(3.0, 3.00, 6.0));
 		box.render();
 
 		//Arriba Estufa mueble
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(22.6, -2.25, 6.800));//.25
 		box.setScale(glm::vec3(3.0, 2.50, 5.6));
 		box.render();
@@ -3455,13 +3499,13 @@ void applicationLoop() {
 		box.render();
 
 		//Mueble madera  izqcosas  
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(14.5, -11.0, 16.00));
 		box.setScale(glm::vec3(7.0, 6.00, 3.0));
 		box.render();
 
 		//Mueble madera izqcosas  arriba
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(14.5, -2.5, 16.00));
 		box.setScale(glm::vec3(7.0, 3.00, 3.0));
 		box.render();
@@ -3473,10 +3517,15 @@ void applicationLoop() {
 		box.render();
 
 		//mesa
-		glBindTexture(GL_TEXTURE_2D, textureID67);
+		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(10.5, -9.00, 6.750));
 		box.setScale(glm::vec3(3.5, 0.20, 10.50));
 		box.render();
+
+
+
+		/*-----------------------*/
+
 
 
 
@@ -4527,99 +4576,60 @@ void applicationLoop() {
 		box9.render();
 
 		/* -----------------------Inician Accesorios ----------------------------------*/
-		//SILLON 1
-				// sillon respaldo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(0.0 + suma, -11.0, -30.0));
-		box4.setScale(glm::vec3(6.0, 4.0, 4.0));
-		box4.render();
-		// sillon asiento
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(0.0 + suma, -13.0, -30.0));
-		box5.setScale(glm::vec3(6.0, 2.0, 8.0));
-		box5.render();
-		// sillon codo izquierdo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(-2.5 + suma, -12.0, -30.0));
-		box6.setScale(glm::vec3(1.0, 1.5, 8.0));
-		box6.render();
-		// sillon codo derecho
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box7.setPosition(glm::vec3(2.5 + suma, -12.0, -30.0));
-		box7.setScale(glm::vec3(1.0, 1.5, 8.0));
-		box7.render();
+		
+		/*Comedor*/
 
-		//_---------------------------------------
-		//SILLON 2
+		//___________________Cuadros  Sala
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4 + suma, -5.4, -22.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
 
-		// sillon respaldo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(-8.0 + suma, -11.0, -22.0));
-		box4.setScale(glm::vec3(1.0, 2.0, 8.0));
-		box4.render();
-		// sillon asiento
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(-7.0 + suma, -13.0, -22.0));
-		box5.setScale(glm::vec3(3.0, 2.0, 8.0));
-		box5.render();
-		// sillon codo izquierdo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(-7.0 + suma, -11.0, -18.5));
-		box6.setScale(glm::vec3(3.0, 1.0, 1.0));
-		box6.render();
+		glBindTexture(GL_TEXTURE_2D, textureID36);
+		box9.setPosition(glm::vec3(-14.4 + suma, -4.5, -19.00));
+		box9.setScale(glm::vec3(0.1, 1.5, 1.7));
+		box9.render();
 
-		//_---------------------------------------
-		//SILLON 3
+		glBindTexture(GL_TEXTURE_2D, textureID37);
+		box9.setPosition(glm::vec3(-14.4 + suma, -6.2, -19.00));
+		box9.setScale(glm::vec3(0.1, 1.5, 1.7));
+		box9.render();
 
-		// sillon respaldo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box4.setPosition(glm::vec3(8.0 + suma, -11.0, -22.0));
-		box4.setScale(glm::vec3(1.0, 2.0, 8.0));
-		box4.render();
-		// sillon asiento
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box5.setPosition(glm::vec3(7.0 + suma, -13.0, -22.0));
-		box5.setScale(glm::vec3(3.0, 2.0, 8.0));
-		box5.render();
-		// sillon codo izquierdo 
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box6.setPosition(glm::vec3(7.0 + suma, -11.0, -18.5));
-		box6.setScale(glm::vec3(3.0, 1.0, 1.0));
-		box6.render();
+		//___________________Cuadros  comedor
 
-		// sillon codo derecho
-		glBindTexture(GL_TEXTURE_2D, textureID8);
-		box7.setPosition(glm::vec3(7.0 + suma, -11.0, -25.0));
-		box7.setScale(glm::vec3(3.0, 1.0, 1.0));
-		box7.render();
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4 + suma, -5.4, 4.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4 + suma, -5.4, 8.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(-14.4 + suma, -5.4, 12.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
+
+		//___________________Cuadros  comedor frente 
+
+		glBindTexture(GL_TEXTURE_2D, textureID35);
+		box9.setPosition(glm::vec3(10.0 + suma, -4.4, 22.00));
+		box9.setScale(glm::vec3(0.1, 3.2, 3.0));
+		box9.render();
 
 
-		//--------------------------- centro de mesa
-		//cilindro
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(0.0 + suma, -13.0, -22.0));
-		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
-		cylinder3.render();
 
-		//-----------------------espejo
-		glBindTexture(GL_TEXTURE_2D, textureID11);
-		box4.setPosition(glm::vec3(0.0 + suma, -5.0, -30.0));
-		box4.setScale(glm::vec3(2.0, 5.0, 0.5));
-		box4.render();
+		/* init  Sala */
 
+		//______________________TV Sala
+		glBindTexture(GL_TEXTURE_2D, textureID47);
+		box9.setPosition(glm::vec3(10.0 + suma, -6.0, -21.0));
+		box9.setScale(glm::vec3(0.15, 4.5, 8.0));
+		box9.render();
 
-		//----------------------- maceta 
-		//cilindro
-		glBindTexture(GL_TEXTURE_2D, textureID12);
-		cylinder3.setPosition(glm::vec3(6.0 + suma, -12.0, -16.0));
-		cylinder3.setScale(glm::vec3(1.0, 3.0, 1.0));
-		cylinder3.render();
-
-		//cactus
-		glBindTexture(GL_TEXTURE_2D, textureID13);
-		sphere2.setPosition(glm::vec3(6.0 + suma, -10.0, -16.0));
-		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
-		sphere2.render();
+	
 
 		/* Primer Cuarto */
 
@@ -5577,21 +5587,124 @@ void applicationLoop() {
 		else
 			angle += 0.0001;
 
-		/*Objetos de Navidad*/
+		/*Objetos de Sala y comedor Casa 1*/
 
-		//Modelo de pruebas
+		//Mesa Comedor
 		glm::mat4 mesa = glm::mat4(1.0);
-		mesa = glm::translate(mesa, glm::vec3(-12.0, -6.0, 8.0));
-		mesa = glm::scale(mesa, glm::vec3(0.10, 0.10, 0.10));
+		mesa = glm::translate(mesa, glm::vec3(-4.0, -14.0, 10.0));
+		mesa = glm::scale(mesa, glm::vec3(8.0, 6.5, 8.00));
 		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
 		modelMesa.render(mesa);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
+		glm::mat4 sofas = glm::mat4(1.0);
+		sofas = glm::translate(sofas, glm::vec3(-7.0, -12.0, -33.0));
+		sofas = glm::scale(sofas, glm::vec3(2.50, 3.00, 3.00));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		ModelSofa.render(sofas);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
+		glm::mat4 sofas2 = glm::mat4(1.0);
+		sofas2 = glm::translate(sofas2, glm::vec3(-7.0, -12.0, -10.0));
+		sofas2 = glm::scale(sofas2, glm::vec3(2.50, 2.50, 2.50));
+		sofas2 = glm::rotate(sofas2, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelSofa.render(sofas2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
+		glm::mat4 sofa = glm::mat4(1.0);
+		sofa = glm::translate(sofa, glm::vec3(-12.0, -14.0, -21.0));
+		sofa = glm::scale(sofa, glm::vec3(1.8000, 2.000,2.00));
+		sofa = glm::rotate(sofa, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelSofaP.render(sofa);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Silla Cafe
+		glm::mat4 sillaC = glm::mat4(1.0);
+		sillaC = glm::translate(sillaC, glm::vec3(-6.0, -11.0, 20.0));
+		sillaC = glm::scale(sillaC, glm::vec3(0.0060, 0.0060, 0.0060));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		ModelSilla.render(sillaC);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//ModelMesa
+
+		glm::mat4 Mesa2 = glm::mat4(1.0);
+		Mesa2 = glm::translate(Mesa2, glm::vec3(-3.0, -15.0, -21.0));
+		Mesa2 = glm::scale(Mesa2, glm::vec3(8.0, 8.0, 8.00));
+		ModelMesa.render(Mesa2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//--------------------------
+		/*Objetos de Sala y comedor Casa 2*/
+
+		//Mesa Comedor
+		glm::mat4 mesa2 = glm::mat4(1.0);
+		mesa2 = glm::translate(mesa2, glm::vec3(-4.0 + suma , -14.0, 10.0));
+		mesa2 = glm::scale(mesa2, glm::vec3(8.0, 6.5, 8.00));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		modelMesa.render(mesa2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 sofas3 = glm::mat4(1.0);
+		sofas3 = glm::translate(sofas3, glm::vec3(-7.0, -12.0, -33.0));
+		sofas3 = glm::scale(sofas3, glm::vec3(2.50, 3.00, 3.00));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		ModelSofa.render(sofas3);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
+		glm::mat4 sofas4 = glm::mat4(1.0);
+		sofas4 = glm::translate(sofas4, glm::vec3(-7.0 + suma, -12.0, -10.0));
+		sofas4 = glm::scale(sofas4, glm::vec3(2.50, 2.50, 2.50));
+		sofas4 = glm::rotate(sofas4, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelSofa.render(sofas4);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
+		glm::mat4 sofa2 = glm::mat4(1.0);
+		sofa2 = glm::translate(sofa2, glm::vec3(-12.0 + suma, -14.0, -21.0));
+		sofa2 = glm::scale(sofa2, glm::vec3(1.8000, 2.000, 2.00));
+		sofa2 = glm::rotate(sofa2, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
+		ModelSofaP.render(sofa);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Silla Cafe
+		glm::mat4 sillaC2 = glm::mat4(1.0);
+		sillaC2 = glm::translate(sillaC2, glm::vec3(-6.0 + suma, -11.0, 20.0));
+		sillaC2 = glm::scale(sillaC2, glm::vec3(0.0060, 0.0060, 0.0060));
+		//silla = glm::rotate(silla, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.00));
+		ModelSilla.render(sillaC2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//ModelMesa
+
+		glm::mat4 Mesa3 = glm::mat4(1.0);
+		Mesa3 = glm::translate(Mesa3, glm::vec3(-3.0 + suma, -15.0, -21.0));
+		Mesa3 = glm::scale(Mesa3, glm::vec3(8.0, 8.0, 8.00));
+		ModelMesa.render(Mesa3);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
+		/*Objetos de Navidad*/
+
 		/*
 
 		;
-		ModelSilla;
+		;
 		ModelBaston;
 		ModelCaballito;
 		ModelCalceta;
@@ -5608,8 +5721,8 @@ void applicationLoop() {
 		ModelSpiderman;
 		ModelTren;
 		ModelTrineo;
-		ModelSofa;
-		ModelSofaP;
+		;
+		;
 		ModelWC;
 		ModelPinata;
 		ModelPrueba;
