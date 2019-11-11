@@ -320,6 +320,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelSilla.loadModel("../models/SillaComedor/Chair.obj");
 	ModelSilla.setShader(&shaderMulLighting);
 
+	Modeljardinera.loadModel("../models/Navidad/jardinera/jardinera.obj");
+	Modeljardinera.setShader(&shaderMulLighting);
+
+	ModelWC.loadModel("../models/toilet/toilet.obj");
+	ModelWC.setShader(&shaderMulLighting);
+
 	/*
 
 	ModelBaston.loadModel("../models/Navidad/baston/baston1.obj");
@@ -352,8 +358,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelNochebuena.loadModel("../models/Navidad/nochebuena/nochebuena.obj");
 	ModelNochebuena.setShader(&shaderMulLighting);
 
-	Modeljardinera.loadModel("../models/Navidad/jardinera/jardinera.obj");
-	Modeljardinera.setShader(&shaderMulLighting);
+	
 
 	ModelDinosaur.loadModel("../models/Navidad/Dinosaur/Dinosaur.obj");
 	ModelDinosaur.setShader(&shaderMulLighting);
@@ -367,8 +372,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	ModelPinata.loadModel("../models/Navidad/pinata/pinata.obj");
 	ModelPinata.setShader(&shaderMulLighting);
 
-	ModelWC.loadModel("../models/toilet/toilet.obj");
-	ModelWC.setShader(&shaderMulLighting);
+
 
 
 
@@ -2738,11 +2742,6 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(0.5, 5.0, 16.0));
 		box9.render();
 
-
-
-
-
-
 		/*------------------Fin sala Pelis----------------------*/
 
 		//// -------------  Frente  ------------------------- 
@@ -3128,15 +3127,6 @@ void applicationLoop() {
 		box9.setScale(glm::vec3(8.0, 0.05, 14.00));
 		box9.render();
 
-
-
-
-
-
-
-
-
-
 		/* Segundo Cuarto Cuarto De Niño */
 		//_________________Pared Cuarto diferente Color
 		glBindTexture(GL_TEXTURE_2D, textureID42);
@@ -3157,7 +3147,6 @@ void applicationLoop() {
 		box9.render(18, 6);
 		glBindTexture(GL_TEXTURE_2D, textureID40);
 		box9.render(24, 6);
-
 
 		//______________________TV
 		glBindTexture(GL_TEXTURE_2D, textureID47);
@@ -3272,15 +3261,6 @@ void applicationLoop() {
 		cylinder3.setPosition(glm::vec3(-5.0 + 20.5, 1.05, -14.00));
 		cylinder3.setScale(glm::vec3(8.0, 0.05, 14.00));
 		cylinder3.render();
-
-
-
-
-
-
-
-
-
 
 
 		/* Tercer Cuarto Cuarto */
@@ -3522,57 +3502,6 @@ void applicationLoop() {
 		box.setScale(glm::vec3(3.5, 0.20, 10.50));
 		box.render();
 
-
-
-		/*-----------------------*/
-
-
-
-
-		/*-----------------------*/
-
-
-		//-----------------mesa 
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		box9.setPosition(glm::vec3(-12.0, 5.0, -14.0 + pos));
-		box9.setScale(glm::vec3(4.0, 1.0, 5.0));
-		box9.render();
-		//base mesa 
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(-12.0, 2.0, -14.0 + pos));
-		cylinder3.setScale(glm::vec3(1.0, 5.0, 3.0));
-		cylinder3.render();
-
-		//----- base computadora
-		glBindTexture(GL_TEXTURE_2D, textureID18);
-		box9.setPosition(glm::vec3(-12.0, 5.5, -14.0 + pos));
-		box9.setScale(glm::vec3(1.0, 0.5, 2.0));
-		box9.render();
-		//----- tapa computadora
-		glBindTexture(GL_TEXTURE_2D, textureID19);
-		box9.setPosition(glm::vec3(-12.4, 5.4, -14.0 + pos));
-		box9.setScale(glm::vec3(0.2, 4.0, 2.0));
-		box9.render();
-
-		//----- fondo computadora
-		glBindTexture(GL_TEXTURE_2D, textureID20);
-		box9.setPosition(glm::vec3(-12.3, 5.5, -14.0 + pos));
-		box9.setScale(glm::vec3(0.1, 3.6, 1.8));
-		box9.render();
-
-		//----- teclado computadora
-		glBindTexture(GL_TEXTURE_2D, textureID25);
-		box9.setPosition(glm::vec3(-12.0, 5.8, -14.0 + pos));
-		box9.setScale(glm::vec3(0.9, 0.1, 1.8));
-		box9.render();
-
-		//banco para computadora
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(-10.0, 2.0, -14.0 + pos));
-		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
-		cylinder3.render();
-
-		/*Acaba Cuarto 1*/
 		/*Compu afuera de cuartos */
 		//  pared separa cochera 
 		glBindTexture(GL_TEXTURE_2D, textureID6);
@@ -3859,8 +3788,8 @@ void applicationLoop() {
 
 		/*------------------------------------------------------------------Inicio de segunda casa ---------------------------------------------------------------------------*/
 
-				/*Estructura de la casa*/
-				/// PARED ATRAS ----------------------------Dos pisos completa
+		/*Estructura de la casa*/
+		// PARED ATRAS ----------------------------Dos pisos completa
 		glBindTexture(GL_TEXTURE_2D, textureID6);
 		box.setPosition(glm::vec3(15.0 + suma, 0.0, 36.5));
 		box.setScale(glm::vec3(60.0, 30.0, 2.0));
@@ -5132,46 +5061,6 @@ void applicationLoop() {
 		box.render();
 
 
-		//-----------------mesa 
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		box9.setPosition(glm::vec3(-12.0 + suma, 5.0, -14.0 + pos));
-		box9.setScale(glm::vec3(4.0, 1.0, 5.0));
-		box9.render();
-		//base mesa 
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(-12.0 + suma, 2.0, -14.0 + pos));
-		cylinder3.setScale(glm::vec3(1.0, 5.0, 3.0));
-		cylinder3.render();
-
-		//----- base computadora
-		glBindTexture(GL_TEXTURE_2D, textureID18);
-		box9.setPosition(glm::vec3(-12.0 + suma, 5.5, -14.0 + pos));
-		box9.setScale(glm::vec3(1.0, 0.5, 2.0));
-		box9.render();
-		//----- tapa computadora
-		glBindTexture(GL_TEXTURE_2D, textureID19);
-		box9.setPosition(glm::vec3(-12.4 + suma, 5.4, -14.0 + pos));
-		box9.setScale(glm::vec3(0.2, 4.0, 2.0));
-		box9.render();
-
-		//----- fondo computadora
-		glBindTexture(GL_TEXTURE_2D, textureID20);
-		box9.setPosition(glm::vec3(-12.3 + suma, 5.5, -14.0 + pos));
-		box9.setScale(glm::vec3(0.1, 3.6, 1.8));
-		box9.render();
-
-		//----- teclado computadora
-		glBindTexture(GL_TEXTURE_2D, textureID25);
-		box9.setPosition(glm::vec3(-12.0 + suma, 5.8, -14.0 + pos));
-		box9.setScale(glm::vec3(0.9, 0.1, 1.8));
-		box9.render();
-
-		//banco para computadora
-		glBindTexture(GL_TEXTURE_2D, textureID9);
-		cylinder3.setPosition(glm::vec3(-10.0 + suma, 2.0, -14.0 + pos));
-		cylinder3.setScale(glm::vec3(3.0, 3.0, 3.0));
-		cylinder3.render();
-
 		/*Acaba Cuarto 1*/
 		/*Compu afuera de cuartos */
 		//  pared separa cochera 
@@ -5695,6 +5584,74 @@ void applicationLoop() {
 		Mesa3 = glm::translate(Mesa3, glm::vec3(-3.0 + suma, -15.0, -21.0));
 		Mesa3 = glm::scale(Mesa3, glm::vec3(8.0, 8.0, 8.00));
 		ModelMesa.render(Mesa3);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+
+		/*Objetos para Casa 1*/
+
+		//WC
+		glm::mat4 wc = glm::mat4(1.0);
+		wc = glm::translate(wc, glm::vec3(-13.0, 1.1, 24.5));
+		wc = glm::scale(wc, glm::vec3(1.5, 1.5, 1.50));
+		ModelWC.render(wc);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Silla de trabajo 
+		glm::mat4 SillaT = glm::mat4(1.0);
+		SillaT = glm::translate(SillaT, glm::vec3(-10.0, 1.1, -23.0));
+		SillaT = glm::scale(SillaT, glm::vec3(0.05, 0.05, 0.05));
+		ModelEjemplo.render(SillaT);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Jardinera
+		glm::mat4 Jardinera = glm::mat4(1.0);
+		Jardinera = glm::translate(Jardinera, glm::vec3(-3.0, -15.0, -47.0));
+		Jardinera = glm::scale(Jardinera, glm::vec3(0.2, 0.2, 0.20));
+		Modeljardinera.render(Jardinera);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Jardinera BANIO
+		glm::mat4 JardineraB = glm::mat4(1.0);
+		JardineraB = glm::translate(JardineraB, glm::vec3(3.5, 1.1, 35.00));
+		JardineraB = glm::scale(JardineraB, glm::vec3(0.2, 0.2, 0.20));
+		Modeljardinera.render(JardineraB);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		/*Objetos para casa 2 */
+		//WC
+		glm::mat4 wc2 = glm::mat4(1.0);
+		wc2 = glm::translate(wc2, glm::vec3(-13.0 + suma, 1.1, 24.5));
+		wc2 = glm::scale(wc2, glm::vec3(1.5, 1.5, 1.50));
+		ModelWC.render(wc2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Silla de trabajo 
+		glm::mat4 SillaT2 = glm::mat4(1.0);
+		SillaT2 = glm::translate(SillaT2, glm::vec3(-10.0 + suma, 1.1, -23.0));
+		SillaT2 = glm::scale(SillaT2, glm::vec3(0.05, 0.05, 0.05));
+		ModelEjemplo.render(SillaT2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Jardinera
+		glm::mat4 Jardinera2 = glm::mat4(1.0);
+		Jardinera2 = glm::translate(Jardinera2, glm::vec3(-3.0 + suma, -15.0, -47.0));
+		Jardinera2 = glm::scale(Jardinera2, glm::vec3(0.2, 0.2, 0.20));
+		Modeljardinera.render(Jardinera2);
+		//Forze to enable the unit texture 0 always ............ IMPORTANT
+		glActiveTexture(GL_TEXTURE0);
+
+		//Jardinera BANIO
+		glm::mat4 JardineraB2 = glm::mat4(1.0);
+		JardineraB2 = glm::translate(JardineraB2, glm::vec3(3.5 + suma, 1.1, 35.00));
+		JardineraB2 = glm::scale(JardineraB2, glm::vec3(0.2, 0.2, 0.20));
+		Modeljardinera.render(JardineraB2);
 		//Forze to enable the unit texture 0 always ............ IMPORTANT
 		glActiveTexture(GL_TEXTURE0);
 
