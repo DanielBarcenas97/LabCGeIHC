@@ -477,7 +477,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	pieR2D2.setColor(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
 
 	//Posicion inicial de la camaras**********************
-	cameraHorrorHouseFree->setPosition(glm::vec3(3.077236, -2.52848, -86.0336));
+	cameraHorrorHouseFree->setPosition(glm::vec3(3.077236, -2.52848, 30.0336));
 	cameraChristmastHouseFree->setPosition(glm::vec3(-3.077236, -2.52848, -86.0336));
 	cameraHorrorHouseAutomatic->setPosition(glm::vec3(5.077236, -2.52848, 86.0336));
 	cameraChristmastHouseAutomatic->setPosition(glm::vec3(-72.0461, -6.87082, 86.0336));
@@ -8583,6 +8583,27 @@ void applicationLoop() {
 		box2.render(modelAgua);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		shaderMulLighting.setFloat("offsetX", 0);
+
+		/*Nacimiento*/
+
+		//Alberc
+		glm::mat4 aguaNacimiento = glm::mat4(1.0);
+		aguaNacimiento = glm::translate(aguaNacimiento, glm::vec3(-6.5,1.05 , 10.0));
+		aguaNacimiento = glm::scale(aguaNacimiento, glm::vec3(10.0, 0.01, 10.0));
+		// Se activa la textura del agua
+		glBindTexture(GL_TEXTURE_2D, textureID2);
+		///Le cambiamos el shader con multiples luces
+		shaderMulLighting.setFloat("offsetX", offX);
+		box2.render(aguaNacimiento);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		shaderMulLighting.setFloat("offsetX", 0);
+
+		//________________________Pastle
+		glBindTexture(GL_TEXTURE_2D, textureID43);
+		cylinder3.setPosition(glm::vec3(-5.0, 1.05, 10.00));
+		cylinder3.setScale(glm::vec3(8.0, 0.05, 14.00));
+		cylinder3.render();
+
 
 		///----------------------------------------------------------------------Bob
 
