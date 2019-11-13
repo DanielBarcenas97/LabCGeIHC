@@ -328,8 +328,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	box7.setShader(&shaderMulLighting);
 
 	
-	ModelChimenea.loadModel("../models/Navidad/fuego/13110_Fireplace_v2_l3.obj");
-	ModelChimenea.setShader(&shaderMulLighting);
+	//ModelChimenea.loadModel("../models/Navidad/fuego/13110_Fireplace_v2_l3.obj");
+	//ModelChimenea.setShader(&shaderMulLighting);
 
 	/*Modelos Transporte
 	ModelAircraft.loadModel("../models/Aircraft_obj/E 45 Aircraft_obj.obj");
@@ -8852,21 +8852,38 @@ void applicationLoop() {
 
 		//Casita de Madera Nino izq
 		glBindTexture(GL_TEXTURE_2D, textureID63);
-		box9.setPosition(glm::vec3(-5.0, 2.10, 4.00));
-		box9.setScale(glm::vec3(3.0, 3.0, 0.15));
+		box9.setPosition(glm::vec3(-14.0, 3.10, 7.70));
+		box9.setScale(glm::vec3(3.0, 4.0, 0.15));
 		box9.render();
 
 		//Casita de Madera Nino der 
 		glBindTexture(GL_TEXTURE_2D, textureID63);
-		box9.setPosition(glm::vec3(-5.0, 2.10, 1.50));
-		box9.setScale(glm::vec3(3.0, 3.0, 0.15));
+		box9.setPosition(glm::vec3(-14.0, 3.10, 1.70));
+		box9.setScale(glm::vec3(3.0, 4.0, 0.15));
 		box9.render();
 
 		//Casita de Madera Nino techo
 		glBindTexture(GL_TEXTURE_2D, textureID63);
-		box9.setPosition(glm::vec3(-5.0, 3.50, 3.50));
-		box9.setScale(glm::vec3(3.0, 0.1, 3.00));
+		box9.setPosition(glm::vec3(-014.0, 5.10, 4.75));
+		box9.setScale(glm::vec3(3.0, 0.1, 6.00));
 		box9.render();
+
+		//Casita de Madera Nino piso
+		glBindTexture(GL_TEXTURE_2D, textureID63);
+		box9.setPosition(glm::vec3(-014.0, 1.150, 4.75));
+		box9.setScale(glm::vec3(3.0, 0.1, 6.00));
+		box9.render();
+
+		//Casita de Madera Nino izq pico
+		glm::mat4 modelP = glm::mat4(1.0f);
+		modelP = glm::translate(modelP, glm::vec3(-12.0, 3.10, 7.70));
+		modelP = glm::rotate(modelP, glm::radians(45.0f), glm::vec3(0.0, 0.0, 1.0));
+		glBindTexture(GL_TEXTURE_2D, textureID63);
+		box9.render(glm::scale(modelP, glm::vec3(3.0, 4.0, 0.15)));
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		//Casita de Madera Nino der pico
+
 
 	
 
@@ -9423,7 +9440,7 @@ void applicationLoop() {
 		
 		//ModelChimenea
 		glm::mat4 fuego = glm::mat4(1.0);
-		fuego = glm::translate(fuego, glm::vec3(-2.0, -15.0, 35.0));
+		fuego = glm::translate(fuego, glm::vec3(-4.0, -10.0, 35.0));
 		fuego = glm::rotate(fuego, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.00));
 		fuego = glm::scale(fuego, glm::vec3(0.10, 0.100,0.100));
 		ModelChimenea.render(fuego);
